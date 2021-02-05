@@ -5,11 +5,6 @@ import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-
-import static cn.davickk.rdi.essentials.general.util.SQLUtils.*;
-
 public class DelhomeThread extends Thread {
     private ServerPlayerEntity player;
     private String homeName;
@@ -26,7 +21,7 @@ public class DelhomeThread extends Thread {
                 return;
             }
             HomeRequest hreq=new HomeRequest(player,homeName);
-            if(!hreq.existsHome()) {
+            if(!hreq.hasHome()) {
                 TextUtils.sendChatMessage(player,"ц╩спур╣╫"+homeName);
                 TextUtils.clickableContent2Send(player, EHomeText.LISTHOME.text, EHomeText.LISTHOME.cmd);
                 return;

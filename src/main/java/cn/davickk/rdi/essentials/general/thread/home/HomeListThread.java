@@ -12,12 +12,8 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Map;
-
-import static cn.davickk.rdi.essentials.general.util.SQLUtils.*;
 
 public class HomeListThread extends Thread {
     private final ServerPlayerEntity player;
@@ -32,13 +28,13 @@ public class HomeListThread extends Thread {
         try {
 
             HomeRequest hreq=new HomeRequest(player);
-            if (hreq.getHomeCount()==0) {
+            if (hreq.getHomeCounts()==0) {
                 TextUtils.sendChatMessage(player, "您还未设置过家，现在就设置一个吗？");
                 TextUtils.clickableContent2Send(player, EHomeText.SETHOME_DEFAULT.text,EHomeText.SETHOME_DEFAULT.cmd);
                 TextUtils.clickableContent2Send(player, EHomeText.IMPORT.text, EHomeText.IMPORT.cmd);
                 return;
             }
-            TextUtils.sendChatMessage(player, "家 ("+hreq.getHomeCount()+"/"+ HomeUtils.MAX_HOME+") (点击->操作)");
+            TextUtils.sendChatMessage(player, "家 ("+hreq.getHomeCounts()+"/"+ HomeUtils.MAX_HOME+") (点击->操作)");
             HashMap<String, HomeLocation> homeMap= hreq.getHomeList();
             if(homeMap==null){
                 TextUtils.sendChatMessage(player,"无法获取家列表，请咨询腐竹");

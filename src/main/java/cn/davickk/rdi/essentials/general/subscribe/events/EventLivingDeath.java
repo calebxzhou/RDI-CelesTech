@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -23,7 +24,7 @@ import java.util.concurrent.Executors;
 public class EventLivingDeath {
 
     @SubscribeEvent
-    public static void onDeath(LivingDeathEvent event) {
+    public static void onDeath(LivingDeathEvent event) throws SQLException, ClassNotFoundException {
         if (!(event.getEntity() instanceof PlayerEntity))
             return;
         ServerPlayerEntity player=(ServerPlayerEntity) event.getEntity();

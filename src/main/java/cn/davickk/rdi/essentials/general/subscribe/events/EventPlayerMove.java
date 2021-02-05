@@ -3,14 +3,9 @@ package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.lib.IslandLocation;
-import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
-import cn.davickk.rdi.essentials.general.util.TextUtils;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
+import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,11 +18,13 @@ public class EventPlayerMove {
     @SubscribeEvent
     public static void onMove(TickEvent.PlayerTickEvent event) {
         PlayerEntity player=event.player;
-        if(player.getPosY()<50){
+        if(player.getPosY()<40){
             //if(PlayerUtils.minusXPLvl(player,1)){
-                IslandLocation loca=new IslandLocation(player);
-                loca.y+=200;
-                PlayerUtils.teleportPlayer((ServerPlayerEntity) player,loca);
+                //IslandLocation loca=new IslandLocation(player);
+                //loca.y+=200;
+            IslandLocation iloc=new IslandLocation(player);
+            iloc.y=-2;
+                PlayerUtils.teleportPlayer(player, iloc);
             //}else player.onKillCommand();
         }
 

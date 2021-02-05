@@ -69,7 +69,7 @@ public class IslandRequest {
     public IslandLocation findAvailableIsland() throws SQLException{
        // for(int i=1;i<=15;i++){
 
-            for(int j=1;j<39;j++){
+            for(int j=1;j<39;++j){
                 IslandLocation loca1=new IslandLocation(DIST*j,  HIGH,DIST*j);
                 IslandLocation loca2=new IslandLocation(- (DIST*j),  HIGH,DIST*j);
                 IslandLocation loca3=new IslandLocation(- (DIST * j), HIGH, -(DIST * j));

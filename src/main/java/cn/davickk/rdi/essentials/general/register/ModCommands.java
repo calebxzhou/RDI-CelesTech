@@ -3,10 +3,7 @@ package cn.davickk.rdi.essentials.general.register;
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
 import cn.davickk.rdi.essentials.general.command.impl.cloudinv.*;
 import cn.davickk.rdi.essentials.general.command.impl.home.*;
-import cn.davickk.rdi.essentials.general.command.impl.island.CreateIslandCmd;
-import cn.davickk.rdi.essentials.general.command.impl.island.IslandCommand;
-import cn.davickk.rdi.essentials.general.command.impl.island.Obsi2LavaCmd;
-import cn.davickk.rdi.essentials.general.command.impl.island.Water2IceCmd;
+import cn.davickk.rdi.essentials.general.command.impl.island.*;
 import cn.davickk.rdi.essentials.general.command.impl.player.*;
 import cn.davickk.rdi.essentials.general.command.impl.server.ReconnSQLCmd;
 import cn.davickk.rdi.essentials.general.command.impl.spawn.SpawnCommand;
@@ -42,6 +39,7 @@ public final class ModCommands {
         //Island
         commands.add(new IslandCommand("rkd",0,true));
         commands.add(new CreateIslandCmd("createkd",0,true));
+        commands.add(new CreateIslandHereCmd("createkdhere",0,true));
         // Player
         commands.add(new GetFromVoidCmd("getfromvoid",0,true));
         commands.add(new KickMeCommand("kickme",0,true));

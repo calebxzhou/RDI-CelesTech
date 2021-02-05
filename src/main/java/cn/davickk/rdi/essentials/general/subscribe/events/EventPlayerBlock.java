@@ -54,7 +54,7 @@ public class EventPlayerBlock {
                                 new Item(new Item.Properties().food(Foods.APPLE))));*/
                 }else{
                     int ran=RandomUtils.generateRandomInt(1,10);
-                    if(ran<3){
+                    if(ran==1){
                         int stack=player.inventory.getFirstEmptyStack();
                         if(stack==-1)
                             return;

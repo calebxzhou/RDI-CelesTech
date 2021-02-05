@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import static cn.davickk.rdi.essentials.RDIEssentials.SQL_CONN;
 import static cn.davickk.rdi.essentials.general.util.SQLUtils.*;
@@ -27,8 +28,26 @@ public class CreateIslandT extends Thread{
         this.player=player;
     }
     public void run(){
-        TextUtils.sendChatMessage(player,"正在创建空岛...");
-        String name= player.getDisplayName().getString();
+        IslandRequest req = null;
+        try {
+            req = new IslandRequest(player);
+            if (req.hasIsland()) {
+                TextUtils.sendChatMessage(player, "您已经有一个空岛了，因此不能创建新的空岛。");
+                TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[立刻前往我的空岛]","/home island"," ");
+                //TODO 回到我的空岛
+                return;
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        TextUtils.sendChatMessage(player,"准备创建空岛...您觉得这个位置可以吗？（请尽量选择没有人的地方）");
+        PlayerUtils.randomTeleport(player,true);
+        TextUtils.clickableContent2Send(player,"[可以，就在这创建空岛吧]","/createkdhere"," ");
+        TextUtils.clickableContent2Send(player,"[不可以，重新寻找位置]","/createkd"," ");
+       /* String name= player.getDisplayName().getString();
         int serverPort = player.getServer().getServerPort();
         try{
             //Class.forName("com.mysql.jdbc.Driver");
@@ -62,6 +81,6 @@ public class CreateIslandT extends Thread{
 
 
 
-        }catch (Exception e){e.printStackTrace();}
+        }catch (Exception e){e.printStackTrace();}*/
     }
 }

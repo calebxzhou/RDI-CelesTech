@@ -138,8 +138,19 @@ public final class PlayerUtils {
     public static boolean isInCreateServ(ServerPlayerEntity player){
         return player.getServer().getServerPort()==ServerUtils.CRET_PORT;
     }
-    public static void teleportPlayer(ServerPlayerEntity player, IslandLocation loca){
-        player.teleport(player.getServerWorld(),loca.x,loca.y,loca.z,0f,0f);
+    public static void randomTeleport(ServerPlayerEntity player,boolean glass){
+        int x=RandomUtils.generateRandomInt(-4900,4900);
+        int z=RandomUtils.generateRandomInt(-4900,4900);
+        IslandLocation isl=new IslandLocation
+                (x,220,z);
+        teleportPlayer(player,isl);
+        if(glass)
+            player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),
+                    "fill "+x+" 219 "+z+" "+x+" 218 "+z+" minecraft:glass");
+
+    }
+    public static void teleportPlayer(PlayerEntity player, IslandLocation loca){
+        player.teleportKeepLoaded(loca.x,loca.y,loca.z);
        /* MinecraftServer server=player.getServer();
         String cmd="tp %player %x %y %z"
                 .replace("%player",player.getDisplayName().getString())
@@ -149,10 +160,10 @@ public final class PlayerUtils {
         //System.out.println(cmd);
         server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
     }
-    public static void teleportPlayer(ServerPlayerEntity player, Location loca){
+    public static void teleportPlayer(PlayerEntity player, Location loca){
         teleportPlayer(player,loca.dims,loca.x,loca.y,loca.z,loca.rotationYaw,loca.rotationPitch);
     }
-    public static void teleportPlayer(ServerPlayerEntity player, ResourceLocation world, double x, double y, double z, float w, float p){
+    public static void teleportPlayer(PlayerEntity player, ResourceLocation world, double x, double y, double z, float w, float p){
         MinecraftServer server=player.getServer();
         String cmd="execute as %player in %world rotated %yaw %pitch run tp %x %y %z"
                 .replace("%player",player.getDisplayName().getString())

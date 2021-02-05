@@ -5,20 +5,12 @@ import cn.davickk.rdi.essentials.general.enums.EHomeText;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.List;
-
-import static cn.davickk.rdi.essentials.general.util.SQLUtils.*;
 
 public class ActionsOfHomeT extends Thread{
     private ServerPlayerEntity player;
@@ -59,7 +51,7 @@ public class ActionsOfHomeT extends Thread{
                 tpHover="未激活，无法传送";
                 int level=player.experienceLevel;
                 if(level<5) {
-                    if(hreq.getHomeCount()==0)
+                    if(hreq.getHomeCounts()==0)
                         activCont=green.concat(activCont);
                     else{
                         activHover="经验不足，无法激活这个家";

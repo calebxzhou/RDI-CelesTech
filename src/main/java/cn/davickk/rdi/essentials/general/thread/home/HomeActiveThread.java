@@ -1,18 +1,10 @@
 package cn.davickk.rdi.essentials.general.thread.home;
 
-import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EHomeText;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
-import cn.davickk.rdi.essentials.general.util.SQLUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-
-import static cn.davickk.rdi.essentials.general.util.SQLUtils.*;
 
 public class HomeActiveThread extends Thread {
     private final ServerPlayerEntity player;
@@ -27,7 +19,7 @@ public class HomeActiveThread extends Thread {
     public void run() {
         try {
             HomeRequest hreq=new HomeRequest(player,homeName);
-            if(!hreq.existsHome()){
+            if(!hreq.hasHome()){
                 TextUtils.sendChatMessage(player,"ц╩спур╣╫"+homeName);
                 return;
             }

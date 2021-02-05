@@ -2,16 +2,8 @@ package cn.davickk.rdi.essentials.general.thread.home;
 
 import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
-import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.Iterator;
-
-import static cn.davickk.rdi.essentials.general.util.SQLUtils.*;
 
 public class ShareHomeT extends Thread{
     private final ServerPlayerEntity player;
@@ -43,7 +35,7 @@ public class ShareHomeT extends Thread{
                 TextUtils.sendChatMessage(player,"无法读取位置，确定"+homeName+"存在吗？");
                 return;
             }
-            if(hreq2.existsHome()){
+            if(hreq2.hasHome()){
                 TextUtils.sendChatMessage(player,"对方已经有"+homeName+"这个家了，请尝试更换名称");
                 return;
             }

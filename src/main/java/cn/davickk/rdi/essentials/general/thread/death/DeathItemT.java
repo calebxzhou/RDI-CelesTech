@@ -1,5 +1,6 @@
 package cn.davickk.rdi.essentials.general.thread.death;
 
+import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EDeathItemReq;
 import cn.davickk.rdi.essentials.general.request.DeathItemRequest;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
@@ -15,7 +16,8 @@ public class DeathItemT extends Thread{
     private final String playerName;
     private final String uuid;
     private final EDeathItemReq ereq;
-    public DeathItemT(ServerPlayerEntity player, EDeathItemReq ereq) {
+    public DeathItemT(ServerPlayerEntity player, EDeathItemReq ereq) throws SQLException, ClassNotFoundException {
+        RDIEssentials.createSQLConnection();
         this.player=player;
         this.playerName=player.getDisplayName().getString();
         this.uuid=player.getUniqueID().toString();
