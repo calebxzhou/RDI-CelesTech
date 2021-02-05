@@ -1,0 +1,124 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url = 'https://files.minecraftforge.net/maven'
+        }
+        maven{
+            url = "https://maven.enginehub.org/repo/"
+        }
+        
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+
+    }
+
+
+}
+repositories {
+     mavenCentral()
+     maven{
+         url = "https://maven.enginehub.org/repo/"
+     }
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+version = modMinecraftVersion + '-' + modVersion
+group = modGroup
+archivesBaseName = modFileName
+
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+
+minecraft {
+    mappings channel: modMcpMappingsChannel, version: modMcpMappingsVersion
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
+
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:' + modMinecraftVersion + '-' + modForgeVersion
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.49'
+    compileOnly "com.sk89q.worldedit:worldedit-core:7.3.0-SNAPSHOT"
+    compileOnly "com.sk89q.worldedit:worldedit-forge-mc1.16.3:7.3.0-SNAPSHOT"
+    runtimeOnly "com.sk89q.worldedit:worldedit-core:7.3.0-SNAPSHOT"
+    runtimeOnly fg.deobf("com.sk89q.worldedit:worldedit-forge-mc1.16.3:7.3.0-SNAPSHOT")
+    //compile group: 'com.sk89q.worldedit',name:'worldedit-forge-mc1.16.3',version: '7.3.0-SNAPSHOT'
+    //compile files('D:/CODE/AeroTechEss/worldedit-forge-mc1.16.3-7.3.0-SNAPHOT.jar')
+   // compile files('D:/CODE/AeroTechEss/worldedit-core-7.3.0-20210131.030946-12-sources.jar')
+    //classpath group: 'com.sk89q.worldedit',name: 'worldedit-forge-mc1.16.3' , version: '7.3.0-SNAPSHOT'
+    //compile files('D:/CODE/AeroTechEss/worldedit-forge-mc1.16.3-7.2.2-dist.jar')
+    //implementation "com.sk89q.worldedit:worldedit-forge-mc1.16.3:7.3.0-SNAPSHOT"
+    implementation "mysql:mysql-connector-java:5.1.49"
+
+    //implementation 'org.hibernate:hibernate-agroal:5.4.27.Final'
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": modId,
+            "Specification-Vendor": modGroup,
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" : modGroup,
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar') 
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}

@@ -1,0 +1,54 @@
+package cn.davickk.rdi.essentials.general.command.impl.team;
+
+import cn.davickk.rdi.essentials.general.command.BaseCommand;
+import cn.davickk.rdi.essentials.general.util.HomeUtils;
+import cn.davickk.rdi.essentials.general.util.PlayerUtils;
+import cn.davickk.rdi.essentials.general.util.TextUtils;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
+import net.minecraft.entity.player.ServerPlayerEntity;
+
+public class TeamCommand extends BaseCommand {
+
+    public TeamCommand(String command, int permissionLevel, boolean enabled) {
+        super(command, permissionLevel, enabled);
+    }
+
+    @Override
+    public LiteralArgumentBuilder<CommandSource> setExecution() {
+        return builder.executes(
+                (context) -> execute(context.getSource()));
+    }
+
+    private int execute(CommandSource source) throws CommandSyntaxException {
+        ServerPlayerEntity player = source.asPlayer();
+        //sendMessage(player, "请输入家的名称");
+        TextUtils.clickableContent2Send(player,"------RDI Team 组队系统 版本v1.0------","",
+                "");
+
+        PlayerUtils.sendLoading(player);
+        //if没有团队
+        TextUtils.getClickableContentComp(player,"[加入团队]","/team join","加入一个已有的团队（无需经验）");
+        TextUtils.getClickableContentComp(player,"[创建团队]","/team create","创建一个新的团队（需要5经验）");
+        //if玩家创建了团队
+        TextUtils.getClickableContentComp(player,"[邀请]","/team invite","邀请他人加入您的团队 %s（需要1经验）");
+        TextUtils.getClickableContentComp(player,"[移除]","/team remove","将一个人从您的团队中移除");
+        TextUtils.getClickableContentComp(player,"[提升等级]","/team levelup","提升团队的等级以容纳更多人");
+
+        //if玩家加入了别人的团队
+        TextUtils.getClickableContentComp(player,"[退出团队]","/team quit","退出团队%s");
+
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private int execute(CommandSource source, String homeName) throws CommandSyntaxException {
+        ServerPlayerEntity player = source.asPlayer();
+        PlayerUtils.sendLoading(player);
+        return Command.SINGLE_SUCCESS;
+    }
+
+}

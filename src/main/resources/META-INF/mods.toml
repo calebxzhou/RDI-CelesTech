@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[34,)"
+issueTrackerURL="https://rdi.davisoft.cn/"
+license="MIT License"
+
+[[mods]]
+    modId="rdi-essentials"
+    version="${file.jarVersion}"
+    displayName="RDI Essentials"
+    updateJSONURL="https://rdi.davisoft.cn/rdi-essentials/update.json"
+    displayURL="https://rdi.davisoft.cn/"
+    logoFile=""
+    credits="Davickk"
+    authors="Davickk"
+    description="The mcRDI Server. QQ Group Number: 1095925708"
+
+    [[dependencies.rdi-essentials]]
+        modId="forge"
+        mandatory=true
+        versionRange="[34.0.0,)"
+        ordering="NONE"
+        side="BOTH"
+
+    [[dependencies.rdi-essentials]]
+        modId="minecraft"
+        mandatory=true
+        versionRange="[1.16.3,)"
+        ordering="NONE"
+        side="BOTH"
