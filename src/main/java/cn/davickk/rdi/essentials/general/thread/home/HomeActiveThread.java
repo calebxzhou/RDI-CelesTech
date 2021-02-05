@@ -25,7 +25,7 @@ public class HomeActiveThread extends Thread {
             }
             if (hreq.hasActiveHome()) {
                 //TextUtils.sendChatMessage(player, "您已经激活过一个家了，继续激活" +homeName+"需要大约7个经验等级。");
-                if(!PlayerUtils.minusXPLvl(player,7)) {
+                if(!PlayerUtils.minusXPLvl(player,1)) {
                     TextUtils.sendChatMessage(player,"您的经验等级不足，无法激活"+homeName);
                 }else{
                     if(hreq.setActive(true)) {

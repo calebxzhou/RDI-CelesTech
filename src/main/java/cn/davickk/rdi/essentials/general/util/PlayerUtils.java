@@ -5,13 +5,18 @@ import cn.davickk.rdi.essentials.general.enums.EWorld;
 import cn.davickk.rdi.essentials.general.lib.IslandLocation;
 import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.thread.ui.LoadingT;
+import com.mojang.brigadier.StringReader;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.command.arguments.ItemArgument;
+import net.minecraft.command.arguments.ItemInput;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -146,7 +151,7 @@ public final class PlayerUtils {
         teleportPlayer(player,isl);
         if(glass)
             player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),
-                    "fill "+x+" 219 "+z+" "+x+" 218 "+z+" minecraft:glass");
+                    "fill "+x+" 219 "+z+" "+x+" 219 "+z+" minecraft:glass");
 
     }
     public static void teleportPlayer(PlayerEntity player, IslandLocation loca){
@@ -176,12 +181,22 @@ public final class PlayerUtils {
         //System.out.println(cmd);
         server.getCommandManager().handleCommand(server.getCommandSource(),cmd);
     }
-    public static void givePlayerItem(ServerPlayerEntity player, String id, int amount){
-        MinecraftServer server=player.getServer();
+    public static boolean givePlayerItem(ServerPlayerEntity player, String id, int amount) throws CommandSyntaxException {
+        ItemInput ia=ItemArgument.item().parse(new StringReader(id));
+        /*MinecraftServer server=player.getServer();
         String cmd="give %player %id %amount".replace("%player",player.getDisplayName().getString())
                 .replace("%id",id).replace("%amount",amount+"");
         System.out.println(cmd);
-        server.getCommandManager().handleCommand(server.getCommandSource(),cmd);
+        server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
+        ItemStack stack=ia.createStack(amount,false);
+        return player.inventory.addItemStackToInventory(stack);
+    }
+    public static boolean hasInventorySpace(ServerPlayerEntity player){
+        int stack=player.inventory.getFirstEmptyStack();
+        if(stack==-1)
+            return false;
+        else
+            return true;
     }
     public static BlockPos lookingAtBlock(ServerPlayerEntity player, boolean isFluid){
         RayTraceResult rays=player.pick(6,1.0f,isFluid);

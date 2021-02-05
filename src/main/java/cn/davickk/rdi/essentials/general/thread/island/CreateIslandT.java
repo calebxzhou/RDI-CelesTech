@@ -45,8 +45,8 @@ public class CreateIslandT extends Thread{
 
         TextUtils.sendChatMessage(player,"准备创建空岛...您觉得这个位置可以吗？（请尽量选择没有人的地方）");
         PlayerUtils.randomTeleport(player,true);
-        TextUtils.clickableContent2Send(player,"[可以，就在这创建空岛吧]","/createkdhere"," ");
-        TextUtils.clickableContent2Send(player,"[不可以，重新寻找位置]","/createkd"," ");
+        TextUtils.clickableContent2Send(player,EColor.BRIGHT_GREEN.code+"[可以，就在这创建空岛吧]","/createkdhere"," ");
+        TextUtils.clickableContent2Send(player,EColor.RED.code+"[不可以，重新寻找位置]","/createkd"," ");
        /* String name= player.getDisplayName().getString();
         int serverPort = player.getServer().getServerPort();
         try{

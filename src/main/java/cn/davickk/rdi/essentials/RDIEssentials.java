@@ -42,9 +42,14 @@ public class RDIEssentials {
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
-    public static void createSQLConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        SQL_CONN= DriverManager.getConnection(DB_URL, USR, PWD);
+    public static void createSQLConnection(){
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            SQL_CONN= DriverManager.getConnection(DB_URL, USR, PWD);
+        } catch (SQLException | ClassNotFoundException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
     /*
         private void onCommonSetup(final FMLCommonSetupEvent event) {

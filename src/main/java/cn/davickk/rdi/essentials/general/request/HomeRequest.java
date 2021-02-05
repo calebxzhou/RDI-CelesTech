@@ -147,17 +147,13 @@ public class HomeRequest{
     public boolean isReachedMax() throws SQLException {
         return getHomeCounts() > HomeUtils.MAX_HOME;
     }
-    public boolean updateHome(Location loca){
-        return false;
-    }
-
     public boolean delHome() throws SQLException {
         String selectSQL = "DELETE FROM home WHERE uuid ='" + uuid + "' AND homeName='"+homeName+"' AND port='"+port+"'";
         int rowsEff = sqlConn.prepareStatement(selectSQL).executeUpdate();
         return rowsEff!=0;
     }
     public boolean hasActiveHome() throws SQLException{
-        ResultSet rs4 = sqlConn.prepareStatement("SELECT * FROM home WHERE uuid= '"+uuid+"' AND activ=true AND port='"+port+"'").executeQuery();
+        ResultSet rs4 = sqlConn.prepareStatement("SELECT * FROM home WHERE uuid= '"+uuid+"' AND activ='1' AND port='"+port+"'").executeQuery();
         return rs4.next();
     }
     public boolean isActive() throws SQLException {
@@ -166,6 +162,7 @@ public class HomeRequest{
         return rs3.next();
     }
     public boolean setActive(boolean activ) throws SQLException {
+
         return sqlConn.prepareStatement("UPDATE home SET activ = '"+activ+"' WHERE uuid='"+uuid+"' AND homeName='"+homeName+"' AND port='"+port+"'")
                 .executeUpdate()>0;
     }

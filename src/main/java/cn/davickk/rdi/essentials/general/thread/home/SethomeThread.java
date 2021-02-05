@@ -26,7 +26,11 @@ public class SethomeThread extends Thread {
             }
             if(hreq.hasHome()){
                 TextUtils.sendChatMessage(player,"您已经设置过"+homeName+"了，正在覆盖....");
-                return;
+                if(!PlayerUtils.minusXPLvl(player,1))
+                {
+                    TextUtils.sendChatMessage(player,"覆盖传送点需要1经验。");
+                    return;
+                }
             }
             if(hreq.setHome()){
             TextUtils.sendChatMessage(player, "成功设置传送点" + homeName);

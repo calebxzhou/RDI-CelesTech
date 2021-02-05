@@ -41,7 +41,6 @@ public class ActionsOfHomeT extends Thread{
             String red=EColor.RED.code;
             String gold=EColor.GOLD.code;
             String blk=EColor.BLACK.code;
-            String player2share="";
             if(hreq.isActive()) {
                 tpCont=green.concat(tpCont);
                 activCont=" ";
@@ -61,16 +60,9 @@ public class ActionsOfHomeT extends Thread{
                     activCont=green.concat(activCont);
 
             }
-
-            if(playerEntityList.isEmpty()){
-                shareCont=gray.concat(shareCont);
-                shareHover="附近没有玩家，无法分享";
-            } else{
-                player2share=playerEntityList.get(0).getDisplayName().getString();
                 shareCont=gold.concat(shareCont);
-                shareHover.concat(player2share);
 
-            }
+
             //[传送]  [重命名] [删除] [激活]    [分享]
             IFormattableTextComponent tpHomeT=
                     TextUtils.getClickableContentComp(player,tpCont,
@@ -88,8 +80,8 @@ public class ActionsOfHomeT extends Thread{
                             activHover);
             IFormattableTextComponent shareHomeT=
                     TextUtils.getClickableContentComp(player,shareCont,
-                            EHomeText.SHARE.cmd.replace("%s",homeName)
-                                    .replace("%p",player2share),shareHover);
+                            EHomeText.SHARE.cmd.replace("%s","")
+                                    .replace("%p",""),shareHover);
             TextUtils.sendChatMessage(player,TextUtils.appendTwoComp(homeName+" -> ",
                     tpHomeT.append(renameT).append(shareHomeT).append(activHomeT).append(new StringTextComponent(
                             "              "

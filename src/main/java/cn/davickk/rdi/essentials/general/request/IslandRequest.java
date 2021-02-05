@@ -65,7 +65,7 @@ public class IslandRequest {
         }
         return false;
     }
-    @Nullable
+    /*@Nullable
     public IslandLocation findAvailableIsland() throws SQLException{
        // for(int i=1;i<=15;i++){
 
@@ -86,7 +86,7 @@ public class IslandRequest {
 
         //}
         return null;
-    }
+    }*/
     public void createIsland(IslandLocation loca) throws SQLException {
         PreparedStatement psm=sqlConn.prepareStatement("INSERT INTO island (uuid, playerName, x, y, z) VALUES (?,?,?,?,?)");
         psm.setString(1,uuid);

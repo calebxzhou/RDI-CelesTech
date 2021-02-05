@@ -18,14 +18,12 @@ public class EventPlayerMove {
     @SubscribeEvent
     public static void onMove(TickEvent.PlayerTickEvent event) {
         PlayerEntity player=event.player;
-        if(player.getPosY()<40){
+        if(player.getPosY()<30){
             //if(PlayerUtils.minusXPLvl(player,1)){
                 //IslandLocation loca=new IslandLocation(player);
                 //loca.y+=200;
-            IslandLocation iloc=new IslandLocation(player);
-            iloc.y=-2;
-                PlayerUtils.teleportPlayer(player, iloc);
-            //}else player.onKillCommand();
+
+             player.onKillCommand();
         }
 
         /*try {

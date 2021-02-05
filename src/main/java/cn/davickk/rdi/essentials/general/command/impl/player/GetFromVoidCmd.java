@@ -11,6 +11,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 public class GetFromVoidCmd extends BaseCommand {
@@ -25,7 +26,13 @@ public class GetFromVoidCmd extends BaseCommand {
 
     private int execute(CommandSource cs) throws CommandSyntaxException {
         ServerPlayerEntity player=cs.asPlayer();
-        ServerUtils.startThread(new DeathItemT(player, EDeathItemReq.READ));
+        try {
+            ServerUtils.startThread(new DeathItemT(player, EDeathItemReq.READ));
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return Command.SINGLE_SUCCESS;
     }
 

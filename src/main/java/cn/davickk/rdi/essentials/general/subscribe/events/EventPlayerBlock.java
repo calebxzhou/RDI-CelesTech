@@ -1,6 +1,7 @@
 package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
+import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.RandomUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
@@ -46,27 +47,53 @@ public class EventPlayerBlock {
                 //System.out.println(player.getHeldItemMainhand().getDisplayName().getString());
                 if(player.getHeldItemMainhand().getItem() instanceof SwordItem){
                     int stack=player.inventory.getFirstEmptyStack();
-                    if(stack==-1)
-                        return;
-                    else
+                    if(PlayerUtils.hasInventorySpace(player))
                         PlayerUtils.givePlayerItem(player,"apple",1);
                         /*player.inventory.add(stack, new ItemStack(
                                 new Item(new Item.Properties().food(Foods.APPLE))));*/
                 }else{
-                    int ran=RandomUtils.generateRandomInt(1,10);
-                    if(ran==1){
+                    int ran=RandomUtils.generateRandomInt(1,100);
+                    if(ran<15){
                         int stack=player.inventory.getFirstEmptyStack();
-                        if(stack==-1)
-                            return;
-                        else{
-                            TextUtils.sendChatMessage(player,"在树上发现了一个苹果，今天运气真不错~");
+                        if(PlayerUtils.hasInventorySpace(player)){
+                            TextUtils.sendChatMessage(player,"在树上发现了一个苹果~");
                             PlayerUtils.givePlayerItem(player,"apple",1);
                         }
-                    }
+                    }else
+                    if(ran<5){
+                        int stack=player.inventory.getFirstEmptyStack();
+                        if(PlayerUtils.hasInventorySpace(player)){
+                            TextUtils.sendChatMessage(player,"在树上发现了一个金苹果！！");
+                            PlayerUtils.givePlayerItem(player,"golden_apple",1);
+                        }
+                    }else
+                    if(ran==66){
+                        int stack=player.inventory.getFirstEmptyStack();
+                        if(PlayerUtils.hasInventorySpace(player)){
+                            TextUtils.sendGlobalChatMessage(player.getServer().getPlayerList(),
+                                    EColor.GOLD.code+player.getDisplayName().getString()+"在树上发现了一个附魔金苹果！！！");
+                            PlayerUtils.givePlayerItem(player,"enchanted_golden_apple",1);
+                        }
+                    }else
+                        if(ran-15<15){
+                            TextUtils.sendChatMessage(player,"就差一点点就可以获得苹果了！！");
+                        }
                 }
             }
             if(block.getRegistryName().toString().equalsIgnoreCase("stone")){
-
+                int ran=RandomUtils.generateRandomInt(1,100);
+                if(ran<3){
+                    if(PlayerUtils.hasInventorySpace(player)) {
+                        TextUtils.sendChatMessage(player, "在石头里发现了一个不知名矿石，看起来很珍贵的样子。");
+                        PlayerUtils.givePlayerItem(player, "appliedenergistics2:quartz", 1);
+                    }
+                }
+                if(ran==66){
+                    if(PlayerUtils.hasInventorySpace(player)) {
+                        TextUtils.sendChatMessage(player, "在石头里发现了一个蓝色的小石头，看起来很珍贵的样子。");
+                        PlayerUtils.givePlayerItem(player, "diamond", 1);
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

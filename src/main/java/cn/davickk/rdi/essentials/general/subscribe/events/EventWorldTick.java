@@ -29,9 +29,9 @@ public class EventWorldTick {
            }else tickCounter++;*/
             int min20 = 25 * 60 * 20 * 5;//about 22 minutes
             int sec30 = 30 * 20 * 5;
-            int min10 = 25*60*10*5;
+            int min5 = 25*60*5*5;
             //int sec10=10*20;
-            if(tickCounter==min10){
+            if(tickCounter==min5){
                 PlayerList playerList = event.world.getServer().getPlayerList();
                 TextUtils.sendGlobalChatMessage(playerList, "提示：/rkd打开空岛菜单");
                 ServerUtils.startThread(new SQLReconnT());

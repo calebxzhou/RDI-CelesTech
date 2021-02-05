@@ -19,13 +19,8 @@ public class ReconnSQLCmd extends BaseCommand {
     }
 
     private int execute(CommandSource source) {
-        try {
             RDIEssentials.createSQLConnection();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
+
         return Command.SINGLE_SUCCESS;
     }
 }
