@@ -23,7 +23,7 @@ public class IslandCommand extends BaseCommand {
 
     private int execute(CommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player=source.asPlayer();
-        sendMessage(player, EColor.AQUA.code+"--RDI CelesTech 新技术空岛系统 1.0--");
+        sendMessage(player, "--RDI CelesTech 新技术空岛系统 v1.2--");
         ServerUtils.startThread(new IslandMenuT(player));
         //----RDI Aerotech新技术空岛系统 版本v1.0---
         //[创建岛] [回岛]

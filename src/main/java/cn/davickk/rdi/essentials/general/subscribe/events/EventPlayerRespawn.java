@@ -17,8 +17,10 @@ public class EventPlayerRespawn {
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
         ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
         PlayerUtils.teleportPlayer(player, ServerUtils.SPAWN_LOCA);
-        TextUtils.sendChatMessage(player,"您刚才可能掉落了一些物品。");
-        TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[恢复物品]","/getfromvoid","花费3经验从虚空中恢复物品。");
+        //TextUtils.sendChatMessage(player,"您刚才可能掉落了一些物品。");
+        //TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[恢复物品]","/getfromvoid","花费1经验从虚空中恢复物品。");
+        //重新设置出生点到主城
+        player.func_242111_a(player.world.getDimensionKey(), ServerUtils.SPAWN_BLKPS, 0f, true, false);
         /*if (ModConfig.spawn_force_on_death) {
 
             Location location = DataManager.getWorld().getSpawn();

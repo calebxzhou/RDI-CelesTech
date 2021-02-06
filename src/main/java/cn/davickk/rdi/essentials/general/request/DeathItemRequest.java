@@ -79,6 +79,10 @@ public class DeathItemRequest {
             return stackList;
     }
     public void getAndGiveItemList() throws SQLException,CommandSyntaxException{
+        if(!PlayerUtils.minusXPLvl(player,1)){
+            TextUtils.sendChatMessage(player,"经验不足，本操作需要1经验。");
+            return;
+        }
         List<ItemStack> stackList =getItemList();
         if(stackList==null||stackList.isEmpty()){
             TextUtils.sendChatMessage(player,"您没有物品可以取出。");
@@ -93,14 +97,17 @@ public class DeathItemRequest {
             //else TextUtils.sendChatMessage(player,"您要取出的物品过多，正在尝试取出...");
         }
         int itemTaken=0;
-        for(ItemStack oneStack:stackList){
+        //for(ItemStack oneStack:stackList){
+        for(int i=0;i<invEmptySize;++i){
+            ItemStack oneStack=stackList.get(i);
                 if(!player.inventory.addItemStackToInventory(oneStack))
                     break;
-                ++itemTaken;
+                //++itemTaken;
         }
         PreparedStatement psm=conn.prepareStatement("DELETE FROM death_item WHERE uuid=?");
         psm.setString(1,uuid);
         psm.executeUpdate();
+
         TextUtils.sendChatMessage(player,"成功取出"+itemTaken+"个物品。");
     }
     public void givePlayerItemList(List<ItemStack> stackList) {

@@ -40,7 +40,7 @@ public class EventPlayerBlock {
             //System.out.println(blockS.toString());
             Block block=blockS.getBlock();
 
-            //System.out.println(block.getRegistryName().toString());
+            //System.out.println(block.getRegistryNamed().toString());
             //System.out.println(block.getRegistryType().toString());
 
             if(block.getRegistryName().toString().contains("leaves")){
@@ -52,22 +52,22 @@ public class EventPlayerBlock {
                         /*player.inventory.add(stack, new ItemStack(
                                 new Item(new Item.Properties().food(Foods.APPLE))));*/
                 }else{
-                    int ran=RandomUtils.generateRandomInt(1,100);
-                    if(ran<15){
+                    int ran=RandomUtils.generateRandomInt(1,1000);
+                    if(ran<100){
                         int stack=player.inventory.getFirstEmptyStack();
                         if(PlayerUtils.hasInventorySpace(player)){
                             TextUtils.sendChatMessage(player,"在树上发现了一个苹果~");
                             PlayerUtils.givePlayerItem(player,"apple",1);
                         }
                     }else
-                    if(ran<5){
+                    if(ran>995){
                         int stack=player.inventory.getFirstEmptyStack();
                         if(PlayerUtils.hasInventorySpace(player)){
                             TextUtils.sendChatMessage(player,"在树上发现了一个金苹果！！");
                             PlayerUtils.givePlayerItem(player,"golden_apple",1);
                         }
                     }else
-                    if(ran==66){
+                    if(ran==666){
                         int stack=player.inventory.getFirstEmptyStack();
                         if(PlayerUtils.hasInventorySpace(player)){
                             TextUtils.sendGlobalChatMessage(player.getServer().getPlayerList(),
@@ -75,14 +75,14 @@ public class EventPlayerBlock {
                             PlayerUtils.givePlayerItem(player,"enchanted_golden_apple",1);
                         }
                     }else
-                        if(ran-15<15){
+                        if(ran-100<50){
                             TextUtils.sendChatMessage(player,"就差一点点就可以获得苹果了！！");
                         }
                 }
             }
             if(block.getRegistryName().toString().equalsIgnoreCase("stone")){
                 int ran=RandomUtils.generateRandomInt(1,100);
-                if(ran<3){
+                if(ran<5){
                     if(PlayerUtils.hasInventorySpace(player)) {
                         TextUtils.sendChatMessage(player, "在石头里发现了一个不知名矿石，看起来很珍贵的样子。");
                         PlayerUtils.givePlayerItem(player, "appliedenergistics2:quartz", 1);

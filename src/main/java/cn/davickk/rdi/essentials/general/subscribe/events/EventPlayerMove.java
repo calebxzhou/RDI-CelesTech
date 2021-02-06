@@ -7,6 +7,8 @@ import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -15,15 +17,17 @@ public class EventPlayerMove {
     private static int tickCounter = 0;
     private static float bodyTemp = 36.5f;
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onMove(TickEvent.PlayerTickEvent event) {
         PlayerEntity player=event.player;
-        if(player.getPosY()<30){
+        if(player.getPosY()<PlayerUtils.LOWEST_LIMIT){
             //if(PlayerUtils.minusXPLvl(player,1)){
                 //IslandLocation loca=new IslandLocation(player);
                 //loca.y+=200;
+            PlayerUtils.teleportPlayer(player,ServerUtils.SPAWN_LOCA);
+            //}
 
-             player.onKillCommand();
+             //player.onKillCommand();
         }
 
         /*try {

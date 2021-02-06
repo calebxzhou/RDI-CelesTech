@@ -1,6 +1,7 @@
 package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
+import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.RandomUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.EntityType;
@@ -16,10 +17,15 @@ import net.minecraftforge.fml.common.Mod;
 public class EventMobs {
     @SubscribeEvent
     public static void mobSpawn(LivingSpawnEvent.SpecialSpawn event){
+        if(event.getEntityLiving().getType().equals(EntityType.PLAYER))
+            return;
         if(event.getEntityLiving().getType().equals(EntityType.SLIME)
-        || event.getEntityLiving().getDisplayName().getString().contains("slime"))
-            if(!(event.getEntityLiving().getType().equals(EntityType.PLAYER)))
+                || event.getEntityLiving().getDisplayName().getString().contains("slime"))
             event.setCanceled(true);
+        if(event.getEntityLiving().getEntity().getPosY()< PlayerUtils.LOWEST_LIMIT){
+            event.setCanceled(true);
+        }
+
     }
     @SubscribeEvent
     public static void babySpawn(BabyEntitySpawnEvent event) {

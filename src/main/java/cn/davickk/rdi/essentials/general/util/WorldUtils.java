@@ -64,4 +64,8 @@ public class WorldUtils {
             Operations.complete(operation);
         }
     }
+    public static void clearMob(PlayerEntity player,String mobName){
+        player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),
+                "kill @e[type="+mobName+"]");
+    }
 }

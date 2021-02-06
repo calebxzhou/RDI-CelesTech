@@ -13,6 +13,7 @@ import com.sk89q.worldedit.forge.ForgeAdapter;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.world.World;
 
 import java.sql.Connection;
@@ -45,8 +46,13 @@ public class CreateIslandT extends Thread{
 
         TextUtils.sendChatMessage(player,"准备创建空岛...您觉得这个位置可以吗？（请尽量选择没有人的地方）");
         PlayerUtils.randomTeleport(player,true);
-        TextUtils.clickableContent2Send(player,EColor.BRIGHT_GREEN.code+"[可以，就在这创建空岛吧]","/createkdhere"," ");
-        TextUtils.clickableContent2Send(player,EColor.RED.code+"[不可以，重新寻找位置]","/createkd"," ");
+        IFormattableTextComponent t1=
+                TextUtils.getClickableContentComp(player,
+                        EColor.BRIGHT_GREEN.code+"[可以，就在这创建空岛吧]","/createkdhere"," ");
+        IFormattableTextComponent t2=
+                TextUtils.getClickableContentComp(player,
+                        EColor.RED.code+"[不可以，重新寻找位置]","/createkd"," ");
+        TextUtils.sendChatMessage(player,t1.append(t2));
        /* String name= player.getDisplayName().getString();
         int serverPort = player.getServer().getServerPort();
         try{

@@ -28,8 +28,12 @@ public class WeatherRequestThread extends Thread {
         try {
             IP2Location loca = WeatherUtils.getLocationFromIP(ip);
             if (loca.status != 0) {
+
                 TextUtils.sendChatMessage(player, "无法获取天气预报，将显示默认城市的天气预报。");
-                loca = WeatherUtils.getLocationFromIP("202.107.26.39");
+                if(player.getServer().isDedicatedServer())
+                    return;
+                else
+                    loca = WeatherUtils.getLocationFromIP("202.107.26.39");
             }
             double lati = loca.result.location.lat;//纬度
             double longi = loca.result.location.lng;//经度
@@ -97,6 +101,8 @@ public class WeatherRequestThread extends Thread {
             //xx(市) 2020年x月x日 晴 xx~xxC 湿度xx% 降水率xx%
             TextUtils.sendChatMessage(player, msgLine1);
             TextUtils.sendChatMessage(player, msgLine2);
+            TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[打开空岛菜单]","/rkd","/rkd");
+
             if(hour>=17)
                 TextUtils.sendChatMessage(player, msgLine3);
         } catch (Exception e) {

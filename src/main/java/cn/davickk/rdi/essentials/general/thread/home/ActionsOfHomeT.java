@@ -1,5 +1,6 @@
 package cn.davickk.rdi.essentials.general.thread.home;
 
+import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.enums.EHomeText;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
@@ -21,6 +22,7 @@ public class ActionsOfHomeT extends Thread{
         this.homeName=homeName;
     }
     public void run(){
+        RDIEssentials.createSQLConnection();
         //3x3x3范围检测 有没有玩家 没有->分享=灰色
         try {
 

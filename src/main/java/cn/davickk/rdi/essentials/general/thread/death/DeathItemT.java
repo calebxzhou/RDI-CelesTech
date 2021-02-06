@@ -17,14 +17,14 @@ public class DeathItemT extends Thread{
     private final String uuid;
     private final EDeathItemReq ereq;
     public DeathItemT(ServerPlayerEntity player, EDeathItemReq ereq) throws SQLException, ClassNotFoundException {
-        RDIEssentials.createSQLConnection();
+
         this.player=player;
         this.playerName=player.getDisplayName().getString();
         this.uuid=player.getUniqueID().toString();
         this.ereq=ereq;
     }
     public void run(){
-
+        RDIEssentials.createSQLConnection();
         if(ereq.equals(EDeathItemReq.RECORD)){
 
 

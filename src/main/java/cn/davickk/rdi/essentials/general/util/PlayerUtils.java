@@ -32,6 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public final class PlayerUtils {
+    public static final int LOWEST_LIMIT=30;
     public static final String benefitOfSleepEarly =
             "早睡的好处：①保证睡眠质量，促进肝脏排毒，告别黑眼圈，令人第二天精力旺盛。" +
                     "②控制体重，防止出现过劳肥。" +
@@ -101,8 +102,7 @@ public final class PlayerUtils {
         //早上好，XXX，现在是yyyy年MM月DD日
         TextUtils.sendChatMessage(player,
                 charTime + "好，" + player.getDisplayName().getString() + "，现在是 " + formattedDateTime + " (UTC+8)");
-        TextUtils.clickableContent2Send(player, EColor.ORANGE.code+"[打开空岛菜单]","/rkd","/rkd");
-    }
+        }
     public static String getUUID(ServerPlayerEntity player)
     {
         return player.getUniqueID().toString();

@@ -1,6 +1,7 @@
 package cn.davickk.rdi.essentials.general.thread.home;
 
 import cn.davickk.rdi.essentials.general.enums.EColor;
+import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.util.*;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -25,12 +26,17 @@ public class SethomeThread extends Thread {
                 return;
             }
             if(hreq.hasHome()){
-                TextUtils.sendChatMessage(player,"您已经设置过"+homeName+"了，正在覆盖....");
-                if(!PlayerUtils.minusXPLvl(player,1))
+                if(PlayerUtils.minusXPLvl(player,1))
                 {
-                    TextUtils.sendChatMessage(player,"覆盖传送点需要1经验。");
+                    hreq.setNewLocation(new Location(player));
+                    TextUtils.sendChatMessage(player,"您已经设置过"+homeName+"了，覆盖成功....");
+                    return;
+                }else{
+                    TextUtils.sendChatMessage(player,"覆盖传送点需要1经验，您的经验不足。");
                     return;
                 }
+
+
             }
             if(hreq.setHome()){
             TextUtils.sendChatMessage(player, "成功设置传送点" + homeName);
