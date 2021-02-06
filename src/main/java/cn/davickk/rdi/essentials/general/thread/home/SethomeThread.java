@@ -28,8 +28,15 @@ public class SethomeThread extends Thread {
             if(hreq.hasHome()){
                 if(PlayerUtils.minusXPLvl(player,1))
                 {
-                    hreq.setNewLocation(new Location(player));
+                    Location loca=new Location(player);
+                    double diff1=Math.abs(loca.x-ServerUtils.SPAWN_LOCA.x);
+                    double diff2=Math.abs(loca.z-ServerUtils.SPAWN_LOCA.z);
+                    if(loca.x<20 && loca.z<20)
+                        TextUtils.sendChatMessage(player,"您不可以在主城设置传送点。");
+                    else{
+                    hreq.setNewLocation(loca);
                     TextUtils.sendChatMessage(player,"您已经设置过"+homeName+"了，覆盖成功....");
+                    }
                     return;
                 }else{
                     TextUtils.sendChatMessage(player,"覆盖传送点需要1经验，您的经验不足。");

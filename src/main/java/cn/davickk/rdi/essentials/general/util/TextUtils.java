@@ -132,7 +132,7 @@ public final class TextUtils {
         System.out.println(cmd);
         server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
     }
-    public static void clickableContent2Send(ServerPlayerEntity player, String content, String commandTodo, String hoverContent)
+    public static void clickableContent2Send(PlayerEntity player, String content, String commandTodo, String hoverContent)
     {
         TextComponent comp=new StringTextComponent(content);
         comp.setStyle(comp.getStyle()

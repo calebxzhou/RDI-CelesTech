@@ -24,13 +24,13 @@ public class SkipNightCmd extends BaseCommand {
         ServerPlayerEntity player=source.asPlayer();
         MinecraftServer serv=player.getServer();
         int playerAmount=serv.getCurrentPlayerCount();
-        if(playerAmount<=2){
-            if(PlayerUtils.minusXPLvl(player,2))
+        if(playerAmount<=8){
+            if(PlayerUtils.minusXPLvl(player,8))
             {
                 WorldUtils.setWorldTime(player.getServerWorld(), EGameTime.DAY);
                 sendMessage(player,"跳过黑夜OK");
             }else
-                sendMessage(player,"经验不足");
+                sendMessage(player,"经验不足，本操作需要8级经验");
         }
 
         return Command.SINGLE_SUCCESS;

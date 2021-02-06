@@ -26,8 +26,8 @@ public class Water2IceCmd extends BaseCommand {
 
     private int execute(CommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player=source.asPlayer();
-        if(!PlayerUtils.minusXPLvl(player,1)){
-            TextUtils.sendChatMessage(player,"执行本操作需要1经验，您的经验不足。");
+        if(!PlayerUtils.minusXPLvl(player,10)){
+            TextUtils.sendChatMessage(player,"执行本操作需要10经验，您的经验不足。");
             return Command.SINGLE_SUCCESS;
         }
         BlockPos blockp= PlayerUtils.lookingAtBlock(player,true);

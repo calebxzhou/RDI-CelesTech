@@ -50,14 +50,14 @@ public class IslandMenuT extends Thread{
             IFormattableTextComponent obsi2LavaTxt=
                     TextUtils.getClickableContentComp(player,ob2lav,"/obsi2lava","将黑曜石熔为岩浆");
             IFormattableTextComponent water2iceTxt=
-                    TextUtils.getClickableContentComp(player,water2ice,"/water2ice","让水结冰。（需要1经验）");
+                    TextUtils.getClickableContentComp(player,water2ice,"/water2ice","让水结冰。（需要经验）");
             IFormattableTextComponent shareTxt=
                     TextUtils.getClickableContentComp(player,share,"/sharehome","把您的空岛分享给朋友");
             IFormattableTextComponent coverTxt=
-                    TextUtils.getClickableContentComp(player,coverTp,"/sethome island","花费：1经验\n将当前您所在的位置设置为空岛的传送点\n（这将会覆盖原有的传送点，无法恢复）");
+                    TextUtils.getClickableContentComp(player,coverTp,"/sethome island","将当前您所在的位置设置为空岛的传送点\n（这将会覆盖原有的传送点，无法恢复）");
             IFormattableTextComponent clearPhanTxt=
                     TextUtils.getClickableContentComp(player,clearPhantom,
-                            "/clearphantom","花费：2经验\n立刻清除幻翼。");
+                            "/clearphantom","花费："+(int)player.experienceLevel*0.5+"经验\n立刻清除幻翼。");
 
             TextUtils.sendChatMessage(player,createTxt.append(homeTxt));
             TextUtils.sendChatMessage(player,obsi2LavaTxt.append(water2iceTxt).append(shareTxt).append(coverTxt).append(clearPhanTxt));

@@ -79,10 +79,10 @@ public class DeathItemRequest {
             return stackList;
     }
     public void getAndGiveItemList() throws SQLException,CommandSyntaxException{
-        if(!PlayerUtils.minusXPLvl(player,1)){
+        /*if(!PlayerUtils.minusXPLvl(player,1)){
             TextUtils.sendChatMessage(player,"经验不足，本操作需要1经验。");
             return;
-        }
+        }*/
         List<ItemStack> stackList =getItemList();
         if(stackList==null||stackList.isEmpty()){
             TextUtils.sendChatMessage(player,"您没有物品可以取出。");
@@ -90,25 +90,26 @@ public class DeathItemRequest {
         }
         int stackSize=stackList.size();
         int invEmptySize= PlayerUtils.getEmptySlotsInventory(player);
-        if(invEmptySize<stackSize) {
+        /*if(invEmptySize<stackSize) {
             TextUtils.sendChatMessage(player, "本操作需要您的背包中有(" + invEmptySize + "/" + stackSize + ")个空位，无法执行。");
             //if(stackSize<35)
                 return;
             //else TextUtils.sendChatMessage(player,"您要取出的物品过多，正在尝试取出...");
-        }
+        }*/
         int itemTaken=0;
         //for(ItemStack oneStack:stackList){
-        for(int i=0;i<invEmptySize;++i){
+        for(int i=0;i<stackList.size();++i){
             ItemStack oneStack=stackList.get(i);
                 if(!player.inventory.addItemStackToInventory(oneStack))
                     break;
+
                 //++itemTaken;
         }
         PreparedStatement psm=conn.prepareStatement("DELETE FROM death_item WHERE uuid=?");
         psm.setString(1,uuid);
         psm.executeUpdate();
 
-        TextUtils.sendChatMessage(player,"成功取出"+itemTaken+"个物品。");
+        TextUtils.sendChatMessage(player,"成功取出"+invEmptySize+"个物品。");
     }
     public void givePlayerItemList(List<ItemStack> stackList) {
         /*for(ItemStack oneStack:stackList){

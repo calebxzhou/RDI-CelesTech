@@ -2,9 +2,11 @@ package cn.davickk.rdi.essentials.general.subscribe.events;
 
 
 import cn.davickk.rdi.essentials.RDIEssentials;
+import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.lib.IslandLocation;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
+import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -17,7 +19,7 @@ public class EventPlayerMove {
     private static int tickCounter = 0;
     private static float bodyTemp = 36.5f;
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
+    @SubscribeEvent
     public static void onMove(TickEvent.PlayerTickEvent event) {
         PlayerEntity player=event.player;
         if(player.getPosY()<PlayerUtils.LOWEST_LIMIT){
@@ -25,6 +27,7 @@ public class EventPlayerMove {
                 //IslandLocation loca=new IslandLocation(player);
                 //loca.y+=200;
             PlayerUtils.teleportPlayer(player,ServerUtils.SPAWN_LOCA);
+            TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[我卡住了]","/spawn","修复卡住的问题。");
             //}
 
              //player.onKillCommand();
