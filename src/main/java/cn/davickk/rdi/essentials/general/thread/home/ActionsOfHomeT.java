@@ -55,7 +55,7 @@ public class ActionsOfHomeT extends Thread{
                     if(hreq.getHomeCounts()==0)
                         activCont=green.concat(activCont);
                     else{
-                        activHover="经验不足，无法激活这个家";
+                        activHover="经验不足5级，无法激活这个家";
                         activCont=gray.concat(activCont);
                     }
                 }else

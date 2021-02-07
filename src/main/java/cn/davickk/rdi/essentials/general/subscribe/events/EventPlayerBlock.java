@@ -2,12 +2,13 @@ package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
+import cn.davickk.rdi.essentials.general.thread.player.CreateCmdSignT;
+import cn.davickk.rdi.essentials.general.thread.player.LoadCmdFromDatabaseT;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.RandomUtils;
+import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -15,7 +16,11 @@ import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
+import net.minecraft.tileentity.SignTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.LightType;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,8 +33,28 @@ public class EventPlayerBlock {
         Entity entity =event.getEntity();
         if(entity instanceof PlayerEntity){
             PlayerEntity player=(PlayerEntity) entity;
-            if(event.getPlacedBlock().getBlock().getRegistryName().toString().contains("crucible"))
+            Block blk=event.getPlacedBlock().getBlock();
+            if(blk.getRegistryName().toString().contains("crucible"))
                 TextUtils.sendChatMessage(player,"坩埚若没有热量，则什么都做不了。");
+            if(blk.getRegistryName().toString().contains("sieve"))
+                TextUtils.sendChatMessage(player,"一种轮状机械也有同样的作用。会是什么呢？");
+            //TODO
+            if(blk.getRegistryName().toString().contains("sign")){
+                try{
+                    TileEntity te=player.world.getTileEntity(event.getPos());
+                    if(te!=null && te instanceof SignTileEntity){
+                        ITextComponent signLine2CmdTxt = ((SignTileEntity) te).getText(1);
+                        if(signLine2CmdTxt== StringTextComponent.EMPTY)
+                            return;
+                        String cmd=signLine2CmdTxt.getString();
+                        ServerUtils.startThread(new CreateCmdSignT(player,cmd,event.getPos()));
+                        TextUtils.sendChatMessage(player,"成功将指令"+cmd+"绑定在这个牌子上");
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
         }
     }
     @SubscribeEvent

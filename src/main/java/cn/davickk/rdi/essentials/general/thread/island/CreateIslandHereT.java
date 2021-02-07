@@ -6,6 +6,8 @@ import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.request.IslandRequest;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
+import cn.davickk.rdi.essentials.general.util.WorldUtils;
+import com.sk89q.worldedit.world.World;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.server.management.PlayerList;
 
@@ -40,10 +42,11 @@ public class CreateIslandHereT extends Thread{
             req.pasteSchematic(iloc);
             req.refresh();
             TextUtils.sendChatMessage(player, "成功创建了空岛");
+            WorldUtils.removeGround(player);
             HomeRequest hreq=new HomeRequest(player);
             Location islandLoca=new Location(iloc.x, iloc.y-5,iloc.z,0.0f,0.0f,"minecraft:overworld");
             hreq.setHomeWithLocation(islandLoca,"island",true);
-            TextUtils.clickableContent2Send(player,EColor.GOLD.code+"请退出服务器，重新登录后方可正常游玩。",""," ");
+            TextUtils.clickableContent2Send(player,EColor.GOLD.code+"可以正常游玩了。",""," ");
                 //TODO 回到我的空岛
 
 

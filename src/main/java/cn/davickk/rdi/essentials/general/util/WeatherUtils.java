@@ -1,6 +1,7 @@
 package cn.davickk.rdi.essentials.general.util;
 
 import cn.davickk.rdi.essentials.general.command.impl.format.IP2Location;
+import cn.davickk.rdi.essentials.general.command.impl.format.IP2LocationForeign;
 import cn.davickk.rdi.essentials.general.thread.weather.WeatherRequestThread;
 import com.google.gson.Gson;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -15,9 +16,16 @@ public class WeatherUtils {
         System.out.println(locationResult);
         return new Gson().fromJson(locationResult, IP2Location.class);
     }
-
+    public static IP2LocationForeign getLocationFromForeignIP(String ip){
+        String url="http://api.ipstack.com/"+ip+"?access_key="+HttpUtils.ipStackKey;
+        String res=HttpUtils.doGet(url);
+        System.out.println(res);
+        return new Gson().fromJson(res, IP2LocationForeign.class);
+    }
     public static void sendWeatherToPlayer(String ip, ServerPlayerEntity player) {
         ExecutorService exe = Executors.newCachedThreadPool();
+        if(!player.getServer().isDedicatedServer())
+            ip="99.226.21.24";
         exe.execute(new WeatherRequestThread(ip, player));
     }
     public static void sendRealTimeWeatherToPlayer()

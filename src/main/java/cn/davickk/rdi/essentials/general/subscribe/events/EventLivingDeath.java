@@ -34,7 +34,7 @@ public class EventLivingDeath {
         PlayerEntity player=(PlayerEntity) event.getEntity();
         //ServerUtils.startThread(new BackThread(player, EBack.RECORD));
         //ServerUtils.startThread(new DeathItemT(player, EDeathItemReq.RECORD));
-        for(int i=0;i<16;i++){
+        for(int i=0;i<20;i++){
             int ran= RandomUtils.generateRandomInt(1,35);
             ItemStack stack2Drop = player.inventory.getStackInSlot(ran);
             if(stack2Drop.isEmpty())

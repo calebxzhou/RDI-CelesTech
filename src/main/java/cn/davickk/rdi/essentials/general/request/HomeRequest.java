@@ -162,8 +162,12 @@ public class HomeRequest{
         return rs3.next();
     }
     public boolean setActive(boolean activ) throws SQLException {
-
-        return sqlConn.prepareStatement("UPDATE home SET activ = '"+activ+"' WHERE uuid='"+uuid+"' AND homeName='"+homeName+"' AND port='"+port+"'")
+        int a;
+        if(activ)
+            a=1;
+        else
+            a=0;
+        return sqlConn.prepareStatement("UPDATE home SET activ = '"+a+"' WHERE uuid='"+uuid+"' AND homeName='"+homeName+"' AND port='"+port+"'")
                 .executeUpdate()>0;
     }
     public EHomeResult goHome() throws SQLException{

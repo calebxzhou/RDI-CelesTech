@@ -68,4 +68,16 @@ public class WorldUtils {
         player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),
                 "kill @e[type="+mobName+"]");
     }
+    public static void removeGround(ServerPlayerEntity player){
+        String fillcmd="fill %x1 4 %z1 %x2 0 %z2 minecraft:air";
+
+        IslandLocation iloc=new IslandLocation(player);
+        fillcmd=fillcmd.replace("%x1",(iloc.x-39)+"")
+                .replace("%z1",(iloc.z-40)+"")
+                .replace("%x2",(iloc.x+40)+"")
+                .replace("%z2",(iloc.z+40)+"");
+        System.out.println(fillcmd);
+        player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),fillcmd);
+
+    }
 }

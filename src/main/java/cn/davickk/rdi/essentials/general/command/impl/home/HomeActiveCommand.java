@@ -3,6 +3,7 @@ package cn.davickk.rdi.essentials.general.command.impl.home;
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
 import cn.davickk.rdi.essentials.general.enums.EGeneral;
 import cn.davickk.rdi.essentials.general.thread.home.ActionsOfHomeT;
+import cn.davickk.rdi.essentials.general.thread.home.HomeActiveThread;
 import cn.davickk.rdi.essentials.general.util.HomeUtils;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
@@ -35,7 +36,7 @@ public class HomeActiveCommand extends BaseCommand {
 
     private int execute(CommandSource source, String homeName) throws CommandSyntaxException {
         PlayerUtils.sendLoading(source.asPlayer());
-        ServerUtils.startThread(new ActionsOfHomeT(source.asPlayer(), homeName));
+        ServerUtils.startThread(new HomeActiveThread(source.asPlayer(), homeName));
         return Command.SINGLE_SUCCESS;
     }
 }

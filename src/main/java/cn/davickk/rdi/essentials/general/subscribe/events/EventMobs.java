@@ -5,26 +5,29 @@ import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.RandomUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = RDIEssentials.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventMobs {
-    @SubscribeEvent
-    public static void mobSpawn(LivingSpawnEvent.SpecialSpawn event){
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void mobSpawn(LivingSpawnEvent event){
         if(event.getEntityLiving().getType().equals(EntityType.PLAYER))
             return;
-        if(event.getEntityLiving().getType().equals(EntityType.SLIME)
-                || event.getEntityLiving().getDisplayName().getString().contains("slime"))
-            event.setCanceled(true);
         if(event.getEntityLiving().getEntity().getPosY()< PlayerUtils.LOWEST_LIMIT){
-            event.setCanceled(true);
+            event.getEntity().remove(false);
         }
+        /*if(event.getEntityLiving().getType().equals(EntityType.SLIME)
+                || event.getEntityLiving().getDisplayName().getString().contains("slime"))
+            event.setCanceled(true);*/
 
     }
     @SubscribeEvent
