@@ -85,9 +85,7 @@ public class ActionsOfHomeT extends Thread{
                             EHomeText.SHARE.cmd.replace("%s","")
                                     .replace("%p",""),shareHover);
             TextUtils.sendChatMessage(player,TextUtils.appendTwoComp(homeName+" -> ",
-                    tpHomeT.append(renameT).append(shareHomeT).append(activHomeT).append(new StringTextComponent(
-                            "              "
-                    )).append(delHomeT)));
+                    tpHomeT.append(renameT).append(shareHomeT).append(activHomeT).append(delHomeT)));
         } catch (Exception e) {
             e.printStackTrace();
         }

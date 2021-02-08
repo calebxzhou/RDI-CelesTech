@@ -1,6 +1,7 @@
 package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
+import cn.davickk.rdi.essentials.general.command.impl.format.WeatherForeign;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.thread.player.CreateCmdSignT;
 import cn.davickk.rdi.essentials.general.thread.player.LoadCmdFromDatabaseT;
@@ -39,11 +40,14 @@ public class EventPlayerBlock {
             if(blk.getRegistryName().toString().contains("sieve"))
                 TextUtils.sendChatMessage(player,"一种轮状机械也有同样的作用。会是什么呢？");
             //TODO
-            if(blk.getRegistryName().toString().contains("sign")){
+            //System.out.println(blk.getRegistryName().toString());
+            /*if(blk.getRegistryName().toString().contains("sign")){
                 try{
                     TileEntity te=player.world.getTileEntity(event.getPos());
+                    System.out.println(te.getPos().toString());
                     if(te!=null && te instanceof SignTileEntity){
                         ITextComponent signLine2CmdTxt = ((SignTileEntity) te).getText(1);
+                        System.out.println(signLine2CmdTxt.getString());
                         if(signLine2CmdTxt== StringTextComponent.EMPTY)
                             return;
                         String cmd=signLine2CmdTxt.getString();
@@ -54,7 +58,7 @@ public class EventPlayerBlock {
                     e.printStackTrace();
                 }
 
-            }
+            }*/
         }
     }
     @SubscribeEvent

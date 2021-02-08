@@ -45,6 +45,7 @@ public final class ModCommands {
         commands.add(new KickMeCommand("kickme",0,true));
         commands.add(new ClearPhantomCmd("clearphantom",0,true));
         commands.add(new RemoveGroundCmd("removeground",0,true));
+        commands.add(new RollCommand("rroll",0,true));
 //        commands.add(new AfkCommand("afk", 0, true));
         commands.add(new OnHandCommand("onhand", 0, true));
         commands.add(new Obsi2LavaCmd("obsi2lava",0,true));

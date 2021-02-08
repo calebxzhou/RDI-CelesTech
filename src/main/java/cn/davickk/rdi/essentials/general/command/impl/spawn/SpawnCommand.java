@@ -1,6 +1,8 @@
 package cn.davickk.rdi.essentials.general.command.impl.spawn;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
+import cn.davickk.rdi.essentials.general.util.PlayerUtils;
+import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -9,7 +11,10 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.world.storage.IWorldInfo;
+
+import java.rmi.registry.Registry;
 
 public class SpawnCommand extends BaseCommand {
 
@@ -32,8 +37,8 @@ public class SpawnCommand extends BaseCommand {
         int x = worldInfo.getSpawnX();
         int y = worldInfo.getSpawnY();
         int z = worldInfo.getSpawnZ();
-        TextUtils.sendChatMessage(player, "传送回当前世界的出生点了。");
-        player.teleport(player.getServerWorld(), x, y, z, 0, 0);
+        TextUtils.sendChatMessage(player, "传送回主世界的出生点了。");
+        PlayerUtils.teleportPlayer(player, ServerUtils.SPAWN_LOCA);
         /*EssentialPlayer eslPlayer = DataManager.getPlayer(player);
 
         long cooldown = eslPlayer.getUsage().getTeleportCooldown("spawn", ModConfig.spawn_cooldown);

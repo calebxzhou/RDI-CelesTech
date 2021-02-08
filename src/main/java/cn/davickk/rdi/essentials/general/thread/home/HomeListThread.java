@@ -31,7 +31,7 @@ public class HomeListThread extends Thread {
             if (hreq.getHomeCounts()==0) {
                 TextUtils.sendChatMessage(player, "您还未设置过家，现在就设置一个吗？");
                 TextUtils.clickableContent2Send(player, EHomeText.SETHOME_DEFAULT.text,EHomeText.SETHOME_DEFAULT.cmd);
-                TextUtils.clickableContent2Send(player, EHomeText.IMPORT.text, EHomeText.IMPORT.cmd);
+                //TextUtils.clickableContent2Send(player, EHomeText.IMPORT.text, EHomeText.IMPORT.cmd);
                 return;
             }
             TextUtils.sendChatMessage(player, "家 ("+hreq.getHomeCounts()+"/"+ HomeUtils.MAX_HOME+") (点击->操作)");
@@ -56,7 +56,7 @@ public class HomeListThread extends Thread {
                         hnameC=EColor.DARK_GREEN.code+EColor.BOLD.code+hname;
                 }else hnameC=hname;
                 String hlocs="(" +dims+", "+ x + ", " + y + ", " + z + ")";
-                String hnames=" 【"+hnameC+EColor.RESET.code+"】 ";
+                String hnames=" >"+hnameC+EColor.RESET.code+"< ";
                 txt2s.append(TextUtils.getClickableContentComp(player,hnames,
                         "/actions4home "+hname,hlocs));
             }

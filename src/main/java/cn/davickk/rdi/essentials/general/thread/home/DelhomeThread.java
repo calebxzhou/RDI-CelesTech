@@ -21,7 +21,7 @@ public class DelhomeThread extends Thread {
                 return;
             }
             HomeRequest hreq=new HomeRequest(player,homeName);
-            if(!hreq.hasHome()) {
+            if(!hreq.hasThisHome()) {
                 TextUtils.sendChatMessage(player,"ц╩спур╣╫"+homeName);
                 TextUtils.clickableContent2Send(player, EHomeText.LISTHOME.text, EHomeText.LISTHOME.cmd);
                 return;

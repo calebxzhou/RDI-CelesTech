@@ -25,7 +25,7 @@ public class SethomeThread extends Thread {
                 TextUtils.sendChatMessage(player,"最多只能设置"+HomeUtils.MAX_HOME+"个传送点。("+homes+"/"+HomeUtils.MAX_HOME+")");
                 return;
             }
-            if(hreq.hasHome()){
+            if(hreq.hasThisHome()){
                 if(PlayerUtils.minusXPLvl(player,1))
                 {
                     Location loca=new Location(player);

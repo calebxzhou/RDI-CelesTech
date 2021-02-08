@@ -23,10 +23,10 @@ public class RemoveGroundCmd extends BaseCommand {
 
     private int execute(CommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player = source.asPlayer();
-        /*if(player.experienceLevel<1){
+        if(player.experienceLevel<1){
             TextUtils.sendChatMessage(player,"清除地面需要1经验，您的经验不足。");
             return Command.SINGLE_SUCCESS;
-        }*/
+        }
         int requireXp= (int) Math.round(player.experienceLevel*0.5);
         if(!PlayerUtils.minusXPLvl(player,requireXp)){
             TextUtils.sendChatMessage(player,"清除地面需要"+requireXp+"经验，您的经验不足。");

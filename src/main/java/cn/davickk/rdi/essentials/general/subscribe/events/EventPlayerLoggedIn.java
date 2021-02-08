@@ -24,7 +24,7 @@ public class EventPlayerLoggedIn {
         PlayerUtils.teleportPlayer(player, ServerUtils.SPAWN_LOCA);
         //TextUtils.sendChatMessage(player,new StringTextComponent(WeatherUtils.getFormattedWeatherFromIP(ip,1)));
         //重新设置出生点到主城
-        player.func_242111_a(player.world.getDimensionKey(), ServerUtils.SPAWN_BLKPS, 0f, true, false);
+        player.func_242111_a(player.world.OVERWORLD, ServerUtils.SPAWN_BLKPS, 0f, true, false);
         /*EssentialPlayer eslPlayer = DataManager.newPlayer(player);
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         //Date date= Calendar.getInstance().getTime();

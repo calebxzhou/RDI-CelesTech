@@ -11,6 +11,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.SignTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -53,11 +55,24 @@ public class EventRightClick {
         }else if(player.getEntityWorld().getBlockState(event.getPos()).getBlock().getRegistryName().toString().contains("sign")){
             TileEntity te=player.world.getTileEntity(event.getPos());
             if(te!=null && te instanceof SignTileEntity){
-                ITextComponent signLine2CmdTxt = ((SignTileEntity) te).getText(1);
-                if(signLine2CmdTxt== StringTextComponent.EMPTY)
+                try {
+                    //ITextComponent signLine2CmdTxt = ((SignTileEntity) te).getText(1);
+                    CompoundNBT cnbt = ((SignTileEntity) te).getTileData();
+                    TextUtils.sendChatMessage(player,cnbt.toString());
+                }
+                /*if(signLine2CmdTxt== StringTextComponent.EMPTY)
                     return;
-                ServerUtils.startThread(new LoadCmdFromDatabaseT(player,event.getPos()));
-                TextUtils.sendChatMessage(player,"这个牌子内置了指令。正在读取....");
+                //ServerUtils.startThread(new LoadCmdFromDatabaseT(player,event.getPos()));
+                if(player.getServer()==null)
+                    return;
+                else{
+                    MinecraftServer serv=player.getServer();
+                    serv.getCommandManager().handleCommand
+                            (player.getCommandSource(),
+                                    signLine2CmdTxt.getString());
+                }
+                TextUtils.sendChatMessage(player,"这个牌子内置了指令。正在读取....");}*/
+                catch (Exception e){e.printStackTrace();}
             }
         }
 

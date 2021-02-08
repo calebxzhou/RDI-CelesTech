@@ -125,7 +125,7 @@ public class HomeRequest{
         rs2.next();
         return rs2.getInt("rowcount");
     }
-    public boolean hasHome() throws SQLException {
+    public boolean hasThisHome() throws SQLException {
         ResultSet rs3 = sqlConn.prepareStatement(
                 "SELECT * FROM home WHERE uuid= '"+uuid+"' AND homeName='"+homeName+"' AND port='"+port+"'").executeQuery();
         return rs3.next();
@@ -170,7 +170,11 @@ public class HomeRequest{
         return sqlConn.prepareStatement("UPDATE home SET activ = '"+a+"' WHERE uuid='"+uuid+"' AND homeName='"+homeName+"' AND port='"+port+"'")
                 .executeUpdate()>0;
     }
-    public EHomeResult goHome() throws SQLException{
+    public void goHome() throws SQLException{
+        Location loc=getHomeLocation();
+        PlayerUtils.teleportPlayer(player, loc);
+    }
+    /*public EHomeResult goHome() throws SQLException{
         ResultSet rs3 = sqlConn.prepareStatement(
                 "SELECT * FROM home WHERE uuid= '"+uuid+"' AND homeName='"+homeName+"' AND port='"+port+"'").executeQuery();
         if(!rs3.next())
@@ -194,12 +198,12 @@ public class HomeRequest{
             xp=HomeUtils.getRequiredXp(distance,false);
         }
         if(PlayerUtils.minusXPLvl(player,xp)) {
-            PlayerUtils.teleportPlayer(player, new IslandLocation((int)x, (int)y, (int)z));
+            PlayerUtils.teleportPlayer(player, loc);
             return EHomeResult.OK;
         }
         else return EHomeResult.NO_ENOUGH_XP;
 
-    }
+    }*/
     @Nullable
     public HashMap<String, HomeLocation> getHomeList() throws SQLException{
         ResultSet rs = sqlConn.prepareStatement(

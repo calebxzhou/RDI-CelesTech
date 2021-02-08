@@ -19,7 +19,7 @@ public class HomeActiveThread extends Thread {
     public void run() {
         try {
             HomeRequest hreq=new HomeRequest(player,homeName);
-            if(!hreq.hasHome()){
+            if(!hreq.hasThisHome()){
                 TextUtils.sendChatMessage(player,"ц╩спур╣╫"+homeName);
                 return;
             }

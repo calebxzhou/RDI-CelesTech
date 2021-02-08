@@ -143,10 +143,12 @@ public class IslandRequest {
     public void refresh() throws SQLException {
         this.allIslands=sqlConn.prepareStatement("SELECT * FROM island").executeQuery();
     }
-    public void backToIsland(){
-
-    }
-    public void checkPosition(){
+    public boolean isJoinedOthersIsland() throws SQLException, ClassNotFoundException {
+        HomeRequest hreq=new HomeRequest(player);
+        if(hreq.getHomeList().keySet().contains("other"))
+            return true;
+        else
+            return false;
 
     }
 }
