@@ -145,6 +145,8 @@ public class IslandRequest {
     }
     public boolean isJoinedOthersIsland() throws SQLException, ClassNotFoundException {
         HomeRequest hreq=new HomeRequest(player);
+        if(hreq.getHomeList()==null)
+            return false;
         if(hreq.getHomeList().keySet().contains("other"))
             return true;
         else

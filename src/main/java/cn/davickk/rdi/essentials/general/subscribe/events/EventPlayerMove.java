@@ -8,6 +8,7 @@ import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.DimensionType;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -23,7 +24,8 @@ public class EventPlayerMove {
     public static void onMove(TickEvent.PlayerTickEvent event) {
         PlayerEntity player=event.player;
         if(!player.isCreative())
-        if(player.getPosY()<PlayerUtils.LOWEST_LIMIT){
+            if(player.getEntityWorld().getDimensionType().equals(DimensionType.OVERWORLD))
+            if(player.getPosY()<PlayerUtils.LOWEST_LIMIT){
             //if(PlayerUtils.minusXPLvl(player,1)){
                 //IslandLocation loca=new IslandLocation(player);
                 //loca.y+=200;

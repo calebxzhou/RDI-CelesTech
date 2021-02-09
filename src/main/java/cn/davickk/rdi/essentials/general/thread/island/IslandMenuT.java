@@ -39,7 +39,7 @@ public class IslandMenuT extends Thread{
                 coverTp=EColor.PINK.code+"[改传送点]";
                 clearPhantom=EColor.DARK_BLUE.code+"[清幻翼]";
                 removeGround=EColor.PINK.code+"[移除草地]";
-                if(PlayerUtils.hasEnoughXPLvl(player,5))
+                if(PlayerUtils.hasEnoughXPLvl(player,3))
                     roll=EColor.AQUA.code+"[大科技转转转]";
             }
             else{

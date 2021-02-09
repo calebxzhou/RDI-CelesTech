@@ -24,8 +24,7 @@ public class HomeCommand extends BaseCommand {
 
     @Override
     public LiteralArgumentBuilder<CommandSource> setExecution() {
-        return builder.executes(
-                (context) -> execute(context.getSource()))
+        return builder.executes((context) -> execute(context.getSource()))
                 .then(Commands.argument("homeName", StringArgumentType.string())
                         //.suggests(ModUtils.HOME_SUGGEST)
                         .executes(
