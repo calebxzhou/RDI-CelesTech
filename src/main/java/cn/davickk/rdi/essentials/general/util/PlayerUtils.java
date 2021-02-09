@@ -35,7 +35,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public final class PlayerUtils {
-    public static final int LOWEST_LIMIT=30;
+    public static final int LOWEST_LIMIT=25;
     public static final String benefitOfSleepEarly =
             "早睡的好处：①保证睡眠质量，促进肝脏排毒，告别黑眼圈，令人第二天精力旺盛。" +
                     "②控制体重，防止出现过劳肥。" +

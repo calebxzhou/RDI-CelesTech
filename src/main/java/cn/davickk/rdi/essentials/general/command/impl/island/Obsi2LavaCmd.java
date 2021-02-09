@@ -35,6 +35,10 @@ public class Obsi2LavaCmd extends BaseCommand {
         ServerPlayerEntity player=source.asPlayer();
         BlockPos blockp= PlayerUtils.lookingAtBlock(player,false);
         BlockState blocks=player.getServerWorld().getBlockState(blockp);
+        if(PlayerUtils.hasEnoughXPLvl(player,2)){
+            sendMessage(player,"您的能力太强了，无法执行。");
+            return Command.SINGLE_SUCCESS;
+        }
         if(blocks.getBlock().getRegistryName().getPath().contains("obsidian")){
             sendMessage(player,"成功把黑曜石熔为岩浆。");
             player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP,1.0f,0.5f);

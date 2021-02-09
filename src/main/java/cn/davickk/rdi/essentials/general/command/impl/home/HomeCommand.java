@@ -39,8 +39,8 @@ public class HomeCommand extends BaseCommand {
     private int execute(CommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player = source.asPlayer();
         //sendMessage(player, "请输入家的名称");
-        TextUtils.clickableContent2Send(player,"------RDI Home系统 版本v2.12------","",
-                "感谢KenRoKoro,pop75189,SampsonnZ\nFunnyTea233对于本系统作出的建议和贡献（排名不分先后）");
+        TextUtils.clickableContent2Send(player,"------RDI Home系统 版本v2.2------","",
+                "感谢KenRoKoro,pop75189,SampsonnZ,YIYIXinAn对于本系统作出的建议和贡献（排名不分先后）");
         PlayerUtils.sendLoading(player);
         ServerUtils.startThread(new HomeListThread(player));
         return Command.SINGLE_SUCCESS;

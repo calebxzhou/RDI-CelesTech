@@ -101,7 +101,7 @@ public class WeatherRequestThread extends Thread {
                 String msgAir="空气质量 "+airQ+"("+aqi+")";
                 String msgLine1=msgCityTemp.concat(msgAir);
                 String msgLine2 = EColor.AQUA.code+ "今天 " + weatherState.getName() + " "
-                        + lowTmp + " ~ " + hiTmp + "° 湿度" + humid + "% 降水率" + preci + "%";
+                        +EColor.RESET.code+ lowTmp + " ~ " + hiTmp + "° 湿度" + humid + "% 降水率" + EColor.BRIGHT_GREEN.code+preci + "%";
                 String msgLine3 = "明天 " + weatherState.getName() + " "
                         + lowTmp2 + " ~ " + hiTmp2 + "° 湿度" + humid2 + "% 降水率" + preci2 + "% ";
                 //xx(市) 2020年x月x日 晴 xx~xxC 湿度xx% 降水率xx%

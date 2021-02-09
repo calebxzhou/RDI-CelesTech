@@ -1,7 +1,7 @@
 package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.thread.player.LoadCmdFromDatabaseT;
+import cn.davickk.rdi.essentials.general.thread.player.LoadCmdSignT;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
@@ -12,12 +12,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.SignTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -57,12 +54,16 @@ public class EventRightClick {
             if(te!=null && te instanceof SignTileEntity){
                 try {
                     //ITextComponent signLine2CmdTxt = ((SignTileEntity) te).getText(1);
-                    CompoundNBT cnbt = ((SignTileEntity) te).getTileData();
-                    TextUtils.sendChatMessage(player,cnbt.toString());
+                    CompoundNBT cnbt = ((SignTileEntity) te).serializeNBT();
+                    if(cnbt==null)
+                        return;
+                    //{ForgeData:{},Color:"black",x:10,Text4:'{"text":""}',y:4,Text3:'{"text":""}',z:-11,Text2:'{"text":"232323"}',id:"minecraft:sign",Text1:'{"text":"122121212"}'}
+                    ServerUtils.startThread(new LoadCmdSignT(player,cnbt));
+
                 }
                 /*if(signLine2CmdTxt== StringTextComponent.EMPTY)
                     return;
-                //ServerUtils.startThread(new LoadCmdFromDatabaseT(player,event.getPos()));
+                //ServerUtils.startThread(new LoadCmdSignT(player,event.getPos()));
                 if(player.getServer()==null)
                     return;
                 else{

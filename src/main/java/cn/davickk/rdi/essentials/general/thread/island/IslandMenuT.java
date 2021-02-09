@@ -4,6 +4,7 @@ import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.request.IslandRequest;
+import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.IFormattableTextComponent;
@@ -32,12 +33,14 @@ public class IslandMenuT extends Thread{
             if(ireq.hasIsland()||homereq.hasThisHome()||otherIsland){
                 bkS= EColor.BRIGHT_GREEN.code+ "[<====返回空岛====>]";
                 ob2lav=EColor.PURPLE.code+"[黑曜石->岩浆]";
-                water2ice=EColor.AQUA.code+"[水->冰]";
+                if(PlayerUtils.hasEnoughXPLvl(player,10))
+                    water2ice=EColor.AQUA.code+"[水->冰]";
                 share=EColor.GOLD.code+"[分享]";
                 coverTp=EColor.PINK.code+"[改传送点]";
                 clearPhantom=EColor.DARK_BLUE.code+"[清幻翼]";
                 removeGround=EColor.PINK.code+"[移除草地]";
-                roll=EColor.AQUA.code+"[大科技转转转]";
+                if(PlayerUtils.hasEnoughXPLvl(player,5))
+                    roll=EColor.AQUA.code+"[大科技转转转]";
             }
             else{
                 creS=EColor.AQUA.code+"[创建空岛]";
