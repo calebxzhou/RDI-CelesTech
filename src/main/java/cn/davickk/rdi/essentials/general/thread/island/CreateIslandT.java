@@ -44,14 +44,14 @@ public class CreateIslandT extends Thread{
             e.printStackTrace();
         }
 
-        TextUtils.sendChatMessage(player,"准备创建空岛...您觉得这个位置可以吗？（请尽量选择没有人的地方）");
+        TextUtils.sendChatMessage(player,"您觉得这个位置适合创建空岛吗？（以下选项可点击）（请尽量选择没有人的地方）");
         PlayerUtils.randomTeleport(player,true);
         IFormattableTextComponent t1=
                 TextUtils.getClickableContentComp(player,
-                        EColor.BRIGHT_GREEN.code+"[可以，就在这创建空岛吧]","/createkdhere"," ");
+                        EColor.BRIGHT_GREEN.code+"[（点这里）可以，就在这创建空岛吧]","/createkdhere"," ");
         IFormattableTextComponent t2=
                 TextUtils.getClickableContentComp(player,
-                        EColor.RED.code+"[不可以，重新寻找位置]","/createkd"," ");
+                        EColor.RED.code+"[（点这里）不可以，重新寻找位置]","/createkd"," ");
         TextUtils.sendChatMessage(player,t1.append(t2));
        /* String name= player.getDisplayName().getString();
         int serverPort = player.getServer().getServerPort();

@@ -46,8 +46,8 @@ public class TechRollT extends Thread {
             itemList.add(new Items2Give(AE+"sky_stone_block","[‘… Ø]",base/8.0,8));
             itemList.add(new Items2Give("experience","[3æ≠—È]",base/2.0,3));
             itemList.add(new Items2Give(AE+"charged_quartz_ore","[≥‰ƒ‹ Ø”¢]",base/8.0,2));
-            itemList.add(new Items2Give(AE+"calculation_processor_press","[‘ÀÀ„—π”°∞Â]",base/10.0,1));
-            itemList.add(new Items2Give(AE+"silicon_press","[πË—π”°∞Â]",base/10.0,1));
+            itemList.add(new Items2Give(AE+"calculation_processor_press","[‘ÀÀ„—π”°∞Â]",base/15.0,1));
+            itemList.add(new Items2Give(AE+"silicon_press","[πË—π”°∞Â]",base/15.0,1));
             itemList.add(new Items2Give(AE+"name_press","[√˚≥∆—π”°∞Â]",base/20.0,1));
             itemList.add(new Items2Give(AE+"logic_processor_press","[¬ﬂº≠—π”°∞Â]",base/20.0,1));
             itemList.add(new Items2Give(AE+"engineering_processor_press","[π§≥Ã—π”°∞Â]",base/20.0,1));

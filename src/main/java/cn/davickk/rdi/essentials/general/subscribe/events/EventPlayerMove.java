@@ -24,7 +24,6 @@ public class EventPlayerMove {
     public static void onMove(TickEvent.PlayerTickEvent event) {
         PlayerEntity player=event.player;
         if(!player.isCreative())
-            if(player.getEntityWorld().getDimensionType().equals(DimensionType.OVERWORLD))
             if(player.getPosY()<PlayerUtils.LOWEST_LIMIT){
             //if(PlayerUtils.minusXPLvl(player,1)){
                 //IslandLocation loca=new IslandLocation(player);

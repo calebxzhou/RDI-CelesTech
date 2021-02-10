@@ -22,6 +22,8 @@ public class EventPlayerBlock {
         if(entity instanceof PlayerEntity){
             PlayerEntity player=(PlayerEntity) entity;
             Block blk=event.getPlacedBlock().getBlock();
+            if(event.getPos().getY()<PlayerUtils.LOWEST_LIMIT)
+                return;
             if(blk.getRegistryName().toString().contains("crucible"))
                 TextUtils.sendChatMessage(player,"坩埚若没有热量，则什么都做不了。");
             if(blk.getRegistryName().toString().contains("sieve"))
@@ -55,7 +57,8 @@ public class EventPlayerBlock {
             BlockState blockS = event.getState();
             //System.out.println(blockS.toString());
             Block block=blockS.getBlock();
-
+            if(event.getPos().getY()<PlayerUtils.LOWEST_LIMIT)
+                return;
             //System.out.println(block.getRegistryNamed().toString());
             //System.out.println(block.getRegistryType().toString());
 

@@ -43,7 +43,7 @@ public class IslandMenuT extends Thread{
                     roll=EColor.AQUA.code+"[大科技转转转]";
             }
             else{
-                creS=EColor.AQUA.code+"[创建空岛]";
+                creS=EColor.AQUA.code+"[创建空岛（点这里）]";
             }
 
             IFormattableTextComponent createTxt=

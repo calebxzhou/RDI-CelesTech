@@ -46,7 +46,7 @@ public class CreateIslandHereT extends Thread{
             HomeRequest hreq=new HomeRequest(player);
             Location islandLoca=new Location(iloc.x, iloc.y-5,iloc.z,0.0f,0.0f,"minecraft:overworld");
             hreq.setHomeWithLocation(islandLoca,"island",true);
-            TextUtils.clickableContent2Send(player,EColor.GOLD.code+"可以正常游玩了。",""," ");
+            TextUtils.clickableContent2Send(player,EColor.GOLD.code+"可以正常游玩了。别忘了阅读群文件的手册。",""," ");
                 //TODO 回到我的空岛
 
 
