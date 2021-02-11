@@ -37,16 +37,16 @@ public class TechRollT extends Thread {
 
         try {
             double base=0.4;
-            if(this.rollCount==1){
+            if(this.rollCount<3){
                 base=0.2;
             }
             List<Items2Give> itemList=new ArrayList<>();
-            /*itemList.add(new Items2Give(MC+"dirt","[泥土]",base,8));
-
+            itemList.add(new Items2Give("experience","[1经验]",base/2.0,1));
+            itemList.add(new Items2Give(MC+"dirt","[泥土]",base,8));
             itemList.add(new Items2Give(MC+"jungle_sapling","[丛林树苗]",base/4.0,2));
             itemList.add(new Items2Give(MC+"nether_quartz_ore","[地狱石英矿]",base/8.0,4));
             itemList.add(new Items2Give(MC+"ancient_debris","[远古残骸]",base/8.0,2));
-            itemList.add(new Items2Give("experience","[3经验]",base/2.0,3));
+            itemList.add(new Items2Give("experience","[3经验]",base/6.0,3));
             itemList.add(new Items2Give(AE+"sky_stone_block","[16陨石]",base/8.0,16));
             itemList.add(new Items2Give(AE+"charged_quartz_ore","[充能石英]",base/8.0,2));
             itemList.add(new Items2Give(AE+"calculation_processor_press","[运算压印板]",base/15.0,1));
@@ -56,8 +56,8 @@ public class TechRollT extends Thread {
             itemList.add(new Items2Give(AE+"engineering_processor_press","[工程压印板]",base/20.0,1));
             itemList.add(new Items2Give(MEK+"fluorite_ore","[氟石]",base/4.0,2));
             itemList.add(new Items2Give(AE+"sky_stone_block","[8陨石]",base/8.0,8));
-            */itemList.add(new Items2Give("experience","[5经验]",base/3.0,5));
-            itemList.add(new Items2Give("creeper","[闪电苦力怕]",base/20.0,1));
+            itemList.add(new Items2Give("experience","[5经验]",base/15.0,5));
+            itemList.add(new Items2Give("creeper","[闪电苦力怕]",base/12.0,1));
         /*itemList.add(new Items2Give(MC+"cow_spawn_egg","[牛]",0.02));
         itemList.add(new Items2Give(MC+"sheep_spawn_egg","[羊]",0.02));
         itemList.add(new Items2Give(MC+"slime_spawn_egg","[史莱姆]",0.02));*/

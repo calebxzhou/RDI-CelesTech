@@ -80,4 +80,25 @@ public class WorldUtils {
         player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),fillcmd);
 
     }
+    public static void pasteSchematic(PlayerEntity player,IslandLocation loc,String schem) throws IOException, WorldEditException {
+        Clipboard clipboard;
+        File file=new File("./islands/"+schem+".schem");
+        ClipboardFormat format = ClipboardFormats.findByFile(file);
+        ClipboardReader reader = format.getReader(new FileInputStream(file));
+        clipboard = reader.read();
+        try(EditSession session = WorldEdit.getInstance().getEditSessionFactory()
+                .getEditSession(ForgeAdapter.adapt(player.world), -1)){
+            System.out.println(loc.x+" "+loc.y+" "+loc.z);
+            Operation operation = new ClipboardHolder(clipboard)
+                    .createPaste(session)
+                    .to(BlockVector3.at(loc.x, loc.y, loc.z))
+                    .copyEntities(false)
+                    .ignoreAirBlocks(true)
+                    // configure here
+                    .build();
+            Operations.complete(operation);
+        }
+
+
+    }
 }

@@ -50,6 +50,7 @@ public final class ModCommands {
         commands.add(new OnHandCommand("onhand", 0, true));
         commands.add(new Obsi2LavaCmd("obsi2lava",0,true));
         commands.add(new Water2IceCmd("water2ice",0,true));
+        commands.add(new SummonMetrCmd("ae2yunshi",0,true));
         //commands.add(new RtpsCommand("rfz", 0, true));
         commands.add(new RtpsCommand("tps", 0, true));
         commands.add(new SaveCommand("SAVE", 0, true));

@@ -40,9 +40,9 @@ public class CreateIslandHereT extends Thread{
             }*/
             req.createIsland(iloc);
             req.pasteSchematic(iloc);
-            req.refresh();
+            //req.refresh();
             TextUtils.sendChatMessage(player, "成功创建了空岛");
-            WorldUtils.removeGround(player);
+            //WorldUtils.removeGround(player);
             HomeRequest hreq=new HomeRequest(player);
             Location islandLoca=new Location(iloc.x, iloc.y-5,iloc.z,0.0f,0.0f,"minecraft:overworld");
             hreq.setHomeWithLocation(islandLoca,"island",true);

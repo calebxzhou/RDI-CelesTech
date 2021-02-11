@@ -29,6 +29,7 @@ public class IslandMenuT extends Thread{
             String clearPhantom="";
             String removeGround="";
             String roll="";
+            String ys="";
             boolean otherIsland=ireq.isJoinedOthersIsland();
             if(ireq.hasIsland()||homereq.hasThisHome()||otherIsland){
                 bkS= EColor.BRIGHT_GREEN.code+ "[<====返回空岛====>]";
@@ -36,11 +37,13 @@ public class IslandMenuT extends Thread{
                 if(PlayerUtils.hasEnoughXPLvl(player,10))
                     water2ice=EColor.AQUA.code+"[水->冰]";
                 share=EColor.GOLD.code+"[分享]";
-                coverTp=EColor.PINK.code+"[改传送点]";
+                coverTp=EColor.RED.code+"[改传送点]";
                 clearPhantom=EColor.DARK_BLUE.code+"[清幻翼]";
                 removeGround=EColor.PINK.code+"[移除草地]";
                 if(PlayerUtils.hasEnoughXPLvl(player,3))
                     roll=EColor.AQUA.code+"[大科技转转转]";
+                if(PlayerUtils.hasEnoughXPLvl(player,30))
+                    ys=EColor.ORANGE.code+"[召唤陨石]";
             }
             else{
                 creS=EColor.AQUA.code+"[创建空岛（点这里）]";
@@ -70,7 +73,9 @@ public class IslandMenuT extends Thread{
             IFormattableTextComponent rollTxt=
                     TextUtils.getClickableContentComp(player,roll,
                             "/rroll","花费5经验启动大转盘。");
-            TextUtils.sendChatMessage(player,createTxt.append(homeTxt));
+            IFormattableTextComponent ysTxt=
+                    TextUtils.getClickableContentComp(player,ys,"/ae2yunshi"," ");
+            TextUtils.sendChatMessage(player,createTxt.append(homeTxt).append(ysTxt));
             TextUtils.sendChatMessage(player,obsi2LavaTxt.append(water2iceTxt).append(shareTxt).append(rollTxt).append(coverTxt).append(clearPhanTxt));
             TextUtils.clickableContent2Send(player,removeGround,"/removeground"," ");
         } catch (Exception sqlException) {
