@@ -1,4 +1,4 @@
-package cn.davickk.rdi.essentials.general.command.impl.format;
+package cn.davickk.rdi.essentials.general.format.weather;
 
 public class Weather {
     public Result result;

@@ -4,9 +4,16 @@ import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.request.IslandRequest;
+import cn.davickk.rdi.essentials.general.util.OpenScreenUtils;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.IContainerListener;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.network.IPacket;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.IFormattableTextComponent;
 
 public class IslandMenuT extends Thread{
@@ -20,6 +27,8 @@ public class IslandMenuT extends Thread{
             RDIEssentials.createSQLConnection();
             IslandRequest ireq=new IslandRequest(player);
             HomeRequest homereq=new HomeRequest(player,"island");
+            //OpenScreenUtils.openInv(player,"RDI CelesTech Menu 2.0");
+            //todo
             String creS="";
             String bkS="";
             String ob2lav="";

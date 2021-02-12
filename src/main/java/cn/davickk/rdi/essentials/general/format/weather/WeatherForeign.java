@@ -1,4 +1,4 @@
-package cn.davickk.rdi.essentials.general.command.impl.format;
+package cn.davickk.rdi.essentials.general.format.weather;
 public final class WeatherForeign {
     public final Coord coord;
     public final Weather weather[];

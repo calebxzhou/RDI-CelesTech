@@ -1,7 +1,7 @@
 package cn.davickk.rdi.essentials.general.util;
 
-import cn.davickk.rdi.essentials.general.command.impl.format.IP2Location;
-import cn.davickk.rdi.essentials.general.command.impl.format.IP2LocationForeign;
+import cn.davickk.rdi.essentials.general.format.IP2Location;
+import cn.davickk.rdi.essentials.general.format.IP2LocationForeign;
 import cn.davickk.rdi.essentials.general.thread.weather.WeatherRequestThread;
 import com.google.gson.Gson;
 import net.minecraft.entity.player.ServerPlayerEntity;

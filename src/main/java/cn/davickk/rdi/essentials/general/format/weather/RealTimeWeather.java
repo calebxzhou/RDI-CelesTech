@@ -1,4 +1,4 @@
-package cn.davickk.rdi.essentials.general.command.impl.format;
+package cn.davickk.rdi.essentials.general.format.weather;
 
 public final class RealTimeWeather {
     public final String status;

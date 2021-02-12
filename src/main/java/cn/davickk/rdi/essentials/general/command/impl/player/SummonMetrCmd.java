@@ -36,7 +36,7 @@ public class SummonMetrCmd extends BaseCommand {
         Location loca=new Location(player);
         double diff1=Math.abs(loca.x-ServerUtils.SPAWN_LOCA.x);
         double diff2=Math.abs(loca.z-ServerUtils.SPAWN_LOCA.z);
-        if(loca.x<20 && loca.z<20){
+        if(diff1<20 && diff2<20){
             TextUtils.sendChatMessage(player,"您不可以在主城召唤陨石。");
             return Command.SINGLE_SUCCESS;
         }

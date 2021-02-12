@@ -1,4 +1,4 @@
-package cn.davickk.rdi.essentials.general.command.impl.format;
+package cn.davickk.rdi.essentials.general.format;
 
 public final class IP2LocationForeign {
     public final String ip;

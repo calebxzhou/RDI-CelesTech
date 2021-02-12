@@ -1,12 +1,13 @@
 package cn.davickk.rdi.essentials.general.register;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
-import cn.davickk.rdi.essentials.general.command.impl.cloudinv.*;
 import cn.davickk.rdi.essentials.general.command.impl.home.*;
 import cn.davickk.rdi.essentials.general.command.impl.island.*;
 import cn.davickk.rdi.essentials.general.command.impl.player.*;
 import cn.davickk.rdi.essentials.general.command.impl.server.ReconnSQLCmd;
 import cn.davickk.rdi.essentials.general.command.impl.spawn.SpawnCommand;
+import cn.davickk.rdi.essentials.general.command.impl.teleport.TpYesCommand;
+import cn.davickk.rdi.essentials.general.command.impl.teleport.TpaCommand;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.command.CommandSource;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -54,6 +55,8 @@ public final class ModCommands {
         //commands.add(new RtpsCommand("rfz", 0, true));
         commands.add(new RtpsCommand("tps", 0, true));
         commands.add(new SaveCommand("SAVE", 0, true));
+        commands.add(new TpaCommand("tpa",0,true));
+        commands.add(new TpYesCommand("tpyes",0,true));
         //commands.add(new BackCommand("back",0,true));
         //TODO
         // commands.add(new BackCommand("back", 0, ModConfig.back_enable));

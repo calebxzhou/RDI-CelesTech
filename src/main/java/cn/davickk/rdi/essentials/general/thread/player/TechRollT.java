@@ -58,9 +58,9 @@ public class TechRollT extends Thread {
             itemList.add(new Items2Give(AE+"sky_stone_block","[8ÔÉÊ¯]",base/8.0,8));
             itemList.add(new Items2Give("experience","[5¾­Ñé]",base/15.0,5));
             itemList.add(new Items2Give("creeper","[ÉÁµç¿àÁ¦ÅÂ]",base/12.0,1));
-        /*itemList.add(new Items2Give(MC+"cow_spawn_egg","[Å£]",0.02));
-        itemList.add(new Items2Give(MC+"sheep_spawn_egg","[Ñò]",0.02));
-        itemList.add(new Items2Give(MC+"slime_spawn_egg","[Ê·À³Ä·]",0.02));*/
+            itemList.add(new Items2Give(MC+"cow_spawn_egg","[Å£]",base/15.0,1));
+            itemList.add(new Items2Give(MC+"sheep_spawn_egg","[Ñò]",base/15.0,1));
+            itemList.add(new Items2Give(MC+"chicken_spawn_egg","[¼¦]",base/18.0,1));
         /*IFormattableTextComponent text=new StringTextComponent("");
         for (int i=0;i<itemList.size();++i) {
             Items2Give itm=itemList.get(i);

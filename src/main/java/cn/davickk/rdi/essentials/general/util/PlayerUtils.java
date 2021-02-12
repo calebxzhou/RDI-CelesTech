@@ -179,6 +179,7 @@ public final class PlayerUtils {
     }
     public static void teleportPlayer(PlayerEntity player, ResourceLocation world, double x, double y, double z, float w, float p){
         MinecraftServer server=player.getServer();
+        if(server==null) return;
         String cmd="execute as %player in %world rotated %yaw %pitch run tp %x %y %z"
                 .replace("%player",player.getDisplayName().getString())
                 .replace("%world", world.toString())

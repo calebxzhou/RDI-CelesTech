@@ -1,6 +1,9 @@
 package cn.davickk.rdi.essentials.general.command.impl.teleport;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
+import cn.davickk.rdi.essentials.general.thread.teleport.SendTpaRequestT;
+import cn.davickk.rdi.essentials.general.util.ServerUtils;
+import cn.davickk.rdi.essentials.general.util.TextUtils;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -8,6 +11,8 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 
 public class TpaCommand extends BaseCommand {
 
@@ -20,9 +25,16 @@ public class TpaCommand extends BaseCommand {
         return builder.then(Commands.argument("targetPlayer", EntityArgument.players()).executes(context -> execute(context.getSource(), EntityArgument.getPlayer(context, "targetPlayer"))));
     }
 
-    private int execute(CommandSource source, ServerPlayerEntity targetPlayer) throws CommandSyntaxException {
-        /*ServerPlayerEntity player = source.asPlayer();
-        EssentialPlayer eslPlayer = DataManager.getPlayer(player);
+    private int execute(CommandSource source, ServerPlayerEntity toPlayer) throws CommandSyntaxException {
+        ServerPlayerEntity fromPlayer = source.asPlayer();
+        if(fromPlayer==toPlayer){
+            TextUtils.sendChatMessage(fromPlayer,"身体被一股奇怪的力量吸住了，动弹不得.....");
+            fromPlayer.addPotionEffect(new EffectInstance(Effects.SLOWNESS,5*20,5));
+            return Command.SINGLE_SUCCESS;
+        }
+        TextUtils.sendChatMessage(fromPlayer,"传送请求已发送给"+toPlayer.getDisplayName().getString());
+        ServerUtils.startThread(new SendTpaRequestT(fromPlayer,toPlayer));
+        /*EssentialPlayer eslPlayer = DataManager.getPlayer(player);
 
         if (player == targetPlayer) {
             //sendMessage(player, "tpa.rdi-essentials.self");
