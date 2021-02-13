@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -19,12 +20,13 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = RDIEssentials.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventMobs {
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void mobSpawn(LivingSpawnEvent.AllowDespawn event){
-        if(event.getEntityLiving().getType().equals(EntityType.PLAYER))
+    @SubscribeEvent(priority = EventPriority.HIGHEST)//LivingSpawnEvent.AllowDespawn
+    public static void mobSpawn(EntityJoinWorldEvent event){
+        if(event.getEntity().getType().equals(EntityType.PLAYER))
             return;
-        if(event.getEntityLiving().getEntity().getPosY()< PlayerUtils.LOWEST_LIMIT){
-            event.setResult(Event.Result.ALLOW);
+        if(event.getEntity().getEntity().getPosY()< PlayerUtils.LOWEST_LIMIT){
+            event.setCanceled(true);
+            //event.setResult(Event.Result.ALLOW);
             //event.getEntity().remove(false);
         }
         /*if(event.getEntityLiving().getType().equals(EntityType.SLIME)

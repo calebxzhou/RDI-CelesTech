@@ -3,10 +3,7 @@ package cn.davickk.rdi.essentials.general.request;
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.lib.Location;
-import cn.davickk.rdi.essentials.general.util.PlayerUtils;
-import cn.davickk.rdi.essentials.general.util.ServerUtils;
-import cn.davickk.rdi.essentials.general.util.TextUtils;
-import cn.davickk.rdi.essentials.general.util.TimeUtils;
+import cn.davickk.rdi.essentials.general.util.*;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.IFormattableTextComponent;
 
@@ -62,8 +59,26 @@ public class TpaRequest {
         Timestamp timesNow=TimeUtils.getTimestampNow();
         if((timesNow.getTime()-timesReq.getTime()) > 60*1000)
             return false;
-        teleportPlayer1to2();
-        return true;
+        double dis= WorldUtils.getDistanceXZ(new Location(fromPlayer),new Location(toPlayer));
+        int xp=0;
+        if(dis>5000)
+            xp=20;
+        else if(dis>3000)
+            xp=15;
+        else if(dis>1000)
+            xp=5;
+        else if(dis>500)
+            xp=3;
+        else if(dis>200)
+            xp=1;
+        if(PlayerUtils.minusXPLvl(fromPlayer,xp)) {
+            teleportPlayer1to2();
+            return true;
+        }else{
+            TextUtils.sendChatMessage(fromPlayer,"本功能需要"+xp+"点经验，您的经验不足。");
+            return false;
+        }
+
     }
     private void teleportPlayer1to2(){
         PlayerUtils.teleportPlayer(fromPlayer,new Location(toPlayer));
@@ -71,7 +86,9 @@ public class TpaRequest {
     public void denyRequest(){
 
     }
-    public void deleteRequest(){
-
+    public void deleteRequest() throws SQLException {
+        PreparedStatement ps=sql.prepareStatement("UPDATE tpa SET reqid='done' WHERE reqid=?");
+        ps.setString(1,reqid);
+        ps.executeUpdate();
     }
 }

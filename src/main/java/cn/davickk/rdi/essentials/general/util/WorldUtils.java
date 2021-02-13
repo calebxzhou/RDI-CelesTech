@@ -2,6 +2,7 @@ package cn.davickk.rdi.essentials.general.util;
 
 import cn.davickk.rdi.essentials.general.enums.EGameTime;
 import cn.davickk.rdi.essentials.general.lib.IslandLocation;
+import cn.davickk.rdi.essentials.general.lib.Location;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.WorldEditException;
@@ -31,7 +32,10 @@ public class WorldUtils {
     {
         world.setDayTime(time.time);
     }
-    public static double getDistance(double x1,double y1,double z1,double x2,double y2,double z2)
+    public static double getDistanceXZ(Location l1, Location l2){
+        return getDistance(l1.x,0,l1.z, l2.x,0,l2.z);
+    }
+    private static double getDistance(double x1,double y1,double z1,double x2,double y2,double z2)
     {
         Vector3d pos1=new Vector3d(x1,y1,z1);
         Vector3d pos2=new Vector3d(x2,y2,z2);

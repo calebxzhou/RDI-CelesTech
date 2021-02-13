@@ -24,4 +24,11 @@ public class EventServerChat {
         ServerUtils.startThread(new ChatRecordT(player,chat));
     }
 
+    /*@SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onPlayerChat2(ServerChatEvent event) {
+        ServerPlayerEntity player = event.getPlayer();
+        String chat=event.getComponent().getString();
+        ServerUtils.startThread(new ChatRecordT(player,chat));
+    }*/
+
 }

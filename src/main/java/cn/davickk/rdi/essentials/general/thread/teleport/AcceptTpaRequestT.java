@@ -1,7 +1,10 @@
 package cn.davickk.rdi.essentials.general.thread.teleport;
 
+import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.request.TpaRequest;
+import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
+import cn.davickk.rdi.essentials.general.util.WorldUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 
 import java.util.UUID;
@@ -17,11 +20,19 @@ public class AcceptTpaRequestT extends Thread{
         try {
         TpaRequest tpreq=new TpaRequest(null,toPlayer,reqid);
         ServerPlayerEntity fromPlayer=tpreq.getFromPlayer();
-        if(!tpreq.acceptRequest() || fromPlayer==null)
-            TextUtils.sendChatMessage(toPlayer,"没有找到这个传送请求....建议对方重新发送。");
+
+        if(fromPlayer==null){
+            TextUtils.sendChatMessage(toPlayer,"没有找到对方，请确认对方是否在线");
+            return;
+        }
+
+        if(tpreq.acceptRequest()) {
+            TextUtils.sendChatMessage(toPlayer, "已经接受传送请求");
+            TextUtils.sendChatMessage(fromPlayer, "对方已经接受您的传送请求");
+            tpreq.deleteRequest();
+        }
         else{
-            TextUtils.sendChatMessage(toPlayer,"OK");
-            TextUtils.sendChatMessage(fromPlayer,"对方已经接受您的传送请求");
+            TextUtils.sendChatMessage(toPlayer,"传送请求已经失效：①超过有效期②对方经验不足");
         }
         } catch (Exception sqlException) {
             sqlException.printStackTrace();

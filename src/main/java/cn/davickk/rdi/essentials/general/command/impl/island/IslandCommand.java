@@ -1,5 +1,6 @@
 package cn.davickk.rdi.essentials.general.command.impl.island;
 
+import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.thread.island.IslandMenuT;
@@ -23,7 +24,7 @@ public class IslandCommand extends BaseCommand {
 
     private int execute(CommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player=source.asPlayer();
-        sendMessage(player, EColor.PINK.code+"--RDI CelesTech v1.7--");
+        sendMessage(player, EColor.PINK.code+"--RDI CelesTech "+ RDIEssentials.VERSION+"--");
         ServerUtils.startThread(new IslandMenuT(player));
         //----RDI Aerotech新技术空岛系统 版本v1.0---
         //[创建岛] [回岛]

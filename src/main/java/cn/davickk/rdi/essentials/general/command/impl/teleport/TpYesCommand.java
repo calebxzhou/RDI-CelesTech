@@ -3,6 +3,7 @@ package cn.davickk.rdi.essentials.general.command.impl.teleport;
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
 import cn.davickk.rdi.essentials.general.thread.teleport.AcceptTpaRequestT;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
+import cn.davickk.rdi.essentials.general.util.TextUtils;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -27,6 +28,7 @@ public class TpYesCommand extends BaseCommand {
 
     private int execute(CommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player = source.asPlayer();
+        TextUtils.sendChatMessage(player,"本功能需要RDI Request ID，如果不知道这是什么，请直接点“接受”按钮，不要使用本指令");
         return Command.SINGLE_SUCCESS;
     }
 

@@ -29,7 +29,7 @@ public class TpaCommand extends BaseCommand {
         ServerPlayerEntity fromPlayer = source.asPlayer();
         if(fromPlayer==toPlayer){
             TextUtils.sendChatMessage(fromPlayer,"身体被一股奇怪的力量吸住了，动弹不得.....");
-            fromPlayer.addPotionEffect(new EffectInstance(Effects.SLOWNESS,5*20,5));
+            fromPlayer.addPotionEffect(new EffectInstance(Effects.SLOWNESS,10*20,5));
             return Command.SINGLE_SUCCESS;
         }
         TextUtils.sendChatMessage(fromPlayer,"传送请求已发送给"+toPlayer.getDisplayName().getString());
