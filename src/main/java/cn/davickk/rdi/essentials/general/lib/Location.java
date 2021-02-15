@@ -1,20 +1,19 @@
 package cn.davickk.rdi.essentials.general.lib;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import jdk.jfr.DataAmount;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.DimensionType;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-
 public class Location {
+
     public double x, y, z;
-    public float rotationYaw, rotationPitch;
+    public float yaw, pitch;
     public ResourceLocation dims;
-    private PlayerEntity playerEntity;
+    //private transient PlayerEntity playerEntity;
     /*public Location(int posX, int posY, int posZ, ResourceLocation dimension) {
         this.x = posX;
         this.y = posY;
@@ -24,12 +23,12 @@ public class Location {
         this.dimension = dimension;
     }*/
 
-    public Location(double posX, double posY, double posZ, float rotationYaw, float rotationPitch, String dims) {
+    public Location(double posX, double posY, double posZ, float yaw, float pitch, String dims) {
         this.x = posX;
         this.y = posY;
         this.z = posZ;
-        this.rotationYaw = rotationYaw;
-        this.rotationPitch = rotationPitch;
+        this.yaw = yaw;
+        this.pitch = pitch;
         this.dims=new ResourceLocation(dims);
     }
 
@@ -37,8 +36,8 @@ public class Location {
         this.x = player.getPosX();
         this.y = player.getPosY();
         this.z = player.getPosZ();
-        this.rotationYaw = player.rotationYaw;
-        this.rotationPitch = player.rotationPitch;
+        this.yaw = player.rotationYaw;
+        this.pitch = player.rotationPitch;
         this.dims=player.getEntityWorld().getDimensionKey().getLocation();
     }
 
@@ -46,15 +45,15 @@ public class Location {
         this.x = player.getPosX();
         this.y = player.getPosY();
         this.z = player.getPosZ();
-        this.rotationYaw = player.rotationYaw;
-        this.rotationPitch = player.rotationPitch;
+        this.yaw = player.rotationYaw;
+        this.pitch = player.rotationPitch;
         this.dims=player.getEntityWorld().getDimensionKey().getLocation();
-        this.playerEntity = player;
+        //this.playerEntity = player;
     }
 
 
 
-    public Biome getBiome() {
+    /*public Biome getBiome() {
         BlockPos pos = new BlockPos(x, y, z);
         return playerEntity.getEntityWorld().getBiomeManager().getBiome(pos);
     }
@@ -62,5 +61,14 @@ public class Location {
     public float getTemperature() {
         BlockPos pos = new BlockPos(x, y, z);
         return playerEntity.getEntityWorld().getBiomeManager().getBiome(pos).getTemperature(pos);
+    }*/
+    @Override
+    public String toString(){
+        Gson gs=new GsonBuilder().setPrettyPrinting().create();
+        return gs.toJson(this);
+    }
+
+    public Location fromString(String json){
+        return new Gson().fromJson(json,Location.class);
     }
 }

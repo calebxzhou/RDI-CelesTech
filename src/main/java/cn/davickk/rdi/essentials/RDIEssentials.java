@@ -27,7 +27,7 @@ import static cn.davickk.rdi.essentials.general.util.SQLUtils.*;
 @Mod(RDIEssentials.MODID)
 public class RDIEssentials {
     public static final String MODID = "rdi-essentials";
-    public static final String VERSION="1.8";
+    public static final String VERSION="1.10";
     public static Connection SQL_CONN;
     public RDIEssentials() throws SQLException, ClassNotFoundException {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

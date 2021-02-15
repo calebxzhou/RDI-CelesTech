@@ -22,6 +22,7 @@ import java.util.UUID;
 public final class TextUtils {
     public static final String TITLE="title";
     public static final String SUBTITLE="subtitle";
+    public static final IFormattableTextComponent SPACE=new StringTextComponent("   ");
     private static void sendMessage(ServerPlayerEntity player, IFormattableTextComponent textComponent, boolean actionBar) {
         player.sendStatusMessage(textComponent, actionBar);
     }

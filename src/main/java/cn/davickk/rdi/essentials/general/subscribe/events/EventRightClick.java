@@ -24,33 +24,10 @@ import java.io.IOException;
 
 @Mod.EventBusSubscriber(modid = RDIEssentials.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventRightClick {
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onRightClick(PlayerInteractEvent.RightClickBlock event) {
+    @SubscribeEvent
+    public static void onLeftClick(PlayerInteractEvent.LeftClickBlock event){
         PlayerEntity player = event.getPlayer();
-        Item heldItem = event.getItemStack().getItem();
-
-        //System.out.println(heldItem.getRegistryName());
-        if(heldItem == Items.BONE) {
-            BlockPos lookingAt=event.getPos();
-            BlockState blockS=player.getEntityWorld().getBlockState(lookingAt);
-            //player.getEntityWorld().setBlockState(lookingAt, Blocks.AIR.getDefaultState());
-            //System.out.println(blockS.getBlock().getRegistryName().toString());
-            if(!blockS.getBlock().getRegistryName().toString().contains("sapling"))
-                return;
-            if(PlayerUtils.hasEnoughXPLvl(player,1)){
-                TextUtils.sendChatMessage(player,"您的能力太强了，超出了本功能的范围");
-                return;
-            }
-            try {
-                WorldUtils.pasteTree(player,lookingAt);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (WorldEditException e) {
-                e.printStackTrace();
-            }
-            player.getHeldItemMainhand().setCount(player.getHeldItemMainhand().getCount()-1);
-        }else if(player.getEntityWorld().getBlockState(event.getPos()).getBlock().getRegistryName().toString().contains("sign")){
+        if(player.getEntityWorld().getBlockState(event.getPos()).getBlock().getRegistryName().toString().contains("sign")){
             TileEntity te=player.world.getTileEntity(event.getPos());
             if(te!=null && te instanceof SignTileEntity){
                 try {
@@ -76,6 +53,33 @@ public class EventRightClick {
                 TextUtils.sendChatMessage(player,"这个牌子内置了指令。正在读取....");}*/
                 catch (Exception e){e.printStackTrace();}
             }
+        }
+    }
+    @SubscribeEvent
+    public static void onRightClick(PlayerInteractEvent.RightClickBlock event) {
+        PlayerEntity player = event.getPlayer();
+        Item heldItem = event.getItemStack().getItem();
+
+        //System.out.println(heldItem.getRegistryName());
+        if(heldItem == Items.BONE) {
+            BlockPos lookingAt=event.getPos();
+            BlockState blockS=player.getEntityWorld().getBlockState(lookingAt);
+            //player.getEntityWorld().setBlockState(lookingAt, Blocks.AIR.getDefaultState());
+            //System.out.println(blockS.getBlock().getRegistryName().toString());
+            if(!blockS.getBlock().getRegistryName().toString().contains("sapling"))
+                return;
+            if(PlayerUtils.hasEnoughXPLvl(player,1)){
+                TextUtils.sendChatMessage(player,"您的能力太强了，超出了本功能的范围");
+                return;
+            }
+            try {
+                WorldUtils.pasteTree(player,lookingAt);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (WorldEditException e) {
+                e.printStackTrace();
+            }
+            player.getHeldItemMainhand().setCount(player.getHeldItemMainhand().getCount()-1);
         }
 
 

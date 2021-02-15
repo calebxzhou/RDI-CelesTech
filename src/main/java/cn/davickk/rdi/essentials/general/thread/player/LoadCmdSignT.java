@@ -21,7 +21,7 @@ public class LoadCmdSignT extends Thread {
 
     public void run() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
             /*RDIEssentials.createSQLConnection();
             PreparedStatement psm=RDIEssentials.SQL_CONN.prepareStatement
                     ("SELECT * FROM cmd_sign WHERE x=? AND y=? AND z=?");

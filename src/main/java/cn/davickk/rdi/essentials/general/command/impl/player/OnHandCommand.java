@@ -22,11 +22,7 @@ public class OnHandCommand extends BaseCommand {
     @Override
     public LiteralArgumentBuilder<CommandSource> setExecution() {
         return builder.executes((context)
-                -> execute(context.getSource()))
-                .then(Commands.argument
-                        ("NoArgs", StringArgumentType.string())
-                        .executes((context)
-                                -> execute(context.getSource())));
+                -> execute(context.getSource()));
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
@@ -40,7 +36,6 @@ public class OnHandCommand extends BaseCommand {
                     ("您的手上拿着的是" + amount + "个" + itm.getDisplayName().getString()));
             sendMessage(player, it.getRegistryName().toString());
             sendMessage(player, it.getTranslationKey());
-            sendMessage(player,player.getServerWorld().getDimensionType().toString());
 
             sendMessage(player, (TextComponent) itm.getTextComponent());
             if (nbt == null)

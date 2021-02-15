@@ -30,12 +30,19 @@ public class EventWorldTick {
             int min20 = 25 * 60 * 20 * 5;//about 22 minutes
             int sec30 = 30 * 20 * 5;
             int min5 = 25*60*5*5;
+            int min10 = 25*60*5*5*2;
             //int sec10=10*20;
             if(tickCounter==min5){
                 PlayerList playerList = event.world.getServer().getPlayerList();
-                TextUtils.sendGlobalChatMessage(playerList, "提示：/rkd打开空岛菜单");
+                TextUtils.sendGlobalChatMessage(playerList, "提示：机械动力(Create)可以实现前期大多数自动化，这是1.16的独有特性。");
                 ServerUtils.startThread(new SQLReconnT());
             }else tickCounter++;
+            if (tickCounter == min10) {
+                PlayerList playerList = event.world.getServer().getPlayerList();
+                TextUtils.sendGlobalChatMessage(playerList, "提示：中期您可以选择[机械动力(Create)]作为额外分支。");
+            } else {
+                tickCounter++;
+            }
             if (tickCounter == min20) {
                 PlayerList playerList = event.world.getServer().getPlayerList();
                 TextUtils.sendGlobalChatMessage(playerList, "15秒后清除掉落物，请拾起重要物品");

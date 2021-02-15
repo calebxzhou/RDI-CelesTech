@@ -20,7 +20,7 @@ public class EventPlayerMove {
     private static int tickCounter = 0;
     private static float bodyTemp = 36.5f;
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onMove(TickEvent.PlayerTickEvent event) {
         PlayerEntity player=event.player;
         if(!player.isCreative())
@@ -33,7 +33,7 @@ public class EventPlayerMove {
             //}
 
              //player.onKillCommand();
-        }
+            }
 
         /*try {
             PlayerEntity player = event.player;

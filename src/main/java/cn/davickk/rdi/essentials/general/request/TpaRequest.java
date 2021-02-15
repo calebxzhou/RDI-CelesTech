@@ -60,6 +60,10 @@ public class TpaRequest {
         if((timesNow.getTime()-timesReq.getTime()) > 60*1000)
             return false;
         double dis= WorldUtils.getDistanceXZ(new Location(fromPlayer),new Location(toPlayer));
+        if(fromPlayer.experienceLevel<1 && toPlayer.experienceLevel<1){
+            teleportPlayer1to2();
+            return true;
+        }
         int xp=0;
         if(dis>5000)
             xp=20;

@@ -1,16 +1,11 @@
 package cn.davickk.rdi.essentials.general.request;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.enums.EHomeResult;
-import cn.davickk.rdi.essentials.general.enums.EWorld;
 import cn.davickk.rdi.essentials.general.lib.HomeLocation;
-import cn.davickk.rdi.essentials.general.lib.IslandLocation;
 import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.util.HomeUtils;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
-import cn.davickk.rdi.essentials.general.util.WorldUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.sql.Connection;
@@ -61,8 +56,8 @@ public class HomeRequest{
         double x = loca.x;
         double y = loca.y;
         double z = loca.z;
-        float w = loca.rotationYaw;
-        float p = loca.rotationPitch;
+        float w = loca.yaw;
+        float p = loca.pitch;
         String dims=loca.dims.toString();
         String st = "INSERT INTO home (uuid, playerName, homeName, port, dims, x, y, z, w, p, activ) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -89,7 +84,7 @@ public class HomeRequest{
             pstm.setString(1,newHomeName);
             pstm.setInt(2,port);
             pstm.setString(3,uuid);
-            pstm.setString(3,homeName);
+            pstm.setString(4,homeName);
         }
         if(updLocation){
             stm="UPDATE home SET x=?,y=?,z=? WHERE port=? AND uuid=? AND homeName=?";

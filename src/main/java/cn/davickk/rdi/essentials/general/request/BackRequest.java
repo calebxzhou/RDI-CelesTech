@@ -2,7 +2,6 @@ package cn.davickk.rdi.essentials.general.request;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.lib.Location;
-import cn.davickk.rdi.essentials.general.util.HomeUtils;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 
@@ -32,8 +31,8 @@ public class BackRequest {
         ps.setDouble(4, loca.x);
         ps.setDouble(5,loca.y);
         ps.setDouble(6,loca.z);
-        ps.setFloat(7,loca.rotationYaw);
-        ps.setFloat(8,loca.rotationPitch);
+        ps.setFloat(7,loca.yaw);
+        ps.setFloat(8,loca.pitch);
         return ps.executeUpdate()>0;
     }
     @Nullable

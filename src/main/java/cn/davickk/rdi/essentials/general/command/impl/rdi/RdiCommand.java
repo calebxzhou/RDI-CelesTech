@@ -26,18 +26,17 @@ public class RdiCommand extends BaseCommand {
     }
     private int execute(CommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player=source.asPlayer();
-        String ob2lav=EColor.PURPLE.code+       "**熔化黑曜石**";
-        String water2ice=EColor.AQUA.code+      "$$$水变冰$$$";
-        String clearPhantom=EColor.STRIKE.code+ ":::::幻翼:::::";
+        String ob2lav=EColor.RED.code+       "熔化黑曜石";
+        String water2ice=EColor.AQUA.code+      "水变冰";
+        String clearPhantom=EColor.STRIKE.code+ "幻翼";
         String removeGround=EColor.BRIGHT_GREEN.code+
-                                                "\\\\\\移除草地///";
+                                                "移除草地";
 
-        String ys=EColor.ORANGE.code+           "%%%召唤陨石%%%";
-        String tps=EColor.DARK_AQUA.code+       "###查看延迟###";
-        String killme=EColor.DARK_RED.code+     "@@@@自鲨@@@@";
-        String onHand=EColor.DARK_GREEN.code+   "!手上物品信息!";
-        String save="***存档***";
-        String forcekick="[强制退出服务器]";
+        String ys=EColor.ORANGE.code+           "召唤陨石";
+        String tps=EColor.AQUA.code+       "查看延迟";
+        String killme=EColor.RED.code+     "自鲨";
+        String onHand=EColor.ORANGE.code+   "手上物品信息";
+        String save="存档";
         sendMessage(player, EColor.AQUA.code+"--RDI Utilities "+ RDIEssentials.VERSION+"--");
         IFormattableTextComponent space=
                 new StringTextComponent("   ");
@@ -63,7 +62,9 @@ public class RdiCommand extends BaseCommand {
         /*IFormattableTextComponent forcekickTxt=
                 TextUtils.getClickableContentComp(player,forcekick,"/kickme","强制退出服务器");*/
         TextUtils.sendChatMessage(player,obsTxt.append(space).append(water2iceTxt).append(space).append(clearPhanTxt));
+        TextUtils.sendChatMessage(player,space);
         TextUtils.sendChatMessage(player,tpsTxt.append(space).append(kilmeTxt).append(space).append(onHandTxt));
+        TextUtils.sendChatMessage(player,space);
         TextUtils.sendChatMessage(player,removeGroundTxt.append(space).append(ysTxt).append(space).append(saveTxt));
         return Command.SINGLE_SUCCESS;
     }

@@ -1,34 +1,24 @@
 package cn.davickk.rdi.essentials.general.util;
 
-import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.enums.EWorld;
 import cn.davickk.rdi.essentials.general.lib.IslandLocation;
 import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.thread.ui.LoadingT;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.command.arguments.ItemArgument;
 import net.minecraft.command.arguments.ItemInput;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import org.apache.logging.log4j.core.jmx.Server;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -175,7 +165,7 @@ public final class PlayerUtils {
         server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
     }
     public static void teleportPlayer(PlayerEntity player, Location loca){
-        teleportPlayer(player,loca.dims,loca.x,loca.y,loca.z,loca.rotationYaw,loca.rotationPitch);
+        teleportPlayer(player,loca.dims,loca.x,loca.y,loca.z,loca.yaw,loca.pitch);
     }
     public static void teleportPlayer(PlayerEntity player, ResourceLocation world, double x, double y, double z, float w, float p){
         MinecraftServer server=player.getServer();
@@ -216,7 +206,7 @@ public final class PlayerUtils {
     public static char facing(ServerPlayerEntity player){
         Location loca=new Location(player);
 //45~135 Î÷west 135~180~ -135 ±±North  -135~-45 E  -45~0~45 S
-        float yaw=loca.rotationYaw;
+        float yaw=loca.yaw;
         if(yaw>=45 && yaw<=135)
             return 'Î÷';
         else if(yaw>135 || yaw<=-135)
