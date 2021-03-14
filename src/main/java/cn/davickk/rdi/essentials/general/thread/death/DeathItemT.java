@@ -3,13 +3,10 @@ package cn.davickk.rdi.essentials.general.thread.death;
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EDeathItemReq;
 import cn.davickk.rdi.essentials.general.request.DeathItemRequest;
-import cn.davickk.rdi.essentials.general.util.TextUtils;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class DeathItemT extends Thread{
     private final ServerPlayerEntity player;

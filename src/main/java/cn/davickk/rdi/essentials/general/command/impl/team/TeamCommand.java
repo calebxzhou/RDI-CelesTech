@@ -1,7 +1,6 @@
 package cn.davickk.rdi.essentials.general.command.impl.team;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
-import cn.davickk.rdi.essentials.general.util.HomeUtils;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import com.mojang.brigadier.Command;

@@ -3,7 +3,6 @@ package cn.davickk.rdi.essentials.general.thread.teleport;
 import cn.davickk.rdi.essentials.general.request.TpaRequest;
 import net.minecraft.entity.player.ServerPlayerEntity;
 
-import java.sql.SQLException;
 import java.util.UUID;
 
 public class SendTpaRequestT extends Thread{

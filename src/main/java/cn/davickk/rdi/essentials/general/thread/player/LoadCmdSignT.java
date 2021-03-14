@@ -1,15 +1,8 @@
 package cn.davickk.rdi.essentials.general.thread.player;
 
-import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.math.BlockPos;
-
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 public class LoadCmdSignT extends Thread {
     private final PlayerEntity player;
@@ -21,7 +14,7 @@ public class LoadCmdSignT extends Thread {
 
     public void run() {
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
             /*RDIEssentials.createSQLConnection();
             PreparedStatement psm=RDIEssentials.SQL_CONN.prepareStatement
                     ("SELECT * FROM cmd_sign WHERE x=? AND y=? AND z=?");

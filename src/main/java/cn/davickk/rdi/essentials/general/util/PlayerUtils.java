@@ -137,10 +137,9 @@ public final class PlayerUtils {
         return player.getServer().getServerPort()==ServerUtils.CRET_PORT;
     }
     public static void randomTeleport(ServerPlayerEntity player,boolean glass){
-        int x=RandomUtils.generateRandomInt(-4900,4900);
-        int z=RandomUtils.generateRandomInt(-4900,4900);
-        IslandLocation isl=new IslandLocation
-                (x,220,z);
+        int x=RandomUtils.generateRandomInt(-9999,9999);
+        int z=RandomUtils.generateRandomInt(-9999,9999);
+        Location isl=new Location(x+0.5,220,z+0.5,0,0,"minecraft:overworld");
         teleportPlayer(player,isl);
         if(glass)
             player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),
@@ -164,8 +163,22 @@ public final class PlayerUtils {
         //System.out.println(cmd);
         server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
     }
+    public static void teleportPlayer(PlayerEntity player, BlockPos loca){
+        teleportPlayer(player,new ResourceLocation("minecraft:overworld"),
+                loca.getX(),loca.getY(),loca.getZ(),0f,0f);
+        //player.changeDimension(player.getServer().getWorld(ServerWorld.OVERWORLD));
+        //player.teleportKeepLoaded(loca.x,loca.y,loca.z);
+       /* MinecraftServer server=player.getServer();
+        String cmd="tp %player %x %y %z"
+                .replace("%player",player.getDisplayName().getString())
+                .replace("%x", String.valueOf(loca.x))
+                .replace("%y", String.valueOf(loca.y))
+                .replace("%z", String.valueOf(loca.z));
+        //System.out.println(cmd);
+        server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
+    }
     public static void teleportPlayer(PlayerEntity player, Location loca){
-        teleportPlayer(player,loca.dims,loca.x,loca.y,loca.z,loca.yaw,loca.pitch);
+        teleportPlayer(player,loca.getDims(),loca.getX(),loca.getY(),loca.getZ(),loca.getYaw(),loca.getPitch());
     }
     public static void teleportPlayer(PlayerEntity player, ResourceLocation world, double x, double y, double z, float w, float p){
         MinecraftServer server=player.getServer();
@@ -206,7 +219,7 @@ public final class PlayerUtils {
     public static char facing(ServerPlayerEntity player){
         Location loca=new Location(player);
 //45~135 Î÷west 135~180~ -135 ±±North  -135~-45 E  -45~0~45 S
-        float yaw=loca.yaw;
+        float yaw=loca.getYaw();
         if(yaw>=45 && yaw<=135)
             return 'Î÷';
         else if(yaw>135 || yaw<=-135)

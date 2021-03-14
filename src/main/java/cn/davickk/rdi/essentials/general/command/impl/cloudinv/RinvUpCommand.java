@@ -1,7 +1,6 @@
 package cn.davickk.rdi.essentials.general.command.impl.cloudinv;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
-import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.enums.EGeneral;
 import cn.davickk.rdi.essentials.general.thread.rinv.RinvUpThread;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
@@ -34,10 +33,10 @@ public class RinvUpCommand extends BaseCommand {
     private int execute(CommandSource source) throws CommandSyntaxException {
         //TODO UP_COMMAND
         ServerPlayerEntity player = source.asPlayer();
-        sendMessage(player,EGeneral.LOADING.text);
+        sendMessage(player,EGeneral.LOADING.text);/*
         TextUtils.sendTitle(player.getServer().getCommandSource(),player,TextUtils.TITLE," ");
         TextUtils.sendTitle(player.getServer().getCommandSource(), player,TextUtils.SUBTITLE,
-                "请不要与背包交互，否则会导致数据丢失");
+                "请不要与背包交互，否则会导致数据丢失");*/
         ExecutorService exe = Executors.newCachedThreadPool();
         exe.execute(new RinvUpThread(player));
 

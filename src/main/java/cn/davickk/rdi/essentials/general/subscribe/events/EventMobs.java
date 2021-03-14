@@ -4,16 +4,13 @@ import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.RandomUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,9 +23,18 @@ public class EventMobs {
             return;
         if(event.getEntity().getEntity().getPosY()< PlayerUtils.LOWEST_LIMIT){
             event.setCanceled(true);
+            return;
             //event.setResult(Event.Result.ALLOW);
             //event.getEntity().remove(false);
         }
+        /*Entity entity=event.getEntity();
+        if(entity.getEntityWorld().getDimensionKey().getRegistryName().getPath().contains("nether"))
+        if(entity.getType().getTranslationKey().equals("entity.minecraft.item")) {
+            ItemEntity itemEntity=(ItemEntity) entity;
+            System.out.println(itemEntity.getItem().getTranslationKey());
+            if(itemEntity.getItem().getTranslationKey().contains("netherrack"))
+                entity.remove();
+        }*/
         /*if(event.getEntityLiving().getType().equals(EntityType.SLIME)
                 || event.getEntityLiving().getDisplayName().getString().contains("slime"))
             event.setCanceled(true);*/

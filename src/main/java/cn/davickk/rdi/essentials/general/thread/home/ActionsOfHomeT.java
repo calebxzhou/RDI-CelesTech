@@ -9,7 +9,6 @@ import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.StringTextComponent;
 
 import java.util.List;
 

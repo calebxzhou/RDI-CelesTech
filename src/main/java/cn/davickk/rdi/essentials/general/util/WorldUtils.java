@@ -19,12 +19,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class WorldUtils {
@@ -33,13 +31,18 @@ public class WorldUtils {
         world.setDayTime(time.time);
     }
     public static double getDistanceXZ(Location l1, Location l2){
-        return getDistance(l1.x,0,l1.z, l2.x,0,l2.z);
+        return getDistance(l1.getX(),0,l1.getZ(), l2.getX(),0,l2.getZ());
     }
     private static double getDistance(double x1,double y1,double z1,double x2,double y2,double z2)
     {
         Vector3d pos1=new Vector3d(x1,y1,z1);
         Vector3d pos2=new Vector3d(x2,y2,z2);
         return pos1.distanceTo(pos2);
+    }
+    public static boolean ifNearbySpawn(Location loca){
+        double diffX=Math.abs(loca.getX()-ServerUtils.SPAWN_LOCA.getX());
+        double diffZ=Math.abs(loca.getZ()-ServerUtils.SPAWN_LOCA.getZ());
+        return diffX<20 && diffZ<20;
     }
     public static String translateDimensionName(String dims){
         if(dims.equalsIgnoreCase("minecraft:overworld"))

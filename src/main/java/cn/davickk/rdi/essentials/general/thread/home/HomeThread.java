@@ -7,8 +7,6 @@ import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 
-import javax.xml.soap.Text;
-
 public class HomeThread extends Thread {
     private ServerPlayerEntity player;
     private String homeName;
@@ -23,7 +21,7 @@ public class HomeThread extends Thread {
             HomeRequest hreq=new HomeRequest(player,homeName);
             if(hreq.hasThisHome()) {
                 if (hreq.isActive()){
-                    if(hreq.getHomeLocation().dims.equals(new ResourceLocation("minecraft:overworld"))){
+                    if(hreq.getHomeLocation().getDims().equals(new ResourceLocation("minecraft:overworld"))){
                         hreq.goHome();
                         TextUtils.sendChatMessage(player,"成功回到"+homeName);
                     }else{

@@ -1,18 +1,17 @@
 package cn.davickk.rdi.essentials.general.command.impl.island;
 
-import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
-import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.thread.island.IslandMenuT;
+import cn.davickk.rdi.essentials.general.thread.island.CreateIslandT;
+import cn.davickk.rdi.essentials.general.thread.island.DeleteIslandT;
+import cn.davickk.rdi.essentials.general.thread.ui.LoadingT;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
-import net.minecraft.entity.player.ServerPlayerEntity;
 
-public class IslandCommand extends BaseCommand {
-    public IslandCommand(String name, int permissionLevel, boolean enabled) {
+public class DeleteIslandCmd extends BaseCommand {
+    public DeleteIslandCmd(String name, int permissionLevel, boolean enabled) {
         super(name, permissionLevel, enabled);
     }
     @Override
@@ -21,11 +20,9 @@ public class IslandCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player=source.asPlayer();
-        sendMessage(player, EColor.ORANGE.code+"--RDI CelesTech "+ RDIEssentials.VERSION+"--");
-        ServerUtils.startThread(new IslandMenuT(player));
         //----RDI Aerotech新技术空岛系统 版本v1.0---
         //[创建岛] [回岛]
+        ServerUtils.startThread(new DeleteIslandT(source.asPlayer()));
         return Command.SINGLE_SUCCESS;
     }
 }

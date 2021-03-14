@@ -2,8 +2,7 @@ package cn.davickk.rdi.essentials.general.command.impl.spawn;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
 import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.thread.home.HomeListThread;
-import cn.davickk.rdi.essentials.general.thread.home.HomeThread;
+import cn.davickk.rdi.essentials.general.thread.spawn.ChangeSpawnPointT;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
@@ -39,7 +38,7 @@ public class ChangeSpawnPointCmd extends BaseCommand {
         ServerPlayerEntity player = source.asPlayer();
         //sendMessage(player, "请输入家的名称");
         IFormattableTextComponent cis=TextUtils.getClickableContentComp(player, EColor.ORANGE.code+"[改回岛传送点]",
-                "/changesp island","更改返回空岛时的传送点");
+                "/sethome island","更改返回空岛时的传送点");
         IFormattableTextComponent crsp=TextUtils.getClickableContentComp(player, EColor.ORANGE.code+"[改复活传送点]",
                 "/changesp respawn","更改复活时的传送点");
         IFormattableTextComponent cjoin=TextUtils.getClickableContentComp(player, EColor.ORANGE.code+"[改进服传送点]",
@@ -52,7 +51,7 @@ public class ChangeSpawnPointCmd extends BaseCommand {
     private int execute(CommandSource source, String arg) throws CommandSyntaxException {
         ServerPlayerEntity player = source.asPlayer();
         PlayerUtils.sendLoading(player);
-        //ServerUtils.startThread(new HomeThread(player, homeName));
+        ServerUtils.startThread(new ChangeSpawnPointT(player, arg));
         return Command.SINGLE_SUCCESS;
     }
 

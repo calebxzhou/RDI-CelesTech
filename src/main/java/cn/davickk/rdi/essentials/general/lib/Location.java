@@ -2,17 +2,14 @@ package cn.davickk.rdi.essentials.general.lib;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import jdk.jfr.DataAmount;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.Biome;
 public class Location {
 
-    public double x, y, z;
-    public float yaw, pitch;
-    public ResourceLocation dims;
+    private double x, y, z;
+    private float yaw, pitch;
+    private ResourceLocation dims;
     //private transient PlayerEntity playerEntity;
     /*public Location(int posX, int posY, int posZ, ResourceLocation dimension) {
         this.x = posX;
@@ -51,17 +48,63 @@ public class Location {
         //this.playerEntity = player;
     }
 
-
-
-    /*public Biome getBiome() {
-        BlockPos pos = new BlockPos(x, y, z);
-        return playerEntity.getEntityWorld().getBiomeManager().getBiome(pos);
+    public double getX() {
+        return x;
     }
 
-    public float getTemperature() {
-        BlockPos pos = new BlockPos(x, y, z);
-        return playerEntity.getEntityWorld().getBiomeManager().getBiome(pos).getTemperature(pos);
-    }*/
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public float getYaw() {
+        return yaw;
+    }
+
+    public float getPitch() {
+        return pitch;
+    }
+
+    public ResourceLocation getDims() {
+        return dims;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public void setZ(double z) {
+        this.z = z;
+    }
+
+    public void setYaw(float yaw) {
+        this.yaw = yaw;
+    }
+
+    public void setPitch(float pitch) {
+        this.pitch = pitch;
+    }
+
+    public void setDims(ResourceLocation dims) {
+        this.dims = dims;
+    }
+
+    /*public Biome getBiome() {
+                                    BlockPos pos = new BlockPos(x, y, z);
+                                    return playerEntity.getEntityWorld().getBiomeManager().getBiome(pos);
+                                }
+
+                                public float getTemperature() {
+                                    BlockPos pos = new BlockPos(x, y, z);
+                                    return playerEntity.getEntityWorld().getBiomeManager().getBiome(pos).getTemperature(pos);
+                                }*/
     @Override
     public String toString(){
         Gson gs=new GsonBuilder().setPrettyPrinting().create();

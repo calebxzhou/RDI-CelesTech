@@ -1,8 +1,9 @@
 package cn.davickk.rdi.essentials.general.thread.weather;
 
-import cn.davickk.rdi.essentials.general.format.*;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.enums.EWeather;
+import cn.davickk.rdi.essentials.general.format.IP2Location;
+import cn.davickk.rdi.essentials.general.format.IP2LocationForeign;
 import cn.davickk.rdi.essentials.general.format.weather.RealTimeWeather;
 import cn.davickk.rdi.essentials.general.format.weather.Weather;
 import cn.davickk.rdi.essentials.general.format.weather.WeatherForeign;

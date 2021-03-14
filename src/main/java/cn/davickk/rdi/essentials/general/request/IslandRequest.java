@@ -14,12 +14,12 @@ import com.sk89q.worldedit.function.operation.Operation;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.session.ClipboardHolder;
-import com.sk89q.worldedit.world.World;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.math.BlockPos;
+
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -87,13 +87,18 @@ public class IslandRequest {
         //}
         return null;
     }*/
-    public void createIsland(IslandLocation loca) throws SQLException {
+    public void deleteIsland() throws  SQLException{
+        PreparedStatement psm=sqlConn.prepareStatement("DELETE FROM island WHERE uuid=?");
+        psm.setString(1,uuid);
+        psm.executeUpdate();
+    }
+    public void createIsland(BlockPos bpos) throws SQLException {
         PreparedStatement psm=sqlConn.prepareStatement("INSERT INTO island (uuid, playerName, x, y, z) VALUES (?,?,?,?,?)");
         psm.setString(1,uuid);
         psm.setString(2,playerName);
-        psm.setInt(3, loca.x);
-        psm.setInt(4, loca.y);
-        psm.setInt(5, loca.z);
+        psm.setInt(3, bpos.getX());
+        psm.setInt(4, bpos.getY());
+        psm.setInt(5, bpos.getZ());
         psm.executeUpdate();
         /* INSERT INTO island (uuid,playerName,x,y,z) (?,?,?,?,?)
         i=1;
@@ -110,7 +115,7 @@ public class IslandRequest {
 
        */
     }
-    public void pasteSchematic(IslandLocation loc) throws IOException, WorldEditException {
+    public void pasteSchematic(BlockPos bpos) throws IOException, WorldEditException {
             Clipboard clipboard;
             File file=new File("./islands/island.schem");
             ClipboardFormat format = ClipboardFormats.findByFile(file);
@@ -118,10 +123,10 @@ public class IslandRequest {
             clipboard = reader.read();
             try(EditSession session = WorldEdit.getInstance().getEditSessionFactory()
                     .getEditSession(ForgeAdapter.adapt(player.getServerWorld()), -1)){
-            System.out.println(loc.x+" "+loc.y+" "+loc.z);
+            System.out.println(bpos.getX()+" "+bpos.getY()+" "+bpos.getZ());
             Operation operation = new ClipboardHolder(clipboard)
                         .createPaste(session)
-                        .to(BlockVector3.at(loc.x, loc.y, loc.z))
+                        .to(BlockVector3.at(bpos.getX(), bpos.getY(), bpos.getZ()))
                         .copyEntities(false)
                         .ignoreAirBlocks(true)
                         // configure here

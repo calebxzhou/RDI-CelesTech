@@ -1,8 +1,8 @@
 package cn.davickk.rdi.essentials.general.util;
 
+import com.mojang.brigadier.Command;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
-import net.minecraft.command.impl.TellRawCommand;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.STitlePacket;
@@ -12,17 +12,31 @@ import net.minecraft.util.text.*;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.util.text.event.HoverEvent;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 public final class TextUtils {
     public static final String TITLE="title";
     public static final String SUBTITLE="subtitle";
     public static final IFormattableTextComponent SPACE=new StringTextComponent("   ");
+
+    public static String getMiddleString(String str)
+    {
+        int position;//在中间的位置
+        //int length;//显示长度，总长度如果小于displayable就显示主长度
+        int displayable=30;//太多了屏幕放不下，最多只能放下displayable字符
+        if(str.length()<displayable)//长度如果比displayable小，直接返回
+            return str;
+        else {//如果长度比displayebale大就在中间截断30个字符
+            position = str.length() / 4;
+            if(displayable-position<15)
+                displayable+=15;
+            if(displayable>str.length())
+                return "loading....";
+            else{
+                return str.substring(position, displayable);
+            }
+        }
+    }
     private static void sendMessage(ServerPlayerEntity player, IFormattableTextComponent textComponent, boolean actionBar) {
         player.sendStatusMessage(textComponent, actionBar);
     }
@@ -37,13 +51,17 @@ public final class TextUtils {
             sendMessage(player, textComponent, actionBar);
         }
     }
-
+    public static void sendTitle(ServerPlayerEntity playerToSend, String content, STitlePacket.Type type) throws CommandSyntaxException {
+        sendTitle(playerToSend,new StringTextComponent(content),type);
+    }
     //source一般是服务器
-    public static void sendTitle(CommandSource source, ServerPlayerEntity playerToSend, String type, String content){
-        MinecraftServer mcs=source.getServer();
+    public static void sendTitle( ServerPlayerEntity playerToSend, ITextComponent content, STitlePacket.Type type) throws CommandSyntaxException {
+        //MinecraftServer mcs=source.getServer();
+        CommandSource src=playerToSend.getServer().getCommandSource();
+        playerToSend.connection.sendPacket(new STitlePacket(type, TextComponentUtils.func_240645_a_(src, content, playerToSend, 0)));/*
         mcs.getCommandManager().handleCommand(source,"title "
                 +playerToSend.getDisplayName().getString()+" "+type+
-                        " {\"text\":\""+content+"\"}");
+                        " {\"text\":\""+content+"\"}");*/
         /* Class cls = Class.forName("net.minecraft.command.impl.TitleCommand");
         Method titlefunc = cls.getDeclaredMethod("show",
                 CommandSource.class, Collection.class, ITextComponent.class, STitlePacket.Type.class);

@@ -9,10 +9,8 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.text.StringTextComponent;
 
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 
 public class GetFromVoidCmd extends BaseCommand {
     public GetFromVoidCmd(String name, int permissionLevel, boolean enabled) {

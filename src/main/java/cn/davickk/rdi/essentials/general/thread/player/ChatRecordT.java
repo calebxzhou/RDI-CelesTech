@@ -3,12 +3,9 @@ package cn.davickk.rdi.essentials.general.thread.player;
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.util.TimeUtils;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
-import java.time.format.DateTimeFormatter;
 
 public class ChatRecordT extends Thread {
     private final PlayerEntity player;

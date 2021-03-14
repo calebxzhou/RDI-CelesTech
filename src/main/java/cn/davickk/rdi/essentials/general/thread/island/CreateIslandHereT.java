@@ -6,10 +6,8 @@ import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.request.IslandRequest;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
-import cn.davickk.rdi.essentials.general.util.WorldUtils;
-import com.sk89q.worldedit.world.World;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.server.management.PlayerList;
+import net.minecraft.util.math.BlockPos;
 
 public class CreateIslandHereT extends Thread{
     private final ServerPlayerEntity player;
@@ -18,14 +16,10 @@ public class CreateIslandHereT extends Thread{
     }
     public void run(){
         TextUtils.sendChatMessage(player,"正在创建空岛...");
-       String name= player.getDisplayName().getString();
-        int serverPort = player.getServer().getServerPort();
         try{
-            //Class.forName("com.mysql.jdbc.Driver");
-            //Connection c = DriverManager.getConnection(DB_URL, USR, PWD);
-            //TextUtils.sendGlobalChatMessage(pli,name+"正在创建空岛....");
             IslandRequest req = new IslandRequest(player);
             IslandLocation iloc=new IslandLocation(player);
+            BlockPos bpos=player.getPosition();
             if (req.hasIsland()) {
                 TextUtils.sendChatMessage(player, "您已经有一个空岛了，因此不能创建新的空岛。");
                 TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[立刻前往我的空岛]","/home island"," ");
@@ -33,13 +27,8 @@ public class CreateIslandHereT extends Thread{
                 return;
             }
             req.refresh();
-            /*IslandLocation iloc = req.findAvailableIsland();
-            if (iloc == null) {
-                TextUtils.sendChatMessage(player, "无法获取新的空岛位置，请咨询腐竹");
-                return;
-            }*/
-            req.createIsland(iloc);
-            req.pasteSchematic(iloc);
+            req.createIsland(bpos);
+            req.pasteSchematic(bpos);
             //req.refresh();
             TextUtils.sendChatMessage(player, "成功创建了空岛");
             //WorldUtils.removeGround(player);

@@ -4,16 +4,9 @@ import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.request.IslandRequest;
-import cn.davickk.rdi.essentials.general.util.OpenScreenUtils;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.IContainerListener;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.network.IPacket;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -38,7 +31,7 @@ public class IslandMenuT extends Thread{
             String roll=EColor.GOLD.code+EColor.BOLD.code+           "〇〇大科技转转转〇〇";
             boolean otherIsland=ireq.isJoinedOthersIsland();
             if(!(ireq.hasIsland()||homereq.hasThisHome()||otherIsland)){
-                TextUtils.clickableContent2Send(player,EColor.AQUA.code+"####创建空岛（点这里）####","/createkd","创建一个新的空岛");
+                TextUtils.clickableContent2Send(player,EColor.AQUA.code+"创建空岛（点这里）","/createkd","创建一个新的空岛");
                 return;
             }
             IFormattableTextComponent homeTxt;

@@ -1,13 +1,8 @@
 package cn.davickk.rdi.essentials.general.thread.teleport;
 
-import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.request.TpaRequest;
-import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
-import cn.davickk.rdi.essentials.general.util.WorldUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
-
-import java.util.UUID;
 
 public class AcceptTpaRequestT extends Thread{
     private final ServerPlayerEntity toPlayer;

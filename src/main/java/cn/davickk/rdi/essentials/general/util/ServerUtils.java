@@ -1,6 +1,5 @@
 package cn.davickk.rdi.essentials.general.util;
 
-import cn.davickk.rdi.essentials.general.lib.IslandLocation;
 import cn.davickk.rdi.essentials.general.lib.Location;
 import net.minecraft.util.math.BlockPos;
 

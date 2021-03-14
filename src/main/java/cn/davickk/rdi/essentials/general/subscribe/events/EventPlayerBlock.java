@@ -5,11 +5,13 @@ import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.RandomUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.SwordItem;
+import net.minecraft.tags.ITag;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -101,12 +103,6 @@ public class EventPlayerBlock {
             }
             if(block.getRegistryName().toString().equalsIgnoreCase("stone")){
                 int ran=RandomUtils.generateRandomInt(1,100);
-                if(ran<5){
-                    if(PlayerUtils.hasInventorySpace(player)) {
-                        TextUtils.sendChatMessage(player, "在石头里发现了一个不知名矿石，看起来很珍贵的样子。");
-                        PlayerUtils.givePlayerItem(player, "appliedenergistics2:quartz", 1);
-                    }
-                }
                 if(ran==66){
                     if(PlayerUtils.hasInventorySpace(player)) {
                         TextUtils.sendChatMessage(player, "在石头里发现了一个蓝色的小石头，看起来很珍贵的样子。");
@@ -114,6 +110,10 @@ public class EventPlayerBlock {
                     }
                 }
             }
+            if(player.getServerWorld().getDimensionKey().getLocation().toString().contains("nether"))
+                if(block.getRegistryName().toString().contains("lava")){
+                    event.setCanceled(true);
+                }
         } catch (Exception e) {
             e.printStackTrace();
         }

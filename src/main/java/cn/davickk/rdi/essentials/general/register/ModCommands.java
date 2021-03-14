@@ -6,6 +6,7 @@ import cn.davickk.rdi.essentials.general.command.impl.island.*;
 import cn.davickk.rdi.essentials.general.command.impl.player.*;
 import cn.davickk.rdi.essentials.general.command.impl.rdi.RdiCommand;
 import cn.davickk.rdi.essentials.general.command.impl.server.ReconnSQLCmd;
+import cn.davickk.rdi.essentials.general.command.impl.spawn.ChangeSpawnPointCmd;
 import cn.davickk.rdi.essentials.general.command.impl.spawn.SpawnCommand;
 import cn.davickk.rdi.essentials.general.command.impl.teleport.TpYesCommand;
 import cn.davickk.rdi.essentials.general.command.impl.teleport.TpaCommand;
@@ -42,17 +43,19 @@ public final class ModCommands {
         commands.add(new IslandCommand("rkd",0,true));
         commands.add(new CreateIslandCmd("createkd",0,true));
         commands.add(new CreateIslandHereCmd("createkdhere",0,true));
+        commands.add(new DeleteIslandCmd("shanchukongdao",0,true));
         // Player
         commands.add(new GetFromVoidCmd("getfromvoid",0,true));
         commands.add(new KickMeCommand("kickme",0,true));
         commands.add(new ClearPhantomCmd("clearphantom",0,true));
         commands.add(new RemoveGroundCmd("removeground",0,true));
         commands.add(new RollCommand("rroll",0,true));
+        commands.add(new ChangeSpawnPointCmd("changesp",0,true));
 //        commands.add(new AfkCommand("afk", 0, true));
         commands.add(new OnHandCommand("onhand", 0, true));
         commands.add(new Obsi2LavaCmd("obsi2lava",0,true));
         commands.add(new Water2IceCmd("water2ice",0,true));
-        commands.add(new SummonMetrCmd("ae2yunshi",0,true));
+        //commands.add(new SummonMetrCmd("ae2yunshi",0,true));
         //commands.add(new RtpsCommand("rfz", 0, true));
         commands.add(new RtpsCommand("tps", 0, true));
         commands.add(new SaveCommand("SAVE", 0, true));

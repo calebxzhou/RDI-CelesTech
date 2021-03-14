@@ -53,12 +53,12 @@ public class HomeRequest{
         else
             homeName=this.homeName;
 
-        double x = loca.x;
-        double y = loca.y;
-        double z = loca.z;
-        float w = loca.yaw;
-        float p = loca.pitch;
-        String dims=loca.dims.toString();
+        double x = loca.getX();
+        double y = loca.getY();
+        double z = loca.getZ();
+        float w = loca.getYaw();
+        float p = loca.getPitch();
+        String dims=loca.getDims().toString();
         String st = "INSERT INTO home (uuid, playerName, homeName, port, dims, x, y, z, w, p, activ) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = sqlConn.prepareStatement(st);
@@ -89,9 +89,9 @@ public class HomeRequest{
         if(updLocation){
             stm="UPDATE home SET x=?,y=?,z=? WHERE port=? AND uuid=? AND homeName=?";
             pstm=sqlConn.prepareStatement(stm);
-            pstm.setDouble(1,newLocation.x);
-            pstm.setDouble(2,newLocation.y);
-            pstm.setDouble(3,newLocation.z);
+            pstm.setDouble(1,newLocation.getX());
+            pstm.setDouble(2,newLocation.getY());
+            pstm.setDouble(3,newLocation.getZ());
             pstm.setInt(4,port);
             pstm.setString(5,uuid);
             pstm.setString(6,homeName);
@@ -144,6 +144,11 @@ public class HomeRequest{
     }
     public boolean delHome() throws SQLException {
         String selectSQL = "DELETE FROM home WHERE uuid ='" + uuid + "' AND homeName='"+homeName+"' AND port='"+port+"'";
+        int rowsEff = sqlConn.prepareStatement(selectSQL).executeUpdate();
+        return rowsEff!=0;
+    }
+    public boolean delAllHome() throws SQLException {
+        String selectSQL = "DELETE FROM home WHERE uuid ='" + uuid + "' AND port='"+port+"'";
         int rowsEff = sqlConn.prepareStatement(selectSQL).executeUpdate();
         return rowsEff!=0;
     }

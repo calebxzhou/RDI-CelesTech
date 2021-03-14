@@ -1,13 +1,13 @@
 package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
-import cn.davickk.rdi.essentials.general.util.TextUtils;
 import cn.davickk.rdi.essentials.general.util.WeatherUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.world.GameType;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -18,10 +18,11 @@ public class EventPlayerLoggedIn {
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
+        PlayerUtils.teleportPlayer(player, ServerUtils.SPAWN_LOCA);
         String ip = player.getPlayerIP();
         PlayerUtils.sayHello(player);
         WeatherUtils.sendWeatherToPlayer(ip, player);
-        PlayerUtils.teleportPlayer(player, ServerUtils.SPAWN_LOCA);
+        player.setGameType(GameType.SURVIVAL);
         //TextUtils.sendChatMessage(player,new StringTextComponent(WeatherUtils.getFormattedWeatherFromIP(ip,1)));
         //重新设置出生点到主城
         player.func_242111_a(player.world.OVERWORLD, ServerUtils.SPAWN_BLKPS, 0f, true, false);

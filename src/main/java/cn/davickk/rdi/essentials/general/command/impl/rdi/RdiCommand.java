@@ -2,10 +2,7 @@ package cn.davickk.rdi.essentials.general.command.impl.rdi;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
-import cn.davickk.rdi.essentials.general.command.impl.player.BackCommand;
 import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.thread.island.IslandMenuT;
-import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -50,7 +47,7 @@ public class RdiCommand extends BaseCommand {
         IFormattableTextComponent removeGroundTxt=
                 TextUtils.getClickableContentComp(player,removeGround,"/removeground","移除下方的陆地。");
         IFormattableTextComponent ysTxt=
-                TextUtils.getClickableContentComp(player,ys,"/ae2yunshi","在空旷的地方尝试，召唤一颗大陨石。");
+                TextUtils.getClickableContentComp(player,ys,"/tps","在空旷的地方尝试，召唤一颗大陨石。");
         IFormattableTextComponent tpsTxt=
                 TextUtils.getClickableContentComp(player,tps,"/tps","查看服务器延迟");
         IFormattableTextComponent kilmeTxt=

@@ -1,7 +1,7 @@
 package cn.davickk.rdi.essentials.general.thread.home;
 
-import cn.davickk.rdi.essentials.general.enums.EHomeText;
 import cn.davickk.rdi.essentials.general.enums.EColor;
+import cn.davickk.rdi.essentials.general.enums.EHomeText;
 import cn.davickk.rdi.essentials.general.enums.EWorld;
 import cn.davickk.rdi.essentials.general.lib.HomeLocation;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
@@ -45,7 +45,7 @@ public class HomeListThread extends Thread {
                 String hname=entry.getKey();
                 String hnameC="";
                 HomeLocation hloc=entry.getValue();
-                int x=(int)hloc.x,  y=(int)hloc.y,  z=(int)hloc.z;
+                int x=(int)hloc.getX(),  y=(int)hloc.getY(),  z=(int)hloc.getZ();
                 String dims=hloc.dims;
                 if(hloc.isActive)
                 {

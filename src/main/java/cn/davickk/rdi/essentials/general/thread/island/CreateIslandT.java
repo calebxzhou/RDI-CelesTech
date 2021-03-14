@@ -1,27 +1,11 @@
 package cn.davickk.rdi.essentials.general.thread.island;
 
 import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.lib.IslandLocation;
-import cn.davickk.rdi.essentials.general.lib.Location;
-import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.request.IslandRequest;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.extension.platform.Actor;
-import com.sk89q.worldedit.forge.ForgeAdapter;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.server.management.PlayerList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.world.World;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import static cn.davickk.rdi.essentials.RDIEssentials.SQL_CONN;
-import static cn.davickk.rdi.essentials.general.util.SQLUtils.*;
 
 public class CreateIslandT extends Thread{
     private final ServerPlayerEntity player;
@@ -29,21 +13,18 @@ public class CreateIslandT extends Thread{
         this.player=player;
     }
     public void run(){
-        IslandRequest req = null;
+
         try {
-            req = new IslandRequest(player);
+            IslandRequest req= new IslandRequest(player);
             if (req.hasIsland()) {
                 TextUtils.sendChatMessage(player, "您已经有一个空岛了，因此不能创建新的空岛。");
                 TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[立刻前往我的空岛]","/home island"," ");
                 //TODO 回到我的空岛
                 return;
             }
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
         TextUtils.sendChatMessage(player,"您觉得这个位置适合创建空岛吗？（以下选项可点击）（请尽量选择没有人的地方）");
         PlayerUtils.randomTeleport(player,true);
         IFormattableTextComponent t1=
