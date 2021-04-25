@@ -33,7 +33,7 @@
     <insert id = "insertRecord" parameterType = "cn.davickk.rdi.essentials.general.model.Home">
         INSERT INTO home VALUES
         (#{uuid}, #{playerName}, #{homeName}, #{dims},
-        #{port},#{x},#{y},#{z},#{w},#{p},#{activ});
+        #{port},#{x},#{y},#{z},#{w},#{p},#{activ},#{comments});
     </insert>
     <select id="exists" parameterType="map" resultType="int">
         SELECT EXISTS(SELECT homeName FROM home WHERE uuid=#{uuid}
@@ -57,5 +57,9 @@
     <delete id="delAllByUuid" parameterType="String">
         DELETE FROM home WHERE uuid=#{uuid};
     </delete>
+
+    <update id="addComment" parameterType="map">
+        UPDATE home SET comments=#{comments} WHERE uuid=#{uuid} AND homeName=#{homeName};
+    </update>
 
 </mapper>

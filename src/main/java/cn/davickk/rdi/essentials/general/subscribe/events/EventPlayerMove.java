@@ -6,10 +6,12 @@ import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
+import net.minecraft.block.SaplingBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.RegistryKey;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent;
@@ -17,9 +19,12 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Mod.EventBusSubscriber(modid = RDIEssentials.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventPlayerMove {
-    private static int tickCounter = 0;
+    private static int tickCounter,moveCounter = 0;
     private static float bodyTemp = 36.5f;
     @SubscribeEvent
     public static void onNether(PlayerEvent.PlayerChangedDimensionEvent event){
@@ -29,10 +34,10 @@ public class EventPlayerMove {
         String locaw=world.getLocation().toString();
         System.out.println("前往"+ locaw);
         if(locaw.contains("nether")){
-            player.setGameType(GameType.ADVENTURE);
+            //player.setGameType(GameType.ADVENTURE);
             TextUtils.sendChatMessage(player,"感觉身体沉甸甸的，做什么都没有力气.....");
         }else if(locaw.contains("overworld")){
-            player.setGameType(GameType.SURVIVAL);
+            //player.setGameType(GameType.SURVIVAL);
         }
     }
     @SubscribeEvent
@@ -54,6 +59,12 @@ public class EventPlayerMove {
              //player.onKillCommand();
             }
         }
+        if (player.isSprinting())
+            moveCounter++;
+        if(tickCounter==20*10){
+
+            resetCounter();
+        }else tickCounter++;
 
         /*try {
             PlayerEntity player = event.player;
@@ -87,5 +98,15 @@ public class EventPlayerMove {
         info.addPlayer(player);*/
 
 
+    }
+    private static void resetCounter(){
+        tickCounter=0;moveCounter=0;
+    }
+    private List<BlockPos> getNearestBlocks(World world, BlockPos pos)
+    {
+        return BlockPos.getAllInBox(pos.add(-5, -2, -5), pos.add(5, 2, 5))
+                .filter(p -> world.getBlockState(p).getBlock() instanceof SaplingBlock)
+                .map(BlockPos::toImmutable)
+                .collect(Collectors.toList());
     }
 }

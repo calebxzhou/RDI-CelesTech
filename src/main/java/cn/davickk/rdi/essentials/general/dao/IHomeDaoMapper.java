@@ -9,8 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface IHomeDaoMapper {
-    //获取所有家
-    List<Home> getAll();
+
     //按照玩家uuid寻找家
     List<Home> getByPlayerUuid(String uuid);
     //获取玩家 家数量
@@ -32,5 +31,6 @@ public interface IHomeDaoMapper {
     //按照uuid删除指定玩家的所有家
     void delAllByUuid(String uuid);
 
+    void addComment(@Param("uuid")String uuid,@Param("homeName")String homeName,@Param("comments")String comment);
 
 }

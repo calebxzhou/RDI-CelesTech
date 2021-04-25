@@ -85,7 +85,7 @@ public final class ModCommands {
         commands.add(new ActionsOfHomeCmd("actions4home",0,true));
         //commands.add(new FromOldHomeCommand("fromoldhome", 0, true));
         commands.add(new ShareHomeCmd("sharehome",0,true));
-        commands.add(new RenameHomeCmd("renamehome",0,true));
+        commands.add(new UpdateHomeCmd("renamehome",0,true));
         commands.forEach((cmd) -> {
             if (cmd.isEnabled() && cmd.setExecution() != null) {
                 dispatcher.register(cmd.getBuilder());

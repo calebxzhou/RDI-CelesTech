@@ -34,7 +34,9 @@ public class SetHomeCommand extends BaseCommand {
 
     private int execute(CommandSource source, String homeName) throws CommandSyntaxException {
         ServerPlayerEntity player = source.asPlayer();
+
         PlayerUtils.sendLoading(player);
+
         ServerUtils.startThread(new SethomeThread(player, homeName));
        /* if(result== EHomeResult.OK.get())
             sendMessage(player,"成功设置了家："+homeName);

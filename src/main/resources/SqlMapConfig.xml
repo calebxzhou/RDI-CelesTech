@@ -9,7 +9,7 @@
 
             <dataSource type = "POOLED">
                 <property name = "driver" value = "com.mysql.jdbc.Driver"/>
-                <property name = "url" value = "jdbc:mysql://cdb-p243thok.cd.tencentcdb.com:10083/rdi?useSSL=true"/>
+                <property name = "url" value = "jdbc:mysql://cdb-p243thok.cd.tencentcdb.com:10083/rdibeta?useSSL=true"/>
                 <property name = "username" value = "root"/>
                 <property name = "password" value = "dmts_avia"/>
             </dataSource>

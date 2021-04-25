@@ -3,6 +3,32 @@ package cn.davickk.rdi.essentials.general.model;
 import cn.davickk.rdi.essentials.general.lib.Location;
 
 public class Home {
+    public Home(String uuid, String playerName, String homeName, String dims, int port, double x, double y, double z, float w, float p, int activ) {
+        this.uuid = uuid;
+        this.playerName = playerName;
+        this.homeName = homeName;
+        this.dims = dims;
+        this.port = port;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.w = w;
+        this.p = p;
+        this.activ = activ;
+    }
+
+    private String uuid;
+    private String playerName;
+    private String homeName;
+    private String dims;
+
+
+
+    private String comments;
+    private int port;
+    private double x,y,z;
+    private float w,p;
+    private int activ;
     public String getUuid() {
         return uuid;
     }
@@ -101,26 +127,18 @@ public class Home {
         this.activ = activ;
         return this;
     }
-
-    public Home(String uuid, String playerName, String homeName, String dims, int port, double x, double y, double z, float w, float p, int activ) {
-        this.uuid = uuid;
-        this.playerName = playerName;
-        this.homeName = homeName;
-        this.dims = dims;
-        this.port = port;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.w = w;
-        this.p = p;
-        this.activ = activ;
+    public String getComment() {
+        if(comments==null)
+            return "";
+        else
+            return comments;
     }
 
-    private String uuid,playerName,homeName,dims;
-    private int port;
-    private double x,y,z;
-    private float w,p;
-    private int activ;
+    public Home setComment(String comments) {
+        this.comments = comments;
+        return this;
+    }
+
     public Location getLocation(){
         return new Location(x,y,z,w,p,dims);
     }

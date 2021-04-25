@@ -2,7 +2,6 @@ package cn.davickk.rdi.essentials.general.thread.island;
 
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
-import cn.davickk.rdi.essentials.general.request.IslandRequest;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
@@ -17,9 +16,8 @@ public class DeleteIslandT extends Thread{
     public void run(){
 
         try {
-            IslandRequest req= new IslandRequest(player);
             HomeRequest hre=new HomeRequest(player);
-            if (!req.hasIsland()) {
+            if (hre.getHomeCounts()==0) {
                 TextUtils.sendChatMessage(player, "您没有空岛，因此不能删除空岛。");
                 return;
             }
@@ -27,7 +25,6 @@ public class DeleteIslandT extends Thread{
             player.setExperienceLevel(0);
             player.setHealth(0.1F);
             hre.delAllHome();
-            req.deleteIsland();
             PlayerUtils.teleportPlayer(player, ServerUtils.SPAWN_LOCA);
             TextUtils.sendChatMessage(player,"成功删除空岛");
         } catch (Exception e) {

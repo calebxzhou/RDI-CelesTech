@@ -1,6 +1,7 @@
 package cn.davickk.rdi.essentials.general.command.impl.home;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
+import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.thread.home.HomeListThread;
 import cn.davickk.rdi.essentials.general.thread.home.HomeThread;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
@@ -36,8 +37,8 @@ public class HomeCommand extends BaseCommand {
     private int execute(CommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player = source.asPlayer();
         //sendMessage(player, "请输入家的名称");
-        TextUtils.clickableContent2Send(player,"------RDI Home系统 版本v2.2------","",
-                "感谢KenRoKoro,pop75189,SampsonnZ,YIYIXinAn对于本系统作出的建议和贡献（排名不分先后）");
+        TextUtils.clickableContent2Send(player, EColor.ORANGE.code+"------RDI Home系统 版本v3.0------","",
+                "感谢KenRoKoro,pop751899,SampsonnZ,YIYIXinAn对于本系统作出的建议和贡献（排名不分先后）");
         PlayerUtils.sendLoading(player);
         ServerUtils.startThread(new HomeListThread(player));
         return Command.SINGLE_SUCCESS;
@@ -45,7 +46,6 @@ public class HomeCommand extends BaseCommand {
 
     private int execute(CommandSource source, String homeName) throws CommandSyntaxException {
         ServerPlayerEntity player = source.asPlayer();
-        PlayerUtils.sendLoading(player);
         ServerUtils.startThread(new HomeThread(player, homeName));
         return Command.SINGLE_SUCCESS;
     }

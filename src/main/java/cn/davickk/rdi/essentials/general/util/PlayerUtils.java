@@ -100,15 +100,7 @@ public final class PlayerUtils {
     {
         return player.getUniqueID().toString();
     }
-    @Deprecated
-    public static String getLegacyUUID(ServerPlayerEntity player){
-        String u1=player.getUniqueID().toString();
-        String u=u1.replace("-","");
-        if(u.startsWith("226e"))
-            return u.replace("226e","22ee");
-        else
-            return u;
-    }
+
     public static void doSuicide(ServerPlayerEntity player) {
         player.onKillCommand();
     }

@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class HomeRequest{
@@ -65,6 +66,7 @@ public class HomeRequest{
         String dims=loca.getDims().toString();
         Home home=new Home(UUID,playerName,homeName,dims,PORT,x,y,z,w,p,isActiv?1:0);
         HOME_MAPPER.insertRecord(home);
+        SQL_SESSION.commit();
         /*String st = "INSERT INTO home (uuid, playerName, homeName, port, dims, x, y, z, w, p, activ) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = SQL_SESSION.prepareStatement(st);
@@ -118,6 +120,7 @@ public class HomeRequest{
     //玩家一共设置过几个家？
     public int getHomeCounts(){
         return HOME_MAPPER.getRecordAmount(UUID);
+
         /*String stm="SELECT COUNT(*) AS rowcount FROM home WHERE uuid=? AND port=?;";
         PreparedStatement ps2= SQL_SESSION.prepareStatement(stm);
         ps2.setString(1, UUID);
@@ -151,12 +154,14 @@ public class HomeRequest{
     }
     public void delHome() throws SQLException {
         HOME_MAPPER.delete(UUID,HOMENAME);
+        SQL_SESSION.commit();
         /*String selectSQL = "DELETE FROM home WHERE uuid ='" + UUID + "' AND homeName='"+ HOMENAME +"' AND port='"+ PORT +"'";
         int rowsEff = SQL_SESSION.prepareStatement(selectSQL).executeUpdate();
         return rowsEff!=0;*/
     }
     public void delAllHome() throws SQLException {
         HOME_MAPPER.delAllByUuid(UUID);
+        SQL_SESSION.commit();
         /*String selectSQL = "DELETE FROM home WHERE uuid ='" + UUID + "' AND port='"+ PORT +"'";
         int rowsEff = SQL_SESSION.prepareStatement(selectSQL).executeUpdate();
         return rowsEff!=0;*/
@@ -174,6 +179,7 @@ public class HomeRequest{
     }
     public void setActive(boolean activ) throws SQLException {
         HOME_MAPPER.setActive(UUID,HOMENAME,activ?1:0);
+        SQL_SESSION.commit();
         /*int a;
         if(activ)
             a=1;
@@ -217,8 +223,10 @@ public class HomeRequest{
 
     }*/
     @Nullable
-    public HashMap<String, HomeLocation> getHomeList() throws SQLException{
-        ResultSet rs = SQL_SESSION.getConnection().prepareStatement(
+    public List<Home> getHomeList() throws SQLException{
+        List<Home> homeList=SQL_SESSION.selectList("getByPlayerUuid",UUID);
+        return homeList;
+        /*ResultSet rs = SQL_SESSION.getConnection().prepareStatement(
                 "SELECT * FROM home WHERE uuid= '"+ UUID +"'").executeQuery();
         if(!rs.next())
             return null;
@@ -239,7 +247,7 @@ public class HomeRequest{
             activ= rs.getBoolean("activ");
             homeMap.put(homeName,new HomeLocation(dims,x,y,z,w,p,activ));
         }
-        return homeMap;
+        return homeMap;*/
     }
 
 }

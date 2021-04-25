@@ -4,6 +4,7 @@ import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.enums.EHomeText;
 import cn.davickk.rdi.essentials.general.enums.EWorld;
 import cn.davickk.rdi.essentials.general.lib.HomeLocation;
+import cn.davickk.rdi.essentials.general.model.Home;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.util.HomeUtils;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
@@ -13,6 +14,7 @@ import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HomeListThread extends Thread {
@@ -23,26 +25,42 @@ public class HomeListThread extends Thread {
     }
 
     public void run() {
-        String uuid= PlayerUtils.getUUID(player);
-        int serverPort = player.getServer().getServerPort();
         try {
 
             HomeRequest hreq=new HomeRequest(player);
             if (hreq.getHomeCounts()==0) {
-                TextUtils.sendChatMessage(player, "您还未设置过家，现在就设置一个吗？");
-                TextUtils.clickableContent2Send(player, EHomeText.SETHOME_DEFAULT.text,EHomeText.SETHOME_DEFAULT.cmd);
+                TextUtils.sendChatMessage(player, EColor.RED.code+"您 未拥有自己的空岛 或者 未加入他人的空岛，因此不能使用此指令。");
+                //TextUtils.clickableContent2Send(player, EHomeText.SETHOME_DEFAULT.text,EHomeText.SETHOME_DEFAULT.cmd);
                 //TextUtils.clickableContent2Send(player, EHomeText.IMPORT.text, EHomeText.IMPORT.cmd);
                 return;
             }
-            TextUtils.sendChatMessage(player, "家 ("+hreq.getHomeCounts()+"/"+ HomeUtils.MAX_HOME+") (点击->操作)");
-            HashMap<String, HomeLocation> homeMap= hreq.getHomeList();
-            if(homeMap==null){
+            TextUtils.sendChatMessage(player, "家 ("+hreq.getHomeCounts()+"/256) (点击->操作)");
+            List<Home> homeList= hreq.getHomeList();
+            if(homeList==null){
                 TextUtils.sendChatMessage(player,"无法获取家列表，请咨询腐竹");
                 return;
             }
             IFormattableTextComponent txt2s=new StringTextComponent("");
-            for(Map.Entry<String ,HomeLocation> entry : homeMap.entrySet()){
-                String hname=entry.getKey();
+            int index=1;
+            for(Home home:homeList){
+                //家名前面的颜色 激活了是绿色
+                String color_homeName="";
+                if(home.getActiv()==1)
+                    color_homeName=EColor.BRIGHT_GREEN.getCode();
+                //完整信息
+                String fullMsg=String.format("[%d] %s%s%s (%d, %d, %d) [%s]   %s// %s",
+                        index,
+                        color_homeName,
+                        home.getHomeName(),
+                        EColor.RESET.code,
+                        (int)home.getX(),(int)home.getY(),(int)home.getZ(),
+                        home.getDims(),
+                        EColor.GRAY.code,
+                        home.getComment()
+                );
+                txt2s.append(TextUtils.getClickableContentComp(player,fullMsg,"/actions4home "+home.getHomeName(),""));
+                TextUtils.sendChatMessage(player,txt2s);
+                /*String hname=entry.getKey();
                 String hnameC="";
                 HomeLocation hloc=entry.getValue();
                 int x=(int)hloc.getX(),  y=(int)hloc.getY(),  z=(int)hloc.getZ();
@@ -58,10 +76,9 @@ public class HomeListThread extends Thread {
                 String hlocs="(" +dims+", "+ x + ", " + y + ", " + z + ")";
                 String hnames=" >"+hnameC+EColor.RESET.code+"< ";
                 txt2s.append(TextUtils.getClickableContentComp(player,hnames,
-                        "/actions4home "+hname,hlocs));
+                        "/actions4home "+hname,hlocs));*/
             }
 
-            TextUtils.sendChatMessage(player,  txt2s);
 
         } catch (Exception e) {
             e.printStackTrace();

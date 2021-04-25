@@ -1,7 +1,7 @@
 package cn.davickk.rdi.essentials.general.thread.island;
 
 import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.request.IslandRequest;
+import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -15,17 +15,17 @@ public class CreateIslandT extends Thread{
     public void run(){
 
         try {
-            IslandRequest req= new IslandRequest(player);
-            if (req.hasIsland()) {
+            HomeRequest hreq=new HomeRequest(player);
+            if(hreq.getHomeCounts()!=0){
                 TextUtils.sendChatMessage(player, "您已经有一个空岛了，因此不能创建新的空岛。");
-                TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[立刻前往我的空岛]","/home island"," ");
-                //TODO 回到我的空岛
                 return;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        TextUtils.sendChatMessage(player,"您觉得这个位置适合创建空岛吗？（以下选项可点击）（请尽量选择没有人的地方）");
+        TextUtils.sendChatMessage(player,"您觉得这个位置适合创建空岛吗？");
+        TextUtils.sendChatMessage(player,"（以下选项可点击）（请尽量选择没有人的地方）");
+        TextUtils.sendChatMessage(player,"请保持不动。");
         PlayerUtils.randomTeleport(player,true);
         IFormattableTextComponent t1=
                 TextUtils.getClickableContentComp(player,

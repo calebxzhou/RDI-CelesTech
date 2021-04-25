@@ -4,7 +4,7 @@ import cn.davickk.rdi.essentials.general.enums.EHomeText;
 import net.minecraft.entity.player.ServerPlayerEntity;
 
 public class HomeUtils {
-    public static final int MAX_HOME = 3;
+    public static final int MAX_HOME = 16;
     public static final int ACTIV_REQUIRE_XP=5;
 
     public static void tellPlayerActivHome(ServerPlayerEntity player,String homeName){

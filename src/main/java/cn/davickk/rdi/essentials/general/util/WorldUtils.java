@@ -108,4 +108,25 @@ public class WorldUtils {
 
 
     }
+    public static void pasteIslandSchematic(BlockPos bpos,ServerPlayerEntity player) throws IOException, WorldEditException {
+        Clipboard clipboard;
+        File file=new File("./islands/island.schem");
+        ClipboardFormat format = ClipboardFormats.findByFile(file);
+        ClipboardReader reader = format.getReader(new FileInputStream(file));
+        clipboard = reader.read();
+        try(EditSession session = WorldEdit.getInstance().getEditSessionFactory()
+                .getEditSession(ForgeAdapter.adapt(player.getServerWorld()), -1)){
+            System.out.println(bpos.getX()+" "+bpos.getY()+" "+bpos.getZ());
+            Operation operation = new ClipboardHolder(clipboard)
+                    .createPaste(session)
+                    .to(BlockVector3.at(bpos.getX(), bpos.getY(), bpos.getZ()))
+                    .copyEntities(false)
+                    .ignoreAirBlocks(true)
+                    // configure here
+                    .build();
+            Operations.complete(operation);
+        }
+
+
+    }
 }

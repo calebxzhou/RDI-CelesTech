@@ -21,7 +21,6 @@ public class HomeListCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        PlayerUtils.sendLoading(source.asPlayer());
         ServerUtils.startThread(new HomeListThread(source.asPlayer()));
         return Command.SINGLE_SUCCESS;
     }
