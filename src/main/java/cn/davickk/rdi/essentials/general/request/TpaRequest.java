@@ -19,9 +19,9 @@ public class TpaRequest {
     private final String toPlayerName;
     private final Connection sql;
     private final String reqid;
-    public TpaRequest(ServerPlayerEntity fromPlayer,ServerPlayerEntity toPlayer,String reqid) throws SQLException {
-        RDIEssentials.createSQLConnection();
-        this.sql=RDIEssentials.SQL_CONN;
+    public TpaRequest(ServerPlayerEntity fromPlayer,ServerPlayerEntity toPlayer,String reqid) throws SQLException, ClassNotFoundException {
+
+        this.sql=RDIEssentials.getSQLUtils().getSqlSession().getConnection();
         this.fromPlayer=fromPlayer;
         this.toPlayer=toPlayer;
         if(fromPlayer!=null)

@@ -28,16 +28,16 @@ public class HomeActiveThread extends Thread {
                 if(!PlayerUtils.minusXPLvl(player,5)) {
                     TextUtils.sendChatMessage(player,"您的经验等级不足，无法激活"+homeName);
                 }else{
-                    if(hreq.setActive(true)) {
-                        TextUtils.sendChatMessage(player, "成功激活" + homeName + "。");
-                        TextUtils.clickableContent2Send(player, EHomeText.HOME.text.replace("%s", homeName), EHomeText.HOME.cmd.replace("%s", homeName));
-                    }
+
+                    TextUtils.sendChatMessage(player, "成功激活" + homeName + "。");
+                    TextUtils.clickableContent2Send(player, EHomeText.HOME.text.replace("%s", homeName), EHomeText.HOME.cmd.replace("%s", homeName));
+
                 }
             }else{
-                if (hreq.setActive(true)) {
+
                     TextUtils.sendChatMessage(player, "成功激活" + homeName + "，现在可以传送了。");
                     TextUtils.clickableContent2Send(player, EHomeText.HOME.text.replace("%s",homeName),EHomeText.HOME.cmd.replace("%s",homeName));
-                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();

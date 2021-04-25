@@ -18,7 +18,7 @@ public class IslandMenuT extends Thread{
 
     public void run(){
         try {
-            RDIEssentials.createSQLConnection();
+
             PlayerUtils.sendLoading(player);
             IslandRequest ireq=new IslandRequest(player);
             HomeRequest homereq=new HomeRequest(player,"island");

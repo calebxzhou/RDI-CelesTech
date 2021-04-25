@@ -1,7 +1,6 @@
 package cn.davickk.rdi.essentials.general.request;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.lib.IslandLocation;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.WorldEditException;
@@ -17,54 +16,42 @@ import com.sk89q.worldedit.session.ClipboardHolder;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static cn.davickk.rdi.essentials.RDIEssentials.SQL_CONN;
 
 public class IslandRequest {
-    private final ServerPlayerEntity player;
+    private final ServerPlayerEntity player;/*
     private final int DIST=128;//每个空岛大小为256*256，中心位置128,128
     private final int HIGH=220;
-    private final int BTWN=256;//每个空岛之间的间隔
-    private final Connection sqlConn=SQL_CONN;
+    private final int BTWN=256;//每个空岛之间的间隔*/
+    ;
     private final String uuid;
     private final String playerName;
-    private ResultSet allIslands;
+    //private ResultSet allIslands;
     public IslandRequest(ServerPlayerEntity player) throws SQLException, ClassNotFoundException {
-        RDIEssentials.createSQLConnection();
+
         this.player=player;
         this.uuid=player.getUniqueID().toString();
-        this.playerName=player.getDisplayName().getString();
-        this.allIslands=sqlConn.prepareStatement("SELECT * FROM island").executeQuery();
+        this.playerName=player.getDisplayName().getString();/*
+        this.allIslands=RDIEssentials.getSQLUtils().getSQLConnection().
+                prepareStatement("SELECT * FROM island").executeQuery();*/
     }
     public boolean hasIsland() throws SQLException {
-        //ResultSet rs=sqlConn.prepareStatement("SELECT x FROM island WHERE uuid='"+uuid+"'").executeQuery();
-        while(allIslands.next()){
+        ResultSet rs=RDIEssentials.getSQLUtils().getSqlSession().getConnection().prepareStatement
+                ("SELECT y FROM island WHERE uuid='"+uuid+"'").executeQuery();
+        return rs.next();
+        /*while(allIslands.next()){
             if(allIslands.getString("uuid").equals(uuid))
                 return true;
         }
-        return false;
+        return false;*/
     }
-    public boolean existIslandOnLocation(IslandLocation loca) throws SQLException{
-        /*PreparedStatement psm =sqlConn.prepareStatement("SELECT COUNT(*) AS rowcount FROM island WHERE x=? AND y=? AND z=?");
-        psm.setInt(1, loca.x);
-        psm.setInt(2, loca.y);
-        psm.setInt(3, loca.z);*/
-        //ResultSet rs=psm.executeQuery();
-        while (allIslands.next()){
-            if(allIslands.getInt("x")==loca.x
-            && allIslands.getInt("z")==loca.z)
-                return true;
-        }
-        return false;
-    }
+
     /*@Nullable
     public IslandLocation findAvailableIsland() throws SQLException{
        // for(int i=1;i<=15;i++){
@@ -88,12 +75,12 @@ public class IslandRequest {
         return null;
     }*/
     public void deleteIsland() throws  SQLException{
-        PreparedStatement psm=sqlConn.prepareStatement("DELETE FROM island WHERE uuid=?");
+        PreparedStatement psm=RDIEssentials.getSQLUtils().getSqlSession().getConnection().prepareStatement("DELETE FROM island WHERE uuid=?");
         psm.setString(1,uuid);
         psm.executeUpdate();
     }
     public void createIsland(BlockPos bpos) throws SQLException {
-        PreparedStatement psm=sqlConn.prepareStatement("INSERT INTO island (uuid, playerName, x, y, z) VALUES (?,?,?,?,?)");
+        PreparedStatement psm=RDIEssentials.getSQLUtils().getSqlSession().getConnection().prepareStatement("INSERT INTO island (uuid, playerName, x, y, z) VALUES (?,?,?,?,?)");
         psm.setString(1,uuid);
         psm.setString(2,playerName);
         psm.setInt(3, bpos.getX());
@@ -136,7 +123,7 @@ public class IslandRequest {
 
 
     }
-    @Nullable
+    /*@Nullable
     public IslandLocation getIslandLocation() throws SQLException {
         while(this.allIslands.next()){
             if(allIslands.getString("uuid").equalsIgnoreCase(uuid))
@@ -144,10 +131,10 @@ public class IslandRequest {
                         allIslands.getInt("z"));
         }
         return null;
-    }
-    public void refresh() throws SQLException {
-        this.allIslands=sqlConn.prepareStatement("SELECT * FROM island").executeQuery();
-    }
+    }*/
+    /*public void refresh() throws SQLException {
+        this.allIslands=RDIEssentials.getSQLUtils().getSQLConnection().prepareStatement("SELECT * FROM island").executeQuery();
+    }*/
     public boolean isJoinedOthersIsland() throws SQLException, ClassNotFoundException {
         HomeRequest hreq=new HomeRequest(player);
         if(hreq.getHomeList()==null)

@@ -43,11 +43,10 @@ public class SethomeThread extends Thread {
                     return;
                 }
             }
-            if(hreq.setHome()){
+            hreq.setHome();
             TextUtils.sendChatMessage(player, "成功设置传送点" + homeName);
             TextUtils.clickableContent2Send(player, EColor.YELLOW.code+"[查看所有]","/home");
-            }else
-                TextUtils.sendChatMessage(player,"无法设置家，请咨询腐竹");
+
         } catch (Exception e) {
             e.printStackTrace();
         }

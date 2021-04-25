@@ -26,10 +26,7 @@ public class DelhomeThread extends Thread {
                 TextUtils.clickableContent2Send(player, EHomeText.LISTHOME.text, EHomeText.LISTHOME.cmd);
                 return;
             }
-            if(hreq.delHome())
-                TextUtils.sendChatMessage(player, "³É¹¦É¾³ýÁË" + homeName);
-            else
-                TextUtils.sendChatMessage(player,"É¾³ýÊ§°Ü£¬Çë×ÉÑ¯¸¯Öñ");
+            TextUtils.sendChatMessage(player, "³É¹¦É¾³ýÁË" + homeName);
         } catch (Exception e) {
             e.printStackTrace();
         }

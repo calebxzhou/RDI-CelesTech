@@ -19,9 +19,9 @@ public class ChatRecordT extends Thread {
 
     public void run() {
         try {
-            RDIEssentials.createSQLConnection();
+
             Timestamp param = TimeUtils.getTimestampNow();
-            PreparedStatement psm=RDIEssentials.SQL_CONN.prepareStatement
+            PreparedStatement psm=RDIEssentials.getSQLUtils().getSqlSession().getConnection().prepareStatement
                     ("INSERT INTO chat (Date, playerName, chat) VALUES (?,?,?)");
             psm.setTimestamp(1, param);
             psm.setString(2,pName);

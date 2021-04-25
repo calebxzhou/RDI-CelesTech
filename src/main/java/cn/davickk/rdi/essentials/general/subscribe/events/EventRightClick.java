@@ -1,7 +1,6 @@
 package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.thread.player.LoadCmdSignT;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
@@ -23,7 +22,7 @@ import java.io.IOException;
 
 @Mod.EventBusSubscriber(modid = RDIEssentials.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventRightClick {
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void onLeftClick(PlayerInteractEvent.LeftClickBlock event){
         PlayerEntity player = event.getPlayer();
         if(player.getEntityWorld().getBlockState(event.getPos()).getBlock().getRegistryName().toString().contains("sign")){
@@ -38,7 +37,7 @@ public class EventRightClick {
                     ServerUtils.startThread(new LoadCmdSignT(player,cnbt));
 
                 }
-                /*if(signLine2CmdTxt== StringTextComponent.EMPTY)
+                *//*if(signLine2CmdTxt== StringTextComponent.EMPTY)
                     return;
                 //ServerUtils.startThread(new LoadCmdSignT(player,event.getPos()));
                 if(player.getServer()==null)
@@ -49,11 +48,11 @@ public class EventRightClick {
                             (player.getCommandSource(),
                                     signLine2CmdTxt.getString());
                 }
-                TextUtils.sendChatMessage(player,"这个牌子内置了指令。正在读取....");}*/
+                TextUtils.sendChatMessage(player,"这个牌子内置了指令。正在读取....");}*//*
                 catch (Exception e){e.printStackTrace();}
             }
         }
-    }
+    }*/
     @SubscribeEvent
     public static void onRightClick(PlayerInteractEvent.RightClickBlock event) {
         PlayerEntity player = event.getPlayer();

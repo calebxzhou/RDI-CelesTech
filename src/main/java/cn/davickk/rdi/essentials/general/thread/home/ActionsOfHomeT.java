@@ -21,7 +21,6 @@ public class ActionsOfHomeT extends Thread{
         this.homeName=homeName;
     }
     public void run(){
-        RDIEssentials.createSQLConnection();
         //3x3x3范围检测 有没有玩家 没有->分享=灰色
         try {
 

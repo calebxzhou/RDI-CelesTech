@@ -1,7 +1,6 @@
 package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.thread.server.SQLReconnT;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.server.MinecraftServer;
@@ -33,7 +32,7 @@ public class EventWorldTick {
             if(tickCounter==min5){
                 PlayerList playerList = event.world.getServer().getPlayerList();
                 TextUtils.sendGlobalChatMessage(playerList, "提示：机械动力(Create)可以实现前期大多数自动化，这是1.16的独有特性。");
-                ServerUtils.startThread(new SQLReconnT());
+
             }else tickCounter++;
             if (tickCounter == min10) {
                 PlayerList playerList = event.world.getServer().getPlayerList();

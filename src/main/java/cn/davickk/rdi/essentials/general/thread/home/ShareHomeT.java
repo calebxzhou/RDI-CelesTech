@@ -15,7 +15,7 @@ public class ShareHomeT extends Thread{
         this.player2Share=player2Share;
     }
     public void run(){
-        try {
+        /*try {
             ServerPlayerEntity player2=player.getServer().getPlayerList().getPlayerByUsername(player2Share);
             HomeRequest hreq=new HomeRequest(player,homeName);
             HomeRequest hreq2=new HomeRequest(player2,homeName);
@@ -23,13 +23,13 @@ public class ShareHomeT extends Thread{
                 TextUtils.sendChatMessage(player, player2Share + "不在线。");
                 return;
             }
-            /*Iterator<PlayerEntity> nearby=PlayerUtils.getNearbyPlayersInRange(player,5).iterator();
+            *//*Iterator<PlayerEntity> nearby=PlayerUtils.getNearbyPlayersInRange(player,5).iterator();
             if(!nearby.hasNext()){
                 TextUtils.sendChatMessage(player,"对方不在你的附近");
                 return;
             }
             if(!nearby.next().getDisplayName().getString().equalsIgnoreCase(player2Share))
-                TextUtils.sendChatMessage(player,"在你附近的人并不是"+player2Share);*/
+                TextUtils.sendChatMessage(player,"在你附近的人并不是"+player2Share);*//*
             Location loca=hreq.getHomeLocation();
             if(loca==null) {
                 TextUtils.sendChatMessage(player,"无法读取位置，确定"+homeName+"存在吗？");
@@ -55,7 +55,7 @@ public class ShareHomeT extends Thread{
             }else TextUtils.sendChatMessage(player,"分享错误，请咨询腐竹");
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         //.getDisplayName().getString().equalsIgnoreCase(player2Share)
     }
 }

@@ -26,7 +26,6 @@ public class CreateIslandHereT extends Thread{
                     //TODO 回到我的空岛
                 return;
             }
-            req.refresh();
             req.createIsland(bpos);
             req.pasteSchematic(bpos);
             //req.refresh();

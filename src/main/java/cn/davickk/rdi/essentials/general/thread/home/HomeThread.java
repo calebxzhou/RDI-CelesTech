@@ -21,12 +21,9 @@ public class HomeThread extends Thread {
             HomeRequest hreq=new HomeRequest(player,homeName);
             if(hreq.hasThisHome()) {
                 if (hreq.isActive()){
-                    if(hreq.getHomeLocation().getDims().equals(new ResourceLocation("minecraft:overworld"))){
                         hreq.goHome();
                         TextUtils.sendChatMessage(player,"成功回到"+homeName);
-                    }else{
-                        TextUtils.sendChatMessage(player,"一股强大的阻力让您在原地动弹不得.....");
-                    }
+
                 }else {
                     if(PlayerUtils.hasEnoughXPLvl(player,HomeUtils.ACTIV_REQUIRE_XP)){
                         TextUtils.sendChatMessage(player,"这个家还没有激活，现在就激活吗？");

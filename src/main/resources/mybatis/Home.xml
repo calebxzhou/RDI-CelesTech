@@ -1,0 +1,61 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "cn.davickk.rdi.essentials.general.dao.IHomeDaoMapper">
+
+    <resultMap id = "result" type = "cn.davickk.rdi.essentials.general.model.Home">
+        <result property = "uuid" column = "uuid"/>
+        <result property = "playerName" column = "playerName"/>
+        <result property = "homeName" column = "homeName"/>
+        <result property = "dims" column = "dims"/>
+        <result property = "x" column = "x"/>
+        <result property = "y" column = "y"/>
+        <result property = "z" column = "z"/>
+        <result property = "w" column = "w"/>
+        <result property = "p" column = "p"/>
+        <result property = "activ" column = "activ"/>
+    </resultMap>
+
+    <select id = "getAll" resultMap = "result">
+        SELECT * FROM home;
+    </select>
+
+    <select id = "getByPlayerUuid" parameterType="String" resultMap = "result">
+        SELECT * FROM home WHERE uuid = #{uuid};
+    </select>
+
+    <select id="getRecordAmount" parameterType="String" resultType="int">
+        SELECT COUNT(*) AS 'home_amount' FROM home
+        WHERE uuid = #{uuid};
+    </select>
+
+    <insert id = "insertRecord" parameterType = "cn.davickk.rdi.essentials.general.model.Home">
+        INSERT INTO home VALUES
+        (#{uuid}, #{playerName}, #{homeName}, #{dims},
+        #{port},#{x},#{y},#{z},#{w},#{p},#{activ});
+    </insert>
+    <select id="exists" parameterType="map" resultType="int">
+        SELECT EXISTS(SELECT homeName FROM home WHERE uuid=#{uuid}
+        AND homeName=#{homeName} LIMIT 1);
+    </select>
+    <select id="isActive" parameterType="map" resultType="int">
+        SELECT activ FROM home
+        WHERE uuid=#{uuid} AND homeName=#{homeName};
+    </select>
+    <select id="hasActive" parameterType="map">
+        SELECT activ FROM home WHERE uuid=#{uuid}
+                             AND activ='1' LIMIT 1;
+    </select>
+
+    <select id="setActive" parameterType="map">
+        UPDATE home SET activ=#{activ} WHERE uuid=#{uuid} AND homeName=#{homeName};
+    </select>
+    <delete id="delete" parameterType="map">
+        DELETE FROM home WHERE uuid=#{uuid} AND homeName=#{homeName};
+    </delete>
+    <delete id="delAllByUuid" parameterType="String">
+        DELETE FROM home WHERE uuid=#{uuid};
+    </delete>
+
+</mapper>

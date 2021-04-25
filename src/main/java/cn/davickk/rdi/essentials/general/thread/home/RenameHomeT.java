@@ -14,14 +14,14 @@ public class RenameHomeT extends Thread{
         this.newName=newName;
     }
     public void run(){
-        try {
+        /*try {
             HomeRequest hreq=new HomeRequest(player,oldName);
             if(hreq.renameHome(newName)){
                 TextUtils.sendChatMessage(player,"改名成功");
             }else TextUtils.sendChatMessage(player,"改名错误，请咨询腐竹");
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         //.getDisplayName().getString().equalsIgnoreCase(player2Share)
     }
 }

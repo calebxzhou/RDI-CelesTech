@@ -5,8 +5,6 @@ import cn.davickk.rdi.essentials.general.command.impl.home.*;
 import cn.davickk.rdi.essentials.general.command.impl.island.*;
 import cn.davickk.rdi.essentials.general.command.impl.player.*;
 import cn.davickk.rdi.essentials.general.command.impl.rdi.RdiCommand;
-import cn.davickk.rdi.essentials.general.command.impl.server.ReconnSQLCmd;
-import cn.davickk.rdi.essentials.general.command.impl.spawn.ChangeSpawnPointCmd;
 import cn.davickk.rdi.essentials.general.command.impl.spawn.SpawnCommand;
 import cn.davickk.rdi.essentials.general.command.impl.teleport.TpYesCommand;
 import cn.davickk.rdi.essentials.general.command.impl.teleport.TpaCommand;
@@ -34,7 +32,7 @@ public final class ModCommands {
         commands.add(new RainCommand("rain", 2, ModConfig.weather_enable));
         commands.add(new SunCommand("sun", 2, ModConfig.weather_enable));
         commands.add(new ThunderCommand("thunder", 2, ModConfig.weather_enable));
-*/      commands.add(new ReconnSQLCmd("reconnsql",4,true));
+*/      //commands.add(new ReconnSQLCmd("reconnsql",4,true));
         // Spawn
 
         commands.add(new SpawnCommand("spawn", 0, true));
@@ -45,12 +43,11 @@ public final class ModCommands {
         commands.add(new CreateIslandHereCmd("createkdhere",0,true));
         commands.add(new DeleteIslandCmd("shanchukongdao",0,true));
         // Player
-        commands.add(new GetFromVoidCmd("getfromvoid",0,true));
+      //  commands.add(new GetFromVoidCmd("getfromvoid",0,true));
         commands.add(new KickMeCommand("kickme",0,true));
         commands.add(new ClearPhantomCmd("clearphantom",0,true));
         commands.add(new RemoveGroundCmd("removeground",0,true));
         commands.add(new RollCommand("rroll",0,true));
-        commands.add(new ChangeSpawnPointCmd("changesp",0,true));
 //        commands.add(new AfkCommand("afk", 0, true));
         commands.add(new OnHandCommand("onhand", 0, true));
         commands.add(new Obsi2LavaCmd("obsi2lava",0,true));

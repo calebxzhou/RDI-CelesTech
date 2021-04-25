@@ -11,7 +11,7 @@ buildscript {
 
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.+', changing: true
 
     }
 
@@ -24,7 +24,6 @@ repositories {
      }
 }
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 version = modMinecraftVersion + '-' + modVersion
 group = modGroup
@@ -91,6 +90,9 @@ dependencies {
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.14.0'
 // https://mvnrepository.com/artifact/org.yaml/snakeyaml
     implementation group: 'org.yaml', name: 'snakeyaml', version: '1.27'
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '4.0.3'
+    // https://mvnrepository.com/artifact/org.mybatis/mybatis
+    implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.6'
 
     //compile group: 'com.sk89q.worldedit',name:'worldedit-forge-mc1.16.3',version: '7.3.0-SNAPSHOT'
     //compile files('D:/CODE/AeroTechEss/worldedit-forge-mc1.16.3-7.3.0-SNAPHOT.jar')

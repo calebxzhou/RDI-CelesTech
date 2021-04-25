@@ -21,10 +21,10 @@ public class RollRecordT extends Thread {
 
     public void run() {
         try {
-            RDIEssentials.createSQLConnection();
+
             java.util.Date date = new Date(System.currentTimeMillis());
             Timestamp param = new Timestamp(date.getTime());
-            PreparedStatement psm=RDIEssentials.SQL_CONN.prepareStatement
+            PreparedStatement psm=RDIEssentials.getSQLUtils().getSqlSession().getConnection().prepareStatement
                     ("INSERT INTO rolls (Date, playerName, counts, itemsGet) VALUES (?,?,?,?)");
             psm.setTimestamp(1, param);
             psm.setString(2,pName);
