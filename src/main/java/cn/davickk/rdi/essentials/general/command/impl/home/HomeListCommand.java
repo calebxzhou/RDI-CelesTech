@@ -2,7 +2,6 @@ package cn.davickk.rdi.essentials.general.command.impl.home;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
 import cn.davickk.rdi.essentials.general.thread.home.HomeListThread;
-import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;

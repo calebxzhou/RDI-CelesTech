@@ -1,6 +1,5 @@
 package cn.davickk.rdi.essentials.general.dao;
 
-import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.model.Home;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

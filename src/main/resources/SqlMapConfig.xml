@@ -19,6 +19,7 @@
 
     <mappers>
         <mapper resource = "/mybatis/Home.xml"/>
+        <mapper resource = "/mybatis/Rinv.xml"/>
     </mappers>
 
 </configuration>

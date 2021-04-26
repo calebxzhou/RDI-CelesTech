@@ -203,7 +203,7 @@ public final class PlayerUtils {
         else
             return true;
     }
-    public static BlockPos lookingAtBlock(ServerPlayerEntity player, boolean isFluid){
+    public static BlockPos lookingAtBlock(PlayerEntity player, boolean isFluid){
         RayTraceResult rays=player.pick(6,1.0f,isFluid);
         Vector3d lookat=rays.getHitVec();
         return new BlockPos(lookat);

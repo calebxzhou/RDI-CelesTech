@@ -5,7 +5,6 @@ import cn.davickk.rdi.essentials.general.util.HomeUtils;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
 
 public class HomeThread extends Thread {
     private ServerPlayerEntity player;

@@ -1,12 +1,10 @@
 package cn.davickk.rdi.essentials.general.util;
 
-import com.mojang.brigadier.Command;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.STitlePacket;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.text.*;
 import net.minecraft.util.text.event.ClickEvent;
@@ -98,15 +96,15 @@ public final class TextUtils {
 
     // Action Bar
 
-    public static void sendActionMessage(ServerPlayerEntity player, IFormattableTextComponent textComponent) {
+    public static void sendActionMessage(PlayerEntity player, IFormattableTextComponent textComponent) {
         sendMessage(player, textComponent, true);
     }
 
-    public static void sendActionMessage(ServerPlayerEntity player, String content) {
+    public static void sendActionMessage(PlayerEntity player, String content) {
         sendMessage(player, new StringTextComponent(content), true);
     }
 
-    public static void sendActionMessage(ServerPlayerEntity player, String translationKey, Object... args) {
+    public static void sendActionMessage(PlayerEntity player, String translationKey, Object... args) {
         sendMessage(player, new TranslationTextComponent(translationKey, args), true);
     }
 

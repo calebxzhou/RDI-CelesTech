@@ -33,7 +33,7 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 
 minecraft {
 
-
+    //mappings channel: 'official', version: '1.16.5'
     mappings channel: modMcpMappingsChannel, version: modMcpMappingsVersion
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -86,11 +86,6 @@ dependencies {
     compileOnly "com.sk89q.worldedit:worldedit-forge-mc1.16.3:7.2.0-SNAPSHOT"
     runtimeOnly "com.sk89q.worldedit:worldedit-core:7.2.0-SNAPSHOT"
     runtimeOnly fg.deobf("com.sk89q.worldedit:worldedit-forge-mc1.16.3:7.2.0-SNAPSHOT")
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl
-    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.14.0'
-// https://mvnrepository.com/artifact/org.yaml/snakeyaml
-    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.27'
-    implementation group: 'com.zaxxer', name: 'HikariCP', version: '4.0.3'
     // https://mvnrepository.com/artifact/org.mybatis/mybatis
     implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.6'
 

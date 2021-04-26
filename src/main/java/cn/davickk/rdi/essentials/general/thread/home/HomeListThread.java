@@ -1,21 +1,14 @@
 package cn.davickk.rdi.essentials.general.thread.home;
 
 import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.enums.EHomeText;
-import cn.davickk.rdi.essentials.general.enums.EWorld;
-import cn.davickk.rdi.essentials.general.lib.HomeLocation;
 import cn.davickk.rdi.essentials.general.model.Home;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
-import cn.davickk.rdi.essentials.general.util.HomeUtils;
-import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HomeListThread extends Thread {
     private final ServerPlayerEntity player;

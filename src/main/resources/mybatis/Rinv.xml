@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "cn.davickk.rdi.essentials.general.dao.IRinvMapper">
+
+    <resultMap id = "result" type = "cn.davickk.rdi.essentials.general.model.Rinv">
+        <result property = "uuid" column = "uuid"/>
+        <result property = "playerName" column = "playerName"/>
+        <result property = "serializedNbt" column = "serializedNbt"/>
+    </resultMap>
+
+
+    <select id = "get" parameterType="String" resultMap = "result">
+        SELECT * FROM rinv WHERE uuid = #{uuid};
+    </select>
+
+    <insert id = "put" parameterType = "cn.davickk.rdi.essentials.general.model.Rinv">
+        INSERT INTO rinv VALUES
+        (#{uuid}, #{playerName}, #{serializedNbt});
+    </insert>
+
+    <delete id="delete" parameterType="map">
+        DELETE FROM rinv WHERE uuid=#{uuid};
+    </delete>
+
+</mapper>

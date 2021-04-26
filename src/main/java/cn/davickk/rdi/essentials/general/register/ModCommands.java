@@ -1,6 +1,7 @@
 package cn.davickk.rdi.essentials.general.register;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
+import cn.davickk.rdi.essentials.general.command.impl.cloudinv.RinvCommand;
 import cn.davickk.rdi.essentials.general.command.impl.home.*;
 import cn.davickk.rdi.essentials.general.command.impl.island.*;
 import cn.davickk.rdi.essentials.general.command.impl.player.*;
@@ -70,8 +71,8 @@ public final class ModCommands {
         //commands.add(new CreateAccountCommand("kaihu",0,true));
         //commands.add(new SetMoneyCommand("setmoney", 2, true));
         //RDI Cloud Inventory
-        /*commands.add(new RinvCommand("rinv", 0, true));
-        commands.add(new RinvUpCommand("rinvput", 0, true));
+        commands.add(new RinvCommand("rinv", 0, true));
+        /*commands.add(new RinvUpCommand("rinvput", 0, true));
         commands.add(new RinvDownCommand("rinvget", 0, true));
         commands.add(new RinvDelCommand("rinvshanchudelete", 0, true));
         commands.add(new RinvLsCommand("rinvls", 0, true));*/

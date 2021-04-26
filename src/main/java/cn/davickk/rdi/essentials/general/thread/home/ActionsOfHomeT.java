@@ -1,6 +1,5 @@
 package cn.davickk.rdi.essentials.general.thread.home;
 
-import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.enums.EHomeText;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;

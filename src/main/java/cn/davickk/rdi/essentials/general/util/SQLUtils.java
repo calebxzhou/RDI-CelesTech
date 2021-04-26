@@ -1,9 +1,5 @@
 package cn.davickk.rdi.essentials.general.util;
 
-import cn.davickk.rdi.essentials.general.dao.IHomeDaoMapper;
-import cn.davickk.rdi.essentials.general.model.Home;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,8 +7,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class SQLUtils {
     /*public static final String DB_URL = "jdbc:mysql://cdb-p243thok.cd.tencentcdb.com:10083/rdi?useSSL=true";

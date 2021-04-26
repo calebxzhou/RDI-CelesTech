@@ -1,7 +1,6 @@
 package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;

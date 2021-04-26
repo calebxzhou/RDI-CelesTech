@@ -5,6 +5,7 @@ import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
+import cn.davickk.rdi.essentials.general.util.RandomUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.SaplingBlock;
@@ -16,7 +17,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -63,24 +63,33 @@ public class EventPlayerMove {
              //player.onKillCommand();
             }
         }
-        if (player.isSprinting())
+        int counterFullCount=0;
+        if (player.isSprinting()){
             moveCounter++;
-        if(tickCounter==20*10){
+            PlayerUtils.lookingAtBlock(player,false);
+            TextUtils.sendActionMessage(player,"树苗生长点数 "+moveCounter+"/300");
+        }
+
+        if(moveCounter==20*15){
 
             List<BlockPos> coords = getNearestBlocks(player.getEntityWorld(), new BlockPos(player.getPositionVec()));
             for (BlockPos pos : coords)
             {
                 Block block = player.getEntityWorld().getBlockState(pos).getBlock();
 
-                if (block instanceof SaplingBlock)
-                {
-                    BoneMealItem.applyBonemeal(new ItemStack(Items.BONE_MEAL), player.getEntityWorld(), pos, player);
-                    System.out.println("bonemeal used");
-                    break;
-                }
+                    if (block instanceof SaplingBlock)
+                    {
+                        BoneMealItem.applyBonemeal(new ItemStack(Items.BONE_MEAL), player.getEntityWorld(), pos, player);
+                        counterFullCount++;
+                        TextUtils.sendActionMessage(player,"生长概率"+ counterFullCount*RandomUtils.generateRandomInt(10,16)+"%\n树苗生长点数 300/300");
+                        break;
+                    }
+
+
+
             }
             resetCounter();
-        }else tickCounter++;
+        }
 
         /*try {
             PlayerEntity player = event.player;

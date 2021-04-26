@@ -10,10 +10,7 @@ public class EventPlayerLoggedOut {
 
     @SubscribeEvent
     public static void onPlayerLeave(PlayerEvent.PlayerLoggedOutEvent event) {
+        //ǿ�ƴ浵
         event.getPlayer().getServer().save(false, false, true);
-        /*ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
-        EssentialPlayer eslPlayer = DataManager.getPlayer(player);
-        eslPlayer.cleanTemp();
-        LogUtils.debug("Player " + player.getDisplayName().getString() + " leave");*/
     }
 }
