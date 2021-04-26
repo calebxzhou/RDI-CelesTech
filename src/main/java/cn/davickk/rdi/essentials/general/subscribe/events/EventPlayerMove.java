@@ -6,8 +6,12 @@ import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.lib.Location;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
+import net.minecraft.block.Block;
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BoneMealItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.RegistryKey;
@@ -63,6 +67,18 @@ public class EventPlayerMove {
             moveCounter++;
         if(tickCounter==20*10){
 
+            List<BlockPos> coords = getNearestBlocks(player.getEntityWorld(), new BlockPos(player.getPositionVec()));
+            for (BlockPos pos : coords)
+            {
+                Block block = player.getEntityWorld().getBlockState(pos).getBlock();
+
+                if (block instanceof SaplingBlock)
+                {
+                    BoneMealItem.applyBonemeal(new ItemStack(Items.BONE_MEAL), player.getEntityWorld(), pos, player);
+                    System.out.println("bonemeal used");
+                    break;
+                }
+            }
             resetCounter();
         }else tickCounter++;
 
@@ -102,7 +118,7 @@ public class EventPlayerMove {
     private static void resetCounter(){
         tickCounter=0;moveCounter=0;
     }
-    private List<BlockPos> getNearestBlocks(World world, BlockPos pos)
+    private static List<BlockPos> getNearestBlocks(World world, BlockPos pos)
     {
         return BlockPos.getAllInBox(pos.add(-5, -2, -5), pos.add(5, 2, 5))
                 .filter(p -> world.getBlockState(p).getBlock() instanceof SaplingBlock)
