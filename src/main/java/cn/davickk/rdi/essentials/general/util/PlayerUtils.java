@@ -1,7 +1,7 @@
 package cn.davickk.rdi.essentials.general.util;
 
-import cn.davickk.rdi.essentials.general.lib.IslandLocation;
-import cn.davickk.rdi.essentials.general.lib.Location;
+import cn.davickk.rdi.essentials.general.model.IslandLocation;
+import cn.davickk.rdi.essentials.general.model.Location;
 import cn.davickk.rdi.essentials.general.thread.ui.LoadingT;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;

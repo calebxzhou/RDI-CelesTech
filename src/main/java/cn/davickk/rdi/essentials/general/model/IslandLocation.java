@@ -1,4 +1,4 @@
-package cn.davickk.rdi.essentials.general.lib;
+package cn.davickk.rdi.essentials.general.model;
 
 import net.minecraft.entity.player.PlayerEntity;
 

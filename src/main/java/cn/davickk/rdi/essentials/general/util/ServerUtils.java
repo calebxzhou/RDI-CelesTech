@@ -1,6 +1,6 @@
 package cn.davickk.rdi.essentials.general.util;
 
-import cn.davickk.rdi.essentials.general.lib.Location;
+import cn.davickk.rdi.essentials.general.model.Location;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.concurrent.ExecutorService;

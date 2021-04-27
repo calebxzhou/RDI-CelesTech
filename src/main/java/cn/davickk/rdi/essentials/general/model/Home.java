@@ -1,7 +1,5 @@
 package cn.davickk.rdi.essentials.general.model;
 
-import cn.davickk.rdi.essentials.general.lib.Location;
-
 public class Home {
     public Home(String uuid, String playerName, String homeName, String dims, int port, double x, double y, double z, float w, float p, int activ) {
         this.uuid = uuid;

@@ -16,11 +16,15 @@
         <result property = "p" column = "p"/>
         <result property = "activ" column = "activ"/>
     </resultMap>
+    <resultMap id = "location" type = "cn.davickk.rdi.essentials.general.model.Location">
 
-    <select id = "getAll" resultMap = "result">
-        SELECT * FROM home;
-    </select>
-
+        <result property = "x" column = "x"/>
+        <result property = "y" column = "y"/>
+        <result property = "z" column = "z"/>
+        <result property = "yaw" column = "w"/>
+        <result property = "pitch" column = "p"/>
+        <result property = "dims" column = "dims" typeHandler="cn.davickk.rdi.essentials.general.dao.DimsTypeHandler"/>
+    </resultMap>
     <select id = "getByPlayerUuid" parameterType="String" resultMap = "result">
         SELECT * FROM home WHERE uuid = #{uuid};
     </select>
@@ -43,6 +47,10 @@
         SELECT activ FROM home
         WHERE uuid=#{uuid} AND homeName=#{homeName};
     </select>
+    <select id="getLocation" parameterType="map" resultMap="location">
+        SELECT x,y,z,w,p,dims FROM home
+        WHERE uuid=#{uuid} AND homeName=#{homeName};
+    </select>
     <select id="hasActive" parameterType="map">
         SELECT activ FROM home WHERE uuid=#{uuid}
                              AND activ='1' LIMIT 1;
@@ -60,6 +68,12 @@
 
     <update id="addComment" parameterType="map">
         UPDATE home SET comments=#{comments} WHERE uuid=#{uuid} AND homeName=#{homeName};
+    </update>
+    <update id="rename" parameterType="map">
+        UPDATE home SET homeName =#{newHomeName} WHERE uuid = #{uuid} AND homeName = #{oldHomeName};
+    </update>
+    <update id="locate" parameterType="map">
+        UPDATE home SET x=#{x},y=#{y},z=#{z} WHERE uuid=#{uuid} AND homeName=#{homeName};
     </update>
 
 </mapper>

@@ -2,7 +2,7 @@ package cn.davickk.rdi.essentials.general.request;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.dao.IHomeDaoMapper;
-import cn.davickk.rdi.essentials.general.lib.Location;
+import cn.davickk.rdi.essentials.general.model.Location;
 import cn.davickk.rdi.essentials.general.model.Home;
 import cn.davickk.rdi.essentials.general.util.HomeUtils;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
@@ -10,7 +10,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import org.apache.ibatis.session.SqlSession;
 
 import javax.annotation.Nullable;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -40,7 +39,7 @@ public class HomeRequest{
         this.UUID = PlayerUtils.getUUID(player);
         this.PORT =player.getServer().getServerPort();
     }
-    private void setHome(boolean isWithLocation, Location hloc, boolean useAnotherHomeName, String anotherHomeName, boolean isActiv) throws SQLException{
+    private void setHome(boolean isWithLocation, Location hloc, boolean useAnotherHomeName, String anotherHomeName, boolean isActiv) {
         String playerName= PLAYER.getDisplayName().getString();
         String homeName;
         Location loca;
@@ -79,40 +78,40 @@ public class HomeRequest{
         stmt.setDouble(10, p);
         stmt.setBoolean(11, isActiv);*/
     }
-    private boolean updateHome(boolean updName, String newHomeName,boolean updLocation,Location newLocation) throws SQLException {
-        String stm;
-        PreparedStatement pstm = null;
+    private void updateHome(boolean updName, String newHomeName,boolean updLocation,Location newLocation)  {
         if(updName){
-            stm="UPDATE home SET homeName = ? WHERE port=? AND uuid = ? AND homeName = ?";
+            HOME_MAPPER.rename(UUID,HOMENAME,newHomeName);
+            /*stm="UPDATE home SET homeName = ? WHERE port=? AND uuid = ? AND homeName = ?";
             pstm= SQL_SESSION.getConnection().prepareStatement(stm);
             pstm.setString(1,newHomeName);
             pstm.setInt(2, PORT);
             pstm.setString(3, UUID);
-            pstm.setString(4, HOMENAME);
+            pstm.setString(4, HOMENAME);*/
         }
         if(updLocation){
-            stm="UPDATE home SET x=?,y=?,z=? WHERE port=? AND uuid=? AND homeName=?";
+            HOME_MAPPER.locate(UUID,HOMENAME, newLocation.getX(), newLocation.getY(), newLocation.getZ());
+            /*stm="UPDATE home SET x=?,y=?,z=? WHERE port=? AND uuid=? AND homeName=?";
             pstm= SQL_SESSION.getConnection().prepareStatement(stm);
             pstm.setDouble(1,newLocation.getX());
             pstm.setDouble(2,newLocation.getY());
             pstm.setDouble(3,newLocation.getZ());
             pstm.setInt(4, PORT);
             pstm.setString(5, UUID);
-            pstm.setString(6, HOMENAME);
+            pstm.setString(6, HOMENAME);*/
         }
-        return pstm.executeUpdate()>0;
+        SQL_SESSION.commit();
     }
-    public void setHome() throws SQLException {
+    public void setHome()  {
         setHome(false,null,false,null,false);
     }
-    public void setHomeWithLocation(Location location2Set,String anotherHomeName, boolean isActiv) throws SQLException{
+    public void setHomeWithLocation(Location location2Set,String anotherHomeName, boolean isActiv) {
         setHome(true,location2Set,true,anotherHomeName,isActiv);
     }
-    public boolean renameHome(String newHomeName) throws SQLException {
-        return updateHome(true,newHomeName,false,null);
+    public void renameHome(String newHomeName)  {
+        updateHome(true,newHomeName,false,null);
     }
-    public boolean setNewLocation(Location newLoca) throws SQLException {
-        return updateHome(false,null,true, newLoca);
+    public void setNewLocation(Location newLoca)  {
+        updateHome(false,null,true, newLoca);
     }
     //玩家一共设置过几个家？
     public int getHomeCounts(){
@@ -133,8 +132,9 @@ public class HomeRequest{
         return rs3.next();*/
     }
     @Nullable
-    public Location getHomeLocation() throws SQLException{
-        ResultSet rs3 = SQL_SESSION.getConnection().prepareStatement(
+    public Location getHomeLocation() {
+        return HOME_MAPPER.getLocation(UUID,HOMENAME);
+        /*ResultSet rs3 = SQL_SESSION.getConnection().prepareStatement(
                 "SELECT * FROM home WHERE uuid= '"+ UUID +"' AND homeName='"+ HOMENAME +"' AND port='"+ PORT +"'").executeQuery();
         if(!rs3.next())
             return null;
@@ -144,37 +144,37 @@ public class HomeRequest{
         double z = rs3.getDouble("z");
         float w = rs3.getFloat("w");
         float p = rs3.getFloat("p");
-        return new Location(x,y,z,w,p,dims);
+        return new Location(x,y,z,w,p,dims);*/
     }
-    public boolean isReachedMax() throws SQLException {
+    public boolean isReachedMax() {
         return getHomeCounts() > HomeUtils.MAX_HOME;
     }
-    public void delHome() throws SQLException {
+    public void delHome() {
         HOME_MAPPER.delete(UUID,HOMENAME);
         SQL_SESSION.commit();
         /*String selectSQL = "DELETE FROM home WHERE uuid ='" + UUID + "' AND homeName='"+ HOMENAME +"' AND port='"+ PORT +"'";
         int rowsEff = SQL_SESSION.prepareStatement(selectSQL).executeUpdate();
         return rowsEff!=0;*/
     }
-    public void delAllHome() throws SQLException {
+    public void delAllHome() {
         HOME_MAPPER.delAllByUuid(UUID);
         SQL_SESSION.commit();
         /*String selectSQL = "DELETE FROM home WHERE uuid ='" + UUID + "' AND port='"+ PORT +"'";
         int rowsEff = SQL_SESSION.prepareStatement(selectSQL).executeUpdate();
         return rowsEff!=0;*/
     }
-    public boolean hasActiveHome() throws SQLException{
+    public boolean hasActiveHome() {
         return HOME_MAPPER.hasActive(UUID) == 1;
         /*ResultSet rs4 = SQL_SESSION.prepareStatement("SELECT * FROM home WHERE uuid= '"+ UUID +"' AND activ='1' AND port='"+ PORT +"'").executeQuery();
         return rs4.next();*/
     }
-    public boolean isActive() throws SQLException {
+    public boolean isActive(){
         return HOME_MAPPER.isActive(UUID,HOMENAME) == 1;
         /*ResultSet rs3 = SQL_SESSION.prepareStatement(
                 "SELECT * FROM home WHERE uuid= '"+ UUID +"' AND homeName='"+ HOMENAME +"' AND activ='1' AND port='"+ PORT +"'").executeQuery();
         return rs3.next();*/
     }
-    public void setActive(boolean activ) throws SQLException {
+    public void setActive(boolean activ) {
         HOME_MAPPER.setActive(UUID,HOMENAME,activ?1:0);
         SQL_SESSION.commit();
         /*int a;
@@ -188,6 +188,10 @@ public class HomeRequest{
     public void goHome() throws SQLException{
         Location loc=getHomeLocation();
         PlayerUtils.teleportPlayer(PLAYER, loc);
+    }
+    public void addComment(String comment){
+        HOME_MAPPER.addComment(UUID,HOMENAME,comment);
+        SQL_SESSION.commit();
     }
     /*public EHomeResult goHome() throws SQLException{
         ResultSet rs3 = sqlConn.prepareStatement(

@@ -71,16 +71,16 @@ public class TechRollT extends Thread {
                 for(Items2Give itm:itemList){
                     itemListStr.append(itm.itemDescription);
                     Thread.sleep(200);
-                    /*if(jcount%2==0){
+                    if(jcount%2==0){
                         //TextUtils.sendActionMessage(player,EColor.BRIGHT_GREEN.code+itm.itemDescription+" <-O");
 
                     }
                     else{
                         //TextUtils.sendActionMessage(player,"O-> "+itm.itemDescription);
 
-                    }*/
-                    TextUtils.sendTitle(player,TextUtils.getMiddleString(itemListStr.toString()), STitlePacket.Type.TITLE);
-                    TextUtils.sendTitle(player,"¡ø", STitlePacket.Type.SUBTITLE);
+                    }
+                    /*TextUtils.sendTitle(player,TextUtils.getMiddleString(itemListStr.toString()), STitlePacket.Type.TITLE);
+                    TextUtils.sendTitle(player,"¡ø", STitlePacket.Type.SUBTITLE);*/
                     if(RandomUtils.randomPercentage(itm.percent)){
                         //Thread.sleep(1000);
                         TextUtils.sendChatMessage(player,"¹§Ï²Äú³éÖÐÁË"+EColor.GOLD.code+itm.itemDescription);

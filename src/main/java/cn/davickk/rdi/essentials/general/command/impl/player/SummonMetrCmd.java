@@ -2,8 +2,8 @@
 package cn.davickk.rdi.essentials.general.command.impl.player;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
-import cn.davickk.rdi.essentials.general.lib.IslandLocation;
-import cn.davickk.rdi.essentials.general.lib.Location;
+import cn.davickk.rdi.essentials.general.model.IslandLocation;
+import cn.davickk.rdi.essentials.general.model.Location;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import cn.davickk.rdi.essentials.general.util.WorldUtils;

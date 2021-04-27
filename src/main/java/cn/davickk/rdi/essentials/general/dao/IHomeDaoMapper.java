@@ -1,6 +1,7 @@
 package cn.davickk.rdi.essentials.general.dao;
 
 import cn.davickk.rdi.essentials.general.model.Home;
+import cn.davickk.rdi.essentials.general.model.Location;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,6 +22,9 @@ public interface IHomeDaoMapper {
     int isActive(@Param("uuid")String uuid,@Param("homeName")String homeName);
     //有没有激活的家
     int hasActive(@Param("uuid")String uuid);
+
+    Location getLocation(@Param("uuid")String uuid,@Param("homeName")String homeName);
+
     //设置家激活状态
     void setActive(@Param("uuid")String uuid,@Param("homeName")String homeName,@Param("activ")int activ);
     //获取家位置
@@ -32,4 +36,16 @@ public interface IHomeDaoMapper {
 
     void addComment(@Param("uuid")String uuid,@Param("homeName")String homeName,@Param("comments")String comment);
 
+    void rename(
+            @Param("uuid") String uuid,
+            @Param("homeName") String homeName,
+                @Param("newHomeName")String newHomeName
+
+                );
+    void locate(@Param("uuid")String uuid,
+                @Param("homeName") String homeName,
+                @Param("x")double x,
+                @Param("y")double y,
+                @Param("z")double z
+                );
 }

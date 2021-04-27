@@ -2,7 +2,7 @@ package cn.davickk.rdi.essentials.general.request;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.lib.Location;
+import cn.davickk.rdi.essentials.general.model.Location;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import cn.davickk.rdi.essentials.general.util.TimeUtils;

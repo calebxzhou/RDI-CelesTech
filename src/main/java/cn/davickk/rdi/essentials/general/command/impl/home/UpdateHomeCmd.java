@@ -1,6 +1,8 @@
 package cn.davickk.rdi.essentials.general.command.impl.home;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
+import cn.davickk.rdi.essentials.general.thread.home.UpdateHomeT;
+import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -34,20 +36,26 @@ public class UpdateHomeCmd extends BaseCommand {
         super(name, permissionLevel, enabled);
         oprationList.add("--locate");
         oprationList.add("--rename");
+        oprationList.add("--comment");
     }
     @Override
     public LiteralArgumentBuilder<CommandSource> setExecution() {
-        return builder.executes(
-                (context) -> execute(context.getSource()))
-                .then(Commands.argument("homeName",StringArgumentType.string()))
-                .then(Commands.argument("opration", StringArgumentType.string())
-                .suggests(SUGGESTIONS_PROVIDER)
-                .then(Commands.argument("argument",StringArgumentType.string())
-                .executes((context) -> execute(
-                        context.getSource(), StringArgumentType.getString(context,"homeName"),
-                                                StringArgumentType.getString(context, "opration"),
-                        StringArgumentType.getString(context,"argument")))
-                        ));
+        return builder
+                .then(
+                        Commands.argument("homeName",StringArgumentType.string())
+                            .then(Commands.argument("opration", StringArgumentType.string()).suggests(SUGGESTIONS_PROVIDER)
+                                .then(Commands.argument("argument",StringArgumentType.string())
+                                        .executes(context ->
+                                                UpdateHomeCmd.this.execute(
+                                                        context.getSource(),
+                                                        StringArgumentType.getString(context, "homeName"),
+                                                        StringArgumentType.getString(context, "opration"),
+                                                        StringArgumentType.getString(context, "argument")
+                                                )
+                                        )
+                                )
+                            )
+                );
     }
 //将 当前所在位置 设置为 空岛传送点位置 /updatehome island --locate here
     //将 传送点aaa 更名为 bbb /updatehome aaa --rename bbb
@@ -58,10 +66,13 @@ public class UpdateHomeCmd extends BaseCommand {
             return Command.SINGLE_SUCCESS;
         }
         if(opration.equals("--locate")){
-
+            ServerUtils.startThread(new UpdateHomeT(player,homeName,UpdateHomeT.LOCATE,argument));
         }else if(opration.equals("--rename")){
-
-        }else{
+            ServerUtils.startThread(new UpdateHomeT(player,homeName,UpdateHomeT.RENAME,argument));
+        }else if(opration.equals("--comment")){
+            ServerUtils.startThread(new UpdateHomeT(player,homeName,UpdateHomeT.COMMENT,argument));
+        }
+        else{
             TextUtils.sendChatMessage(player,"请输入正确的操作参数，详见群文件“home系列指令的使用方法”");
 
         }

@@ -1,7 +1,7 @@
 package cn.davickk.rdi.essentials.general.thread.home;
 
 import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.lib.Location;
+import cn.davickk.rdi.essentials.general.model.Location;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.util.HomeUtils;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;

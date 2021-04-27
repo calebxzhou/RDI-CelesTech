@@ -3,7 +3,7 @@ package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.lib.Location;
+import cn.davickk.rdi.essentials.general.model.Location;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.RandomUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;

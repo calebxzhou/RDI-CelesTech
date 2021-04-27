@@ -1,8 +1,8 @@
 package cn.davickk.rdi.essentials.general.util;
 
 import cn.davickk.rdi.essentials.general.enums.EGameTime;
-import cn.davickk.rdi.essentials.general.lib.IslandLocation;
-import cn.davickk.rdi.essentials.general.lib.Location;
+import cn.davickk.rdi.essentials.general.model.IslandLocation;
+import cn.davickk.rdi.essentials.general.model.Location;
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.WorldEditException;
