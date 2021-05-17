@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import java.util.List;
 
 public class RinvRequest {
-    private final SqlSession SQL_SESSION = RDIEssentials.getSQLUtils().getSqlSession();
+    private final SqlSession SQL_SESSION = RDIEssentials.getSQLUtils().getSqlSession2();
     private IRinvMapper RINV_MAPPER;
     private final ServerPlayerEntity PLAYER;
     private final String UUID,PLAYER_NAME;

@@ -3,55 +3,76 @@ package cn.davickk.rdi.essentials.general.request;
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.model.Location;
+import cn.davickk.rdi.essentials.general.model.PlayerTpaRequest;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import cn.davickk.rdi.essentials.general.util.TimeUtils;
 import cn.davickk.rdi.essentials.general.util.WorldUtils;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.IFormattableTextComponent;
+import org.apache.ibatis.session.SqlSession;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TpaRequest {
-    private ServerPlayerEntity fromPlayer;
-    private final ServerPlayerEntity toPlayer;
-    private String fromPlayerName;
-    private final String toPlayerName;
-    private final Connection sql;
-    private final String reqid;
-    public TpaRequest(ServerPlayerEntity fromPlayer,ServerPlayerEntity toPlayer,String reqid) throws SQLException, ClassNotFoundException {
-
-        this.sql=RDIEssentials.getSQLUtils().getSqlSession().getConnection();
+    private static Map<String,PlayerTpaRequest> REQ_MAP=new HashMap<>();
+   /* private PlayerTpaRequest playerTpaRequest;
+    private PlayerEntity fromPlayer;
+    private PlayerEntity toPlayer;*/
+    /*private String fromPlayerName;
+    private String toPlayerName;
+    private Connection sql;
+    private SqlSession sqlSession;
+    private String reqid;*/
+    /*public TpaRequest(ServerPlayerEntity fromPlayer,ServerPlayerEntity toPlayer,String reqid) throws SQLException, ClassNotFoundException {
+        sqlSession=RDIEssentials.getSQLUtils().getSqlSession();
+        this.sql=sqlSession.getConnection();
         this.fromPlayer=fromPlayer;
         this.toPlayer=toPlayer;
         if(fromPlayer!=null)
             this.fromPlayerName=fromPlayer.getDisplayName().getString();
         this.toPlayerName=toPlayer.getDisplayName().getString();
         this.reqid=reqid;
+    }*/
+    /*public TpaRequest(PlayerTpaRequest ptrq){
+        playerTpaRequest=ptrq;
+        fromPlayer=ptrq.getFromPlayer();
+        toPlayer=ptrq.getToPlayer();
+    }*/
+    public static Map<String,PlayerTpaRequest> getReqMap(){
+        return REQ_MAP;
     }
-    public ServerPlayerEntity getFromPlayer() throws SQLException{
-        PreparedStatement ps=sql.prepareStatement("SELECT * FROM tpa WHERE reqid=?");
+    /*public ServerPlayerEntity getFromPlayer() throws SQLException{
+        *//*PreparedStatement ps=sql.prepareStatement("SELECT * FROM tpa WHERE reqid=?");
         ps.setString(1,reqid);
         ResultSet rs=ps.executeQuery();
         if(!rs.next())
             return null;
         this.fromPlayerName=rs.getString("fromPlayer");
         this.fromPlayer=toPlayer.getServer().getPlayerList().getPlayerByUsername(this.fromPlayerName);
-        return fromPlayer;
-    }
-    public void sendRequest() throws SQLException {
+        return fromPlayer;*//*
+    }*/
+    /*public void sendRequest() throws SQLException {
         PreparedStatement ps=sql.prepareStatement("INSERT INTO tpa (reqid, reqtime, fromPlayer, toPlayer) VALUES (?,?,?,?)");
         ps.setString(1,reqid);
         ps.setTimestamp(2, TimeUtils.getTimestampNow());
         ps.setString(3,this.fromPlayerName);
         ps.setString(4,this.toPlayerName);
         ps.executeUpdate();
-        TextUtils.sendChatMessage(this.toPlayer,this.fromPlayerName+"想要传送到你的身边。");
-        IFormattableTextComponent tpyes=TextUtils.getClickableContentComp(this.toPlayer, EColor.BRIGHT_GREEN.code+"[接受]"+EColor.RESET.code,"/tpyes "+reqid," ");
+        sqlSession.commit();
+
+        TextUtils.sendChatMessage(this.toPlayer,this.fromPlayer.getDisplayName().getString()+"想要传送到你的身边。");
+        IFormattableTextComponent tpyes=TextUtils.getClickableContentComp(this.toPlayer, EColor.BRIGHT_GREEN.code+"[接受]"+EColor.RESET.code,"/tpyes "+playerTpaRequest.getReqId()," ");
         IFormattableTextComponent tpwait=TextUtils.getClickableContentComp(this.toPlayer, EColor.GOLD.code+"[等我一下]"+EColor.RESET.code,"稍等"," ");
         TextUtils.sendChatMessage(this.toPlayer,tpyes.append(tpwait));
-    }
-    public boolean acceptRequest() throws SQLException {
+        reqList.add(playerTpaRequest);
+    }*/
+    /*public boolean acceptRequest() throws SQLException {
         PreparedStatement ps=sql.prepareStatement("SELECT * FROM tpa WHERE reqid=?");
         ps.setString(1,reqid);
         ResultSet rs=ps.executeQuery();
@@ -85,16 +106,15 @@ public class TpaRequest {
             return false;
         }
 
-    }
+    }*/
     private void teleportPlayer1to2(){
-        PlayerUtils.teleportPlayer(fromPlayer,new Location(toPlayer));
+        //PlayerUtils.teleportPlayer(fromPlayer,new Location(toPlayer));
     }
-    public void denyRequest(){
-
-    }
-    public void deleteRequest() throws SQLException {
+    /*public void deleteRequest(PlayerTpaRequest ptpr){
+        reqList.remove(ptpr);
         PreparedStatement ps=sql.prepareStatement("UPDATE tpa SET reqid='done' WHERE reqid=?");
         ps.setString(1,reqid);
         ps.executeUpdate();
-    }
+        sqlSession.commit();
+    }*/
 }

@@ -8,7 +8,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityMobGriefingEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,14 +19,16 @@ import net.minecraftforge.fml.common.Mod;
 public class EventMobs {
     @SubscribeEvent(priority = EventPriority.HIGHEST)//LivingSpawnEvent.AllowDespawn
     public static void mobSpawn(EntityJoinWorldEvent event){
-        if(event.getEntity().getType().equals(EntityType.PLAYER))
-            return;
-        if(event.getEntity().getEntity().getPosY()< PlayerUtils.LOWEST_LIMIT){
+        if(event.getEntity().getType().equals(EntityType.TNT)){
+            if(RandomUtils.randomPercentage(0.4))
+                event.getEntity().remove();
+        }
+
+
+        /*if(event.getEntity().getEntity().getPosY()< PlayerUtils.LOWEST_LIMIT){
             event.setCanceled(true);
             return;
-            //event.setResult(Event.Result.ALLOW);
-            //event.getEntity().remove(false);
-        }
+        }*/
         /*Entity entity=event.getEntity();
         if(entity.getEntityWorld().getDimensionKey().getRegistryName().getPath().contains("nether"))
         if(entity.getType().getTranslationKey().equals("entity.minecraft.item")) {
@@ -38,6 +42,8 @@ public class EventMobs {
             event.setCanceled(true);*/
 
     }
+
+
     @SubscribeEvent
     public static void babySpawn(BabyEntitySpawnEvent event) {
         try {

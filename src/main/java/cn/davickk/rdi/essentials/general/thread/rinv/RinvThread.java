@@ -47,6 +47,7 @@ public class RinvThread extends Thread {
                     TextUtils.sendChatMessage(player,"云仓库里有物品，请先取出后才可上传。");
                     return;
                 }
+
                 for (int i = 0; i <= 35; i++)//MC的物品栏排列：9~17 / 18~26 / 27~35 / 0~8
                 {
                     //itemList.add(i,inventory.getStackInSlot(i).serializeNBT().toString());
@@ -60,8 +61,12 @@ public class RinvThread extends Thread {
 
 
                 }
-
+                TextUtils.sendChatMessage(player,"上传完成。");
             }else if(this.arg==GET){
+                if(invdata.isEmpty()){
+                    TextUtils.sendChatMessage(player,"您的云仓库里什么都没有。");
+                    return;
+                }
                 if(!player.inventory.isEmpty()){
                     TextUtils.sendChatMessage(player,"请清空您的背包，包括身上的穿戴品，才能开始取出。");
                     return;

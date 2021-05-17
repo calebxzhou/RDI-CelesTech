@@ -78,7 +78,7 @@ public final class TextUtils {
     }
 
     // Chat msg
-    public static void sendChatMessage(ServerPlayerEntity player, IFormattableTextComponent textComponent) {
+    public static void sendChatMessage(PlayerEntity player, IFormattableTextComponent textComponent) {
         sendMessage(player, textComponent, false);
     }
 
@@ -90,7 +90,7 @@ public final class TextUtils {
         sendMessage(player, new StringTextComponent(content), false);
     }
 
-    public static void sendChatMessage(ServerPlayerEntity player, String translationKey, Object... args) {
+    public static void sendChatMessage(PlayerEntity player, String translationKey, Object... args) {
         sendMessage(player, new TranslationTextComponent(translationKey, args), false);
     }
 

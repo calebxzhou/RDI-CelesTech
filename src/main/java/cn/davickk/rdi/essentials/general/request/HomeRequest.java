@@ -39,7 +39,7 @@ public class HomeRequest{
         this.UUID = PlayerUtils.getUUID(player);
         this.PORT =player.getServer().getServerPort();
     }
-    private void setHome(boolean isWithLocation, Location hloc, boolean useAnotherHomeName, String anotherHomeName, boolean isActiv) {
+    private void setHome(boolean isWithLocation, Location hloc, boolean useAnotherHomeName, String anotherHomeName, boolean isActiv,String comment) {
         String playerName= PLAYER.getDisplayName().getString();
         String homeName;
         Location loca;
@@ -61,6 +61,7 @@ public class HomeRequest{
         float p = loca.getPitch();
         String dims=loca.getDims().toString();
         Home home=new Home(UUID,playerName,homeName,dims,PORT,x,y,z,w,p,isActiv?1:0);
+        home.setComment(comment);
         HOME_MAPPER.insertRecord(home);
         SQL_SESSION.commit();
         /*String st = "INSERT INTO home (uuid, playerName, homeName, port, dims, x, y, z, w, p, activ) " +
@@ -102,10 +103,10 @@ public class HomeRequest{
         SQL_SESSION.commit();
     }
     public void setHome()  {
-        setHome(false,null,false,null,false);
+        setHome(false,null,false,null,false,"");
     }
-    public void setHomeWithLocation(Location location2Set,String anotherHomeName, boolean isActiv) {
-        setHome(true,location2Set,true,anotherHomeName,isActiv);
+    public void setHomeWithLocation(Location location2Set,String anotherHomeName, boolean isActiv,String comment) {
+        setHome(true,location2Set,true,anotherHomeName,isActiv,comment);
     }
     public void renameHome(String newHomeName)  {
         updateHome(true,newHomeName,false,null);

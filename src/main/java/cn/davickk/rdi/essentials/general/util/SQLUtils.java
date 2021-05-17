@@ -15,6 +15,7 @@ public class SQLUtils {
     private static Connection SQL_CONN;*/
     private Reader CONF_RES;
     private SqlSession SQL_SESSION;
+    private SqlSession SQL_SESSION_2;
     /*private static HikariConfig config = new HikariConfig();
     private static HikariDataSource ds;*/
 
@@ -22,7 +23,10 @@ public class SQLUtils {
         try {
             CONF_RES=Resources.getResourceAsReader("SqlMapConfig.xml");
             SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(CONF_RES);
+            SqlSessionFactory sessionFactory2=new SqlSessionFactoryBuilder().build(
+                    Resources.getResourceAsReader("SqlMapConfig.xml"),"cele2");
             SQL_SESSION = sessionFactory.openSession();
+            SQL_SESSION_2 = sessionFactory2.openSession();
             //Create a new student object
             /*Student student = new Student("Mohammad","It", 80, 984803322, "Mohammad@gmail.com" );
 
@@ -62,6 +66,12 @@ public class SQLUtils {
     public SqlSession getSqlSession() {
             return this.SQL_SESSION;
             //return ds.getConnection();
+
+
+    }
+    public SqlSession getSqlSession2() {
+        return this.SQL_SESSION_2;
+        //return ds.getConnection();
 
 
     }

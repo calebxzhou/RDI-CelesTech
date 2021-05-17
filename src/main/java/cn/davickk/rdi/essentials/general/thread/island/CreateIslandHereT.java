@@ -14,6 +14,10 @@ public class CreateIslandHereT extends Thread{
         this.player=player;
     }
     public void run(){
+        if(WorldUtils.ifNearbySpawn(new Location(player))){
+            TextUtils.sendChatMessage(player,"不可以在主城创建空岛");
+            return;
+        }
         TextUtils.sendChatMessage(player,"正在创建空岛...请不要移动...");
         try{
             //IslandRequest req = new IslandRequest(player);
@@ -24,7 +28,7 @@ public class CreateIslandHereT extends Thread{
                 TextUtils.sendChatMessage(player, "您已经有一个空岛了，因此不能创建新的空岛。");
                 return;
             }
-            hreq.setHomeWithLocation(new Location(player),"island",true);
+            hreq.setHomeWithLocation(new Location(player),"island",true,"空岛传送点，请勿删除");
             WorldUtils.pasteIslandSchematic(bpos,player);
             TextUtils.sendChatMessage(player, "成功创建了空岛");
             TextUtils.clickableContent2Send(player,EColor.GOLD.code+"可以正常游玩了。请阅读群文件的手册。",""," ");

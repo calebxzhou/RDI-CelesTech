@@ -25,7 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public final class PlayerUtils {
-    public static final int LOWEST_LIMIT=25;
+    public static final int LOWEST_LIMIT=0;
     public static final String benefitOfSleepEarly =
             "早睡的好处：①保证睡眠质量，促进肝脏排毒，告别黑眼圈，令人第二天精力旺盛。" +
                     "②控制体重，防止出现过劳肥。" +
@@ -67,16 +67,16 @@ public final class PlayerUtils {
 
     public static void sayHello(ServerPlayerEntity player) {
         LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy年MM月dd日 E HH:mm:ss");
+        /*DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy年MM月dd日 E HH:mm:ss");
         String formattedDateTime = dateTime.format(myFormatObj).replace("Mon", "星期一")
                 .replace("Tue", "星期二").replace("Wed", "星期三")
                 .replace("Thu", "星期四").replace("Fri", "星期五")
-                .replace("Sat", "星期六").replace("Sun", "星期日");
+                .replace("Sat", "星期六").replace("Sun", "星期日");*/
         int hour = dateTime.getHour();
         int slog= slogan.length;
         String charTime = "";
         String wishToSend = PlayerUtils.slogan[RandomUtils.generateRandomInt(0, slog-1)];
-        TextUtils.sendChatMessage(player, "§e§o" + wishToSend);
+        TextUtils.sendActionMessage(player, "§e§o" + wishToSend);
         if (hour >= 0 && hour <= 5) {
             charTime = "凌晨";
             TextUtils.sendChatMessage(player, new StringTextComponent(PlayerUtils.benefitOfSleepEarly));
@@ -94,7 +94,9 @@ public final class PlayerUtils {
         //TextUtils.sendChatMessage(player,new StringTextComponent(PlayerUtils.benefitOfSleepEarly));
         //早上好，XXX，现在是yyyy年MM月DD日
         TextUtils.sendChatMessage(player,
-                charTime + "好，" + player.getDisplayName().getString() + "，现在是 " + formattedDateTime + " (UTC+8)");
+                charTime + "好 " + player.getDisplayName().getString() + ",欢迎回到RDI。");
+        if(player.getServer().getServerPort()==28524)
+            TextUtils.sendChatMessage(player,"您当前游玩的是空岛1.0服务器，您可以在5月24日晚9时之前将数据迁移至空岛2.0服务器，逾期将关闭迁移功能。");
         }
     public static String getUUID(ServerPlayerEntity player)
     {
@@ -125,9 +127,6 @@ public final class PlayerUtils {
         AxisAlignedBB boundBox=new AxisAlignedBB(pos1,pos2);
         return player.getEntityWorld().getEntitiesWithinAABB(EntityType.PLAYER,boundBox, PlayerEntity::isUser);
     }
-    public static boolean isInCreateServ(ServerPlayerEntity player){
-        return player.getServer().getServerPort()==ServerUtils.CRET_PORT;
-    }
     public static void randomTeleport(ServerPlayerEntity player,boolean glass){
         int x=RandomUtils.generateRandomInt(-9999,9999);
         int z=RandomUtils.generateRandomInt(-9999,9999);
@@ -136,9 +135,6 @@ public final class PlayerUtils {
         if(glass)
             player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),
                     "fill "+x+" 219 "+z+" "+x+" 219 "+z+" minecraft:glass");
-
-    }
-    public static void forceBack2Spawn(PlayerEntity player){
 
     }
     public static void teleportPlayer(PlayerEntity player, IslandLocation loca){

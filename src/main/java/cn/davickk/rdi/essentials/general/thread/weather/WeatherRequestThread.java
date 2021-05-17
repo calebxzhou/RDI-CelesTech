@@ -46,11 +46,16 @@ public class WeatherRequestThread extends Thread {
             //String province = loca.result.ad_info.province;//省
             if(nation.equals("中国"))
             {
-                city = loca.result.ad_info.city.replace("市", "");//市
+                city = loca.result.ad_info.city.replace("市", "");
                 district = loca.result.ad_info.district.replace("区", "")
                         .replace("市", "");
                 lati = loca.result.location.lat;
                 longi = loca.result.location.lng;
+
+                if(city.equals("沈阳")||city.equals("抚顺")||city.equals("葫芦岛"))
+                    TextUtils.sendChatMessage(player,
+                            EColor.ITALIC.code+"您距离服主已经非常近了...");
+
                 weatherJsonData = HttpUtils.doGet("https://api.caiyunapp.com/v2.5/" + HttpUtils.caiyunWeatherKey
                         + "/" + longi + "," + lati + "/daily.json");
                 weatherRTJsonData = HttpUtils.doGet("https://api.caiyunapp.com/v2.5/" + HttpUtils.caiyunWeatherKey
@@ -102,9 +107,9 @@ public class WeatherRequestThread extends Thread {
                     airQ=EColor.DARK_RED.code+airQ;
                 String msgAir="空气质量 "+airQ+"("+aqi+")";
                 String msgLine1=msgCityTemp.concat(msgAir);
-                String msgLine2 = EColor.AQUA.code+ "今天 " + weatherState.getName() + " "
+                String msgLine2 = EColor.AQUA.code+ "今" + weatherState.getName() + " "
                         +EColor.RESET.code+ lowTmp + " ~ " + hiTmp + "° 湿度" + humid + "% 降水率" + EColor.BRIGHT_GREEN.code+preci + "%";
-                String msgLine3 = "明天 " + weatherState.getName() + " "
+                String msgLine3 = "明" + weatherState.getName() + " "
                         + lowTmp2 + " ~ " + hiTmp2 + "° 湿度" + humid2 + "% 降水率" + preci2 + "% ";
                 //xx(市) 2020年x月x日 晴 xx~xxC 湿度xx% 降水率xx%
                 TextUtils.sendChatMessage(player, msgLine1);
@@ -132,7 +137,7 @@ public class WeatherRequestThread extends Thread {
 
 
 
-            TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[打开空岛菜单]","/rkd","/rkd");
+            TextUtils.clickableContent2Send(player, EColor.GOLD.code+"点击[这 ↑ 里 ↓]打开空岛菜单]","/rkd","/rkd");
 
 
         } catch (Exception e) {

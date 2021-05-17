@@ -17,7 +17,7 @@ public class TechRollT extends Thread {
 
     private final String MC="minecraft:";
     private final String MEK="mekanism:";
-
+    private final String AE="appliedenergistics2:";
     public TechRollT(ServerPlayerEntity player,int rollCount) {
         this.rollCount=rollCount;
         this.player = player;
@@ -37,7 +37,7 @@ public class TechRollT extends Thread {
             itemList.add(new Items2Give(MC+"nether_quartz_ore","[µÿ”¸ Ø”¢øÛ]",base/8.0,4));
             itemList.add(new Items2Give(MC+"ancient_debris","[‘∂π≈≤–∫°]",base/8.0,2));
             itemList.add(new Items2Give("experience","[3æ≠—È]",base/6.0,3));
-            /*itemList.add(new Items2Give(AE+"sky_stone_block","[16‘… Ø]",base/8.0,16));
+            itemList.add(new Items2Give(AE+"sky_stone_block","[16‘… Ø]",base/8.0,16));
             itemList.add(new Items2Give(AE+"charged_quartz_ore","[≥‰ƒ‹ Ø”¢]",base/8.0,2));
             itemList.add(new Items2Give(AE+"calculation_processor_press","[‘ÀÀ„—π”°∞Â]",base/15.0,1));
             itemList.add(new Items2Give(AE+"silicon_press","[πË—π”°∞Â]",base/15.0,1));
@@ -45,7 +45,7 @@ public class TechRollT extends Thread {
             itemList.add(new Items2Give(AE+"logic_processor_press","[¬ﬂº≠—π”°∞Â]",base/20.0,1));
             itemList.add(new Items2Give(AE+"sky_stone_block","[8‘… Ø]",base/8.0,8));
             itemList.add(new Items2Give(AE+"engineering_processor_press","[π§≥Ã—π”°∞Â]",base/20.0,1));
-            */
+
             itemList.add(new Items2Give(MEK+"fluorite_ore","[∑˙ Ø]",base/6.0,2));
 
             itemList.add(new Items2Give("experience","[5æ≠—È]",base/15.0,5));
@@ -72,11 +72,11 @@ public class TechRollT extends Thread {
                     itemListStr.append(itm.itemDescription);
                     Thread.sleep(200);
                     if(jcount%2==0){
-                        //TextUtils.sendActionMessage(player,EColor.BRIGHT_GREEN.code+itm.itemDescription+" <-O");
+                        TextUtils.sendActionMessage(player,EColor.BRIGHT_GREEN.code+itm.itemDescription+" <-O");
 
                     }
                     else{
-                        //TextUtils.sendActionMessage(player,"O-> "+itm.itemDescription);
+                        TextUtils.sendActionMessage(player,"O-> "+itm.itemDescription);
 
                     }
                     /*TextUtils.sendTitle(player,TextUtils.getMiddleString(itemListStr.toString()), STitlePacket.Type.TITLE);

@@ -88,7 +88,7 @@ dependencies {
     runtimeOnly fg.deobf("com.sk89q.worldedit:worldedit-forge-mc1.16.3:7.2.0-SNAPSHOT")
     // https://mvnrepository.com/artifact/org.mybatis/mybatis
     implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.6'
-
+    implementation 'org.hibernate:hibernate-tools-maven-plugin:5.4.31.Final'
     //compile group: 'com.sk89q.worldedit',name:'worldedit-forge-mc1.16.3',version: '7.3.0-SNAPSHOT'
     //compile files('D:/CODE/AeroTechEss/worldedit-forge-mc1.16.3-7.3.0-SNAPHOT.jar')
    // compile files('D:/CODE/AeroTechEss/worldedit-core-7.3.0-20210131.030946-12-sources.jar')

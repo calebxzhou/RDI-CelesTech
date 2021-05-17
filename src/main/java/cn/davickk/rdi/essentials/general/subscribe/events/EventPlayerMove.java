@@ -47,14 +47,14 @@ public class EventPlayerMove {
     @SubscribeEvent
     public static void onMove(TickEvent.PlayerTickEvent event) {
         PlayerEntity player=event.player;
-        if(!player.isCreative()){
+
             if(player.getPosY()<PlayerUtils.LOWEST_LIMIT){
             //if(PlayerUtils.minusXPLvl(player,1)){
                 //IslandLocation loca=new IslandLocation(player);
                 //loca.y+=200;
                 Location loca=new Location(player);
                 loca.setY(240);
-                TextUtils.sendChatMessage(player,"感觉身体轻飘飘的.....");
+                TextUtils.sendChatMessage(player,"虚空防掉落机制已启动.....");
                 PlayerUtils.teleportPlayer(player,loca);
                 player.addPotionEffect(new EffectInstance(Effects.SLOW_FALLING,10*20,2));
                 TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[我卡住了]","/spawn","修复卡住的问题。");
@@ -62,7 +62,7 @@ public class EventPlayerMove {
 
              //player.onKillCommand();
             }
-        }
+        /*
         int counterFullCount=0;
         if (player.isSprinting()){
             moveCounter++;
@@ -90,7 +90,7 @@ public class EventPlayerMove {
             }
             resetCounter();
         }
-
+*/
         /*try {
             PlayerEntity player = event.player;
             Location loca = new Location(player);

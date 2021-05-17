@@ -27,13 +27,13 @@ public class HomeListThread extends Thread {
                 //TextUtils.clickableContent2Send(player, EHomeText.IMPORT.text, EHomeText.IMPORT.cmd);
                 return;
             }
-            TextUtils.sendChatMessage(player, "家 ("+hreq.getHomeCounts()+"/256) (点击->操作)");
+            TextUtils.sendChatMessage(player, "家 (点击->操作)");
             List<Home> homeList= hreq.getHomeList();
             if(homeList==null){
                 TextUtils.sendChatMessage(player,"无法获取家列表，请咨询腐竹");
                 return;
             }
-            IFormattableTextComponent txt2s=new StringTextComponent("");
+            IFormattableTextComponent txt2s;
             int index=1;
             for(Home home:homeList){
                 //家名前面的颜色 激活了是绿色
@@ -51,8 +51,9 @@ public class HomeListThread extends Thread {
                         EColor.GRAY.code,
                         home.getComment()
                 );
-                txt2s.append(TextUtils.getClickableContentComp(player,fullMsg,"/actions4home "+home.getHomeName(),""));
+                txt2s=TextUtils.getClickableContentComp(player,fullMsg,"/actions4home "+home.getHomeName(),"");
                 TextUtils.sendChatMessage(player,txt2s);
+
                 /*String hname=entry.getKey();
                 String hnameC="";
                 HomeLocation hloc=entry.getValue();

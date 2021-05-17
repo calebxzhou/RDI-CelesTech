@@ -25,11 +25,11 @@
         <result property = "pitch" column = "p"/>
         <result property = "dims" column = "dims" typeHandler="cn.davickk.rdi.essentials.general.dao.DimsTypeHandler"/>
     </resultMap>
-    <select id = "getByPlayerUuid" parameterType="String" resultMap = "result">
+    <select id = "getByPlayerUuid" parameterType="java.lang.String" resultMap = "result">
         SELECT * FROM home WHERE uuid = #{uuid};
     </select>
 
-    <select id="getRecordAmount" parameterType="String" resultType="int">
+    <select id="getRecordAmount" parameterType="java.lang.String" resultType="int">
         SELECT COUNT(*) AS 'home_amount' FROM home
         WHERE uuid = #{uuid};
     </select>
@@ -51,18 +51,18 @@
         SELECT x,y,z,w,p,dims FROM home
         WHERE uuid=#{uuid} AND homeName=#{homeName};
     </select>
-    <select id="hasActive" parameterType="map">
+    <select id="hasActive" parameterType="map" resultType="int">
         SELECT activ FROM home WHERE uuid=#{uuid}
                              AND activ='1' LIMIT 1;
     </select>
 
-    <select id="setActive" parameterType="map">
+    <update id="setActive" parameterType="map">
         UPDATE home SET activ=#{activ} WHERE uuid=#{uuid} AND homeName=#{homeName};
-    </select>
+    </update>
     <delete id="delete" parameterType="map">
         DELETE FROM home WHERE uuid=#{uuid} AND homeName=#{homeName};
     </delete>
-    <delete id="delAllByUuid" parameterType="String">
+    <delete id="delAllByUuid" parameterType="java.lang.String">
         DELETE FROM home WHERE uuid=#{uuid};
     </delete>
 

@@ -37,7 +37,6 @@ public class DelHomeCommand extends BaseCommand {
 
     private int execute(CommandSource source, String homeName) throws CommandSyntaxException {
         ServerPlayerEntity player = source.asPlayer();
-        PlayerUtils.sendLoading(player);
         ServerUtils.startThread(new DelhomeThread(player,homeName));
 
         return Command.SINGLE_SUCCESS;

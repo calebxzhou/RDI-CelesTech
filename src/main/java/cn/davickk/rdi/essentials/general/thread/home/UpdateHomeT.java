@@ -3,6 +3,8 @@ package cn.davickk.rdi.essentials.general.thread.home;
 import cn.davickk.rdi.essentials.general.model.Location;
 import cn.davickk.rdi.essentials.general.request.HomeRequest;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
+import cn.davickk.rdi.essentials.general.util.WorldUtils;
+import com.sk89q.worldedit.world.World;
 import net.minecraft.entity.player.ServerPlayerEntity;
 
 public class UpdateHomeT extends Thread{
@@ -28,6 +30,10 @@ public class UpdateHomeT extends Thread{
                 hreq.renameHome(argument);
                 TextUtils.sendChatMessage(player,"成功把传送点"+homeName+"更名为"+argument);
             }else if(opr==LOCATE){
+                if(WorldUtils.ifNearbySpawn(new Location(player))){
+                    TextUtils.sendChatMessage(player,"不可以把传送点更改到主城附近");
+                    return;
+                }
                 hreq.setNewLocation(new Location(player));
                 TextUtils.sendChatMessage(player,"成功更改了"+homeName+"的位置");
             }else if(opr==COMMENT){

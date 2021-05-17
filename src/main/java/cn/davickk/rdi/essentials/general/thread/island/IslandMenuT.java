@@ -22,7 +22,7 @@ public class IslandMenuT extends Thread{
             String share=EColor.AQUA.code+        "分享空岛";
             String changeTp=EColor.RED.code+      "改传送点";
             String ut=EColor.ORANGE.code+         "实用工具";
-            String roll=EColor.GOLD.code+EColor.BOLD.code+"大科技转转转";
+            String roll=EColor.GOLD.code+"大科技转转转";
             if(homereq.getHomeCounts()==0){
                 TextUtils.clickableContent2Send(player,EColor.AQUA.code+"创建空岛（点这里）","/createkd","创建一个新的空岛");
                 return;

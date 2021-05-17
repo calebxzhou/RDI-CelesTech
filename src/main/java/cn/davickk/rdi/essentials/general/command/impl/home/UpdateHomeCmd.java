@@ -15,7 +15,9 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.ISuggestionProvider;
+import net.minecraft.command.arguments.MessageArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.text.ITextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +46,13 @@ public class UpdateHomeCmd extends BaseCommand {
                 .then(
                         Commands.argument("homeName",StringArgumentType.string())
                             .then(Commands.argument("opration", StringArgumentType.string()).suggests(SUGGESTIONS_PROVIDER)
-                                .then(Commands.argument("argument",StringArgumentType.string())
+                                .then(Commands.argument("argument", MessageArgument.message())
                                         .executes(context ->
                                                 UpdateHomeCmd.this.execute(
                                                         context.getSource(),
                                                         StringArgumentType.getString(context, "homeName"),
                                                         StringArgumentType.getString(context, "opration"),
-                                                        StringArgumentType.getString(context, "argument")
+                                                        MessageArgument.getMessage(context, "argument")
                                                 )
                                         )
                                 )
@@ -59,18 +61,18 @@ public class UpdateHomeCmd extends BaseCommand {
     }
 //将 当前所在位置 设置为 空岛传送点位置 /updatehome island --locate here
     //将 传送点aaa 更名为 bbb /updatehome aaa --rename bbb
-    private int execute(CommandSource source, String homeName, String opration, String argument) throws CommandSyntaxException {
+    private int execute(CommandSource source, String homeName, String opration, ITextComponent argument) throws CommandSyntaxException {
         ServerPlayerEntity player=source.asPlayer();
         if(!this.oprationList.contains(opration)){
             TextUtils.sendChatMessage(player,"请输入正确的操作参数，详见群文件“home系列指令的使用方法”");
             return Command.SINGLE_SUCCESS;
         }
         if(opration.equals("--locate")){
-            ServerUtils.startThread(new UpdateHomeT(player,homeName,UpdateHomeT.LOCATE,argument));
+            ServerUtils.startThread(new UpdateHomeT(player,homeName,UpdateHomeT.LOCATE,argument.getString()));
         }else if(opration.equals("--rename")){
-            ServerUtils.startThread(new UpdateHomeT(player,homeName,UpdateHomeT.RENAME,argument));
+            ServerUtils.startThread(new UpdateHomeT(player,homeName,UpdateHomeT.RENAME,argument.getString()));
         }else if(opration.equals("--comment")){
-            ServerUtils.startThread(new UpdateHomeT(player,homeName,UpdateHomeT.COMMENT,argument));
+            ServerUtils.startThread(new UpdateHomeT(player,homeName,UpdateHomeT.COMMENT,argument.getString()));
         }
         else{
             TextUtils.sendChatMessage(player,"请输入正确的操作参数，详见群文件“home系列指令的使用方法”");

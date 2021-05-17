@@ -20,7 +20,7 @@ public class RollRecordT extends Thread {
     }
 
     public void run() {
-        try {
+       /* try {
 
             java.util.Date date = new Date(System.currentTimeMillis());
             Timestamp param = new Timestamp(date.getTime());
@@ -31,8 +31,9 @@ public class RollRecordT extends Thread {
             psm.setInt(3, counts);
             psm.setString(4, items);
             psm.executeUpdate();
+            RDIEssentials.getSQLUtils().getSqlSession().commit();
         }catch (Exception e)
-        {e.printStackTrace();}
+        {e.printStackTrace();}*/
 
     }
 }

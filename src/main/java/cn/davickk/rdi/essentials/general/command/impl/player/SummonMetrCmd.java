@@ -1,4 +1,4 @@
-/*
+
 package cn.davickk.rdi.essentials.general.command.impl.player;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
@@ -39,10 +39,9 @@ public class SummonMetrCmd extends BaseCommand {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else TextUtils.sendChatMessage(player,"经验不足...")
+        }else TextUtils.sendChatMessage(player,"经验不足...");
 
         return Command.SINGLE_SUCCESS;
     }
 
 }
-*/

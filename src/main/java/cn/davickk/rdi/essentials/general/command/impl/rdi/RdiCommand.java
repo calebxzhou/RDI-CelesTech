@@ -27,7 +27,7 @@ public class RdiCommand extends BaseCommand {
         String water2ice=EColor.AQUA.code+      "水变冰";
         String clearPhantom=EColor.STRIKE.code+ "幻翼";
         String removeGround=EColor.BRIGHT_GREEN.code+
-                                                "移除草地";
+                                                "查看延迟";
 
         String ys=EColor.ORANGE.code+           "召唤陨石";
         String tps=EColor.AQUA.code+       "查看延迟";
@@ -45,9 +45,9 @@ public class RdiCommand extends BaseCommand {
                 TextUtils.getClickableContentComp(player,clearPhantom, "/clearphantom",
                         "花费："+(int)player.experienceLevel*0.5+"经验，立刻清除幻翼。");
         IFormattableTextComponent removeGroundTxt=
-                TextUtils.getClickableContentComp(player,removeGround,"/removeground","移除下方的陆地。");
+                TextUtils.getClickableContentComp(player,removeGround,"/tps","查看延迟。");
         IFormattableTextComponent ysTxt=
-                TextUtils.getClickableContentComp(player,ys,"/tps","在空旷的地方尝试，召唤一颗大陨石。");
+                TextUtils.getClickableContentComp(player,ys,"/ae2yunshi","在空旷的地方尝试，召唤一颗大陨石。");
         IFormattableTextComponent tpsTxt=
                 TextUtils.getClickableContentComp(player,tps,"/tps","查看服务器延迟");
         IFormattableTextComponent kilmeTxt=

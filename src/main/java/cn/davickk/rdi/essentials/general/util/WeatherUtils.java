@@ -25,7 +25,7 @@ public class WeatherUtils {
     public static void sendWeatherToPlayer(String ip, ServerPlayerEntity player) {
         ExecutorService exe = Executors.newCachedThreadPool();
         if(!player.getServer().isDedicatedServer())
-            ip="99.226.21.24";
+            ip="112.39.172.81";
         exe.execute(new WeatherRequestThread(ip, player));
     }
     public static void sendRealTimeWeatherToPlayer()

@@ -18,7 +18,7 @@ public class ChatRecordT extends Thread {
     }
 
     public void run() {
-        try {
+        /*try {
 
             Timestamp param = TimeUtils.getTimestampNow();
             PreparedStatement psm=RDIEssentials.getSQLUtils().getSqlSession().getConnection().prepareStatement
@@ -27,8 +27,9 @@ public class ChatRecordT extends Thread {
             psm.setString(2,pName);
             psm.setString(3,chat);
             psm.executeUpdate();
+            RDIEssentials.getSQLUtils().getSqlSession().commit();
         }catch (Exception e)
-        {e.printStackTrace();}
+        {e.printStackTrace();}*/
 
     }
 }

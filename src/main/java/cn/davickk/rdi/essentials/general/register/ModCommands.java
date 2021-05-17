@@ -53,7 +53,7 @@ public final class ModCommands {
         commands.add(new OnHandCommand("onhand", 0, true));
         commands.add(new Obsi2LavaCmd("obsi2lava",0,true));
         commands.add(new Water2IceCmd("water2ice",0,true));
-        //commands.add(new SummonMetrCmd("ae2yunshi",0,true));
+        commands.add(new SummonMetrCmd("ae2yunshi",0,true));
         //commands.add(new RtpsCommand("rfz", 0, true));
         commands.add(new RtpsCommand("tps", 0, true));
         commands.add(new SaveCommand("SAVE", 0, true));
@@ -82,10 +82,10 @@ public final class ModCommands {
         commands.add(new SetHomeCommand("sethome", 0, true));
         commands.add(new HomeActiveCommand("activhome", 0, true));
         commands.add(new HomeCommand("home", 0, true));
-        commands.add(new HomeListCommand("listhome", 0, true));
+        //commands.add(new HomeListCommand("listhome", 0, true));
         commands.add(new ActionsOfHomeCmd("actions4home",0,true));
         //commands.add(new FromOldHomeCommand("fromoldhome", 0, true));
-        commands.add(new ShareHomeCmd("sharehome",0,true));
+        //commands.add(new ShareHomeCmd("sharehome",0,true));
         commands.add(new UpdateHomeCmd("updatehome",0,true));
         commands.forEach((cmd) -> {
             if (cmd.isEnabled() && cmd.setExecution() != null) {
