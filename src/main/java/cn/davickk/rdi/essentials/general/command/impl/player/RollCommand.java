@@ -40,7 +40,7 @@ public class RollCommand extends BaseCommand {
         String z3="";
         String z5="";
         String z10="";
-        ServerPlayerEntity player= source.asPlayer();
+        ServerPlayerEntity player= source.getPlayerOrException();
 
         if(PlayerUtils.hasEnoughXPLvl(player,3))
             z1=EColor.ORANGE.code+"[转1次] ";
@@ -65,13 +65,13 @@ public class RollCommand extends BaseCommand {
     }
     private int execute(CommandSource source,int count){
         try {
-            if(PlayerUtils.minusXPLvl(source.asPlayer(), count*3)){
-                TextUtils.sendChatMessage(source.asPlayer(), "转盘运行中，不要退出游戏！！");
-                System.out.println(source.asPlayer().getDisplayName().getString()+"正在抽奖");
-                ServerUtils.startThread(new TechRollT(source.asPlayer(),count));
+            if(PlayerUtils.minusXPLvl(source.getPlayerOrException(), count*3)){
+                TextUtils.sendChatMessage(source.getPlayerOrException(), "转盘运行中，不要退出游戏！！");
+                System.out.println(source.getPlayerOrException().getDisplayName().getString()+"正在抽奖");
+                ServerUtils.startThread(new TechRollT(source.getPlayerOrException(),count));
             }
             else
-                TextUtils.sendChatMessage(source.asPlayer(), "经验不足");
+                TextUtils.sendChatMessage(source.getPlayerOrException(), "经验不足");
         } catch (Exception e) {
             e.printStackTrace();
         }

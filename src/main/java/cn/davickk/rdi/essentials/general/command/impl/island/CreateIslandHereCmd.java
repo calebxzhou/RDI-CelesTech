@@ -20,7 +20,7 @@ public class CreateIslandHereCmd extends BaseCommand {
     private int execute(CommandSource source) throws CommandSyntaxException {
         //----RDI Aerotech新技术空岛系统 版本v1.0---
         //[创建岛] [回岛]
-        ServerUtils.startThread(new CreateIslandHereT(source.asPlayer()));
+        ServerUtils.startThread(new CreateIslandHereT(source.getPlayerOrException()));
         return Command.SINGLE_SUCCESS;
     }
 }

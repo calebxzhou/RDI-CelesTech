@@ -60,7 +60,7 @@ public class WorldUtils {
         ClipboardReader reader = format.getReader(new FileInputStream(file));
         clipboard = reader.read();
         try(EditSession session = WorldEdit.getInstance().getEditSessionFactory()
-                .getEditSession(ForgeAdapter.adapt(player.world), -1)){
+                .getEditSession(ForgeAdapter.adapt(player.getCommandSenderWorld()), -1)){
             Operation operation = new ClipboardHolder(clipboard)
                     .createPaste(session)
                     .to(BlockVector3.at(loc.getX()-1, loc.getY(), loc.getZ()))
@@ -72,7 +72,7 @@ public class WorldUtils {
         }
     }
     public static void clearMob(PlayerEntity player,String mobName){
-        player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),
+        player.getServer().getCommands().performCommand(player.getServer().createCommandSourceStack(),
                 "kill @e[type="+mobName+"]");
     }
     public static void removeGround(ServerPlayerEntity player){
@@ -84,7 +84,7 @@ public class WorldUtils {
                 .replace("%x2",(iloc.x+40)+"")
                 .replace("%z2",(iloc.z+40)+"");
         System.out.println(fillcmd);
-        player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),fillcmd);
+        player.getServer().getCommands().performCommand(player.getServer().createCommandSourceStack(),fillcmd);
 
     }
     public static void pasteSchematic(PlayerEntity player,IslandLocation loc,String schem) throws IOException, WorldEditException {
@@ -94,7 +94,7 @@ public class WorldUtils {
         ClipboardReader reader = format.getReader(new FileInputStream(file));
         clipboard = reader.read();
         try(EditSession session = WorldEdit.getInstance().getEditSessionFactory()
-                .getEditSession(ForgeAdapter.adapt(player.world), -1)){
+                .getEditSession(ForgeAdapter.adapt(player.getCommandSenderWorld()), -1)){
             System.out.println(loc.x+" "+loc.y+" "+loc.z);
             Operation operation = new ClipboardHolder(clipboard)
                     .createPaste(session)
@@ -115,7 +115,7 @@ public class WorldUtils {
         ClipboardReader reader = format.getReader(new FileInputStream(file));
         clipboard = reader.read();
         try(EditSession session = WorldEdit.getInstance().getEditSessionFactory()
-                .getEditSession(ForgeAdapter.adapt(player.getServerWorld()), -1)){
+                .getEditSession(ForgeAdapter.adapt(player.getCommandSenderWorld()), -1)){
             System.out.println(bpos.getX()+" "+bpos.getY()+" "+bpos.getZ());
             Operation operation = new ClipboardHolder(clipboard)
                     .createPaste(session)

@@ -25,7 +25,7 @@ public class SummonMetrCmd extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player=source.asPlayer();
+        ServerPlayerEntity player=source.getPlayerOrException();
         Location loca=new Location(player);
         if(WorldUtils.ifNearbySpawn(loca)){
             TextUtils.sendChatMessage(player,"您不可以在主城召唤陨石。");

@@ -27,12 +27,12 @@ public class ActionsOfHomeCmd extends BaseCommand {
 
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        sendMessage(source.asPlayer(),"请指定家的名称，以查看具体操作");
+        sendMessage(source.getPlayerOrException(),"请指定家的名称，以查看具体操作");
         return Command.SINGLE_SUCCESS;
     }
     private int execute(CommandSource source, String homeName) throws CommandSyntaxException {
-        ServerPlayerEntity player=source.asPlayer();
-        ServerUtils.startThread(new ActionsOfHomeT(source.asPlayer(),homeName));
+        ServerPlayerEntity player=source.getPlayerOrException();
+        ServerUtils.startThread(new ActionsOfHomeT(source.getPlayerOrException(),homeName));
         return Command.SINGLE_SUCCESS;
     }
 }

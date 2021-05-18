@@ -26,14 +26,14 @@ public class HomeActiveCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        TextUtils.sendChatMessage(source.asPlayer(), "请指定家的名称");
+        TextUtils.sendChatMessage(source.getPlayerOrException(), "请指定家的名称");
 
         return Command.SINGLE_SUCCESS;
     }
 
     private int execute(CommandSource source, String homeName) throws CommandSyntaxException {
-        PlayerUtils.sendLoading(source.asPlayer());
-        ServerUtils.startThread(new HomeActiveThread(source.asPlayer(), homeName));
+        PlayerUtils.sendLoading(source.getPlayerOrException());
+        ServerUtils.startThread(new HomeActiveThread(source.getPlayerOrException(), homeName));
         return Command.SINGLE_SUCCESS;
     }
 }

@@ -26,7 +26,7 @@ public class DelHomeCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
         sendMessage(player, "您想删除哪个家？");
         TextUtils.clickableContent2Send(player, EColor.YELLOW.code+"[查看所有的家]","/listhome");
         //TextComponent text=new StringTextComponent("请指定家的名称");
@@ -36,7 +36,7 @@ public class DelHomeCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source, String homeName) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
         ServerUtils.startThread(new DelhomeThread(player,homeName));
 
         return Command.SINGLE_SUCCESS;

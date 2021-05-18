@@ -29,7 +29,7 @@ public class PlayerSuicideCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();/*
+        ServerPlayerEntity player = source.getPlayerOrException();/*
         EssentialPlayer eslPlayer = DataManager.getPlayer(player);
 
         long cooldown = eslPlayer.getUsage().getCommandCooldown("suicide", ModConfig.suicide_player_cooldown);
@@ -43,7 +43,7 @@ public class PlayerSuicideCommand extends BaseCommand {
 
         doSuicide(player);
         MinecraftServer mcs = source.getServer();
-        mcs.getCommandManager().handleCommand(mcs.getCommandSource(), "mek radiation removeAll");
+        mcs.getCommands().performCommand(mcs.createCommandSourceStack(), "mek radiation removeAll");
         TextUtils.sendGlobalChatMessage(mcs.getPlayerList(), player.getDisplayName().getString() + " ´óº°Ò»Éù £ººßºß °¡  ºß°¡°¡°¡°¡°¡°¡°¡°¡°¡");
         return Command.SINGLE_SUCCESS;
     }

@@ -20,7 +20,7 @@ public class HomeListCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerUtils.startThread(new HomeListThread(source.asPlayer()));
+        ServerUtils.startThread(new HomeListThread(source.getPlayerOrException()));
         return Command.SINGLE_SUCCESS;
     }
 }

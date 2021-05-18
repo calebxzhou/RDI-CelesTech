@@ -20,11 +20,11 @@ public class KickMeCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
         MinecraftServer server=player.getServer();
-        server.getCommandManager().handleCommand(server.getCommandSource(),"kick "+player.getDisplayName().getString()+"您已退出服务器\n重新进入服务器后方可恢复正常");
+        server.getCommands().performCommand(server.createCommandSourceStack(),"kick "+player.getDisplayName().getString()+"您已退出服务器\n重新进入服务器后方可恢复正常");
         /*Location ploc = new Location(player);
-       // if(player.getServerWorld().getWorldInfo())
+       // if(player.getCommandSenderWorld().getWorldInfo())
 
         double x=ploc.x;
         double y=ploc.y;

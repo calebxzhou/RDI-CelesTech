@@ -2,8 +2,10 @@ package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.enums.EColor;
+import cn.davickk.rdi.essentials.general.thread.blockrec.BlockRecThread;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.RandomUtils;
+import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,6 +21,9 @@ import net.minecraftforge.fml.common.Mod;
 public class EventPlayerBlock {
     @SubscribeEvent
     public static void onPlayerPlace(BlockEvent.EntityPlaceEvent event){
+        //方块放置记录
+        ServerUtils.startThread(new BlockRecThread(event));
+
         Entity entity =event.getEntity();
         if(entity instanceof PlayerEntity){
             PlayerEntity player=(PlayerEntity) entity;
@@ -53,6 +58,7 @@ public class EventPlayerBlock {
     }
     @SubscribeEvent
     public static void onPlayerDestory(BlockEvent.BreakEvent event) {
+        ServerUtils.startThread(new BlockRecThread(event));
         try {
             ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
             BlockState blockS = event.getState();
@@ -60,13 +66,10 @@ public class EventPlayerBlock {
             Block block=blockS.getBlock();
             if(event.getPos().getY()<PlayerUtils.LOWEST_LIMIT)
                 return;
-            //System.out.println(block.getRegistryNamed().toString());
-            //System.out.println(block.getRegistryType().toString());
-
             if(block.getRegistryName().toString().contains("leaves")){
                 //System.out.println(player.getHeldItemMainhand().getDisplayName().getString());
-                if(player.getHeldItemMainhand().getItem() instanceof SwordItem){
-                    int stack=player.inventory.getFirstEmptyStack();
+                if(player.getMainHandItem().getItem() instanceof SwordItem){
+                    int stack=player.inventory.getFreeSlot();
                     if(PlayerUtils.hasInventorySpace(player))
                         PlayerUtils.givePlayerItem(player,"apple",1);
                         /*player.inventory.add(stack, new ItemStack(
@@ -74,21 +77,21 @@ public class EventPlayerBlock {
                 }else{
                     int ran=RandomUtils.generateRandomInt(1,1000);
                     if(ran<100){
-                        int stack=player.inventory.getFirstEmptyStack();
+                        int stack=player.inventory.getFreeSlot();
                         if(PlayerUtils.hasInventorySpace(player)){
                             TextUtils.sendChatMessage(player,"在树上发现了一个苹果~");
                             PlayerUtils.givePlayerItem(player,"apple",1);
                         }
                     }else
                     if(ran>995){
-                        int stack=player.inventory.getFirstEmptyStack();
+                        int stack=player.inventory.getFreeSlot();
                         if(PlayerUtils.hasInventorySpace(player)){
                             TextUtils.sendChatMessage(player,"在树上发现了一个金苹果！！");
                             PlayerUtils.givePlayerItem(player,"golden_apple",1);
                         }
                     }else
                     if(ran==666){
-                        int stack=player.inventory.getFirstEmptyStack();
+                        int stack=player.inventory.getFreeSlot();
                         if(PlayerUtils.hasInventorySpace(player)){
                             TextUtils.sendGlobalChatMessage(player.getServer().getPlayerList(),
                                     EColor.GOLD.code+player.getDisplayName().getString()+"在树上发现了一个附魔金苹果！！！");
@@ -109,7 +112,7 @@ public class EventPlayerBlock {
                     }
                 }
             }
-            if(player.getServerWorld().getDimensionKey().getLocation().toString().contains("nether"))
+            if(player.getCommandSenderWorld().dimension().getRegistryName().toString().contains("nether"))
                 if(block.getRegistryName().toString().contains("lava")){
                     event.setCanceled(true);
                 }

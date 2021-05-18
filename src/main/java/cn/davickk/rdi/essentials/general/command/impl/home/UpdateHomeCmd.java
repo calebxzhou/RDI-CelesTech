@@ -62,7 +62,7 @@ public class UpdateHomeCmd extends BaseCommand {
 //将 当前所在位置 设置为 空岛传送点位置 /updatehome island --locate here
     //将 传送点aaa 更名为 bbb /updatehome aaa --rename bbb
     private int execute(CommandSource source, String homeName, String opration, ITextComponent argument) throws CommandSyntaxException {
-        ServerPlayerEntity player=source.asPlayer();
+        ServerPlayerEntity player=source.getPlayerOrException();
         if(!this.oprationList.contains(opration)){
             TextUtils.sendChatMessage(player,"请输入正确的操作参数，详见群文件“home系列指令的使用方法”");
             return Command.SINGLE_SUCCESS;
@@ -82,15 +82,15 @@ public class UpdateHomeCmd extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        TextUtils.sendChatMessage(source.asPlayer(),"请输入完整指令，详见群文件“home系列指令的使用方法”");
+        TextUtils.sendChatMessage(source.getPlayerOrException(),"请输入完整指令，详见群文件“home系列指令的使用方法”");
         return Command.SINGLE_SUCCESS;
     }
     private int execute(CommandSource source,String homeName) throws CommandSyntaxException {
-        TextUtils.sendChatMessage(source.asPlayer(),"请输入完整指令，详见群文件“home系列指令的使用方法”");
+        TextUtils.sendChatMessage(source.getPlayerOrException(),"请输入完整指令，详见群文件“home系列指令的使用方法”");
         return Command.SINGLE_SUCCESS;
     }
     private int execute(CommandSource source,String homeName,String opration) throws CommandSyntaxException {
-        TextUtils.sendChatMessage(source.asPlayer(),"请输入完整指令，详见群文件“home系列指令的使用方法”");
+        TextUtils.sendChatMessage(source.getPlayerOrException(),"请输入完整指令，详见群文件“home系列指令的使用方法”");
         return Command.SINGLE_SUCCESS;
     }
 }

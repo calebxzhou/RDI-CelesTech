@@ -95,22 +95,20 @@ public final class PlayerUtils {
         //早上好，XXX，现在是yyyy年MM月DD日
         TextUtils.sendChatMessage(player,
                 charTime + "好 " + player.getDisplayName().getString() + ",欢迎回到RDI。");
-        if(player.getServer().getServerPort()==28524)
-            TextUtils.sendChatMessage(player,"您当前游玩的是空岛1.0服务器，您可以在5月24日晚9时之前将数据迁移至空岛2.0服务器，逾期将关闭迁移功能。");
-        }
+    }
     public static String getUUID(ServerPlayerEntity player)
     {
-        return player.getUniqueID().toString();
+        return player.getUUID().toString();
     }
 
     public static void doSuicide(ServerPlayerEntity player) {
-        player.onKillCommand();
+        player.kill();
     }
 
     public static boolean minusXPLvl(PlayerEntity player,int lvl2Minus){
         if(hasEnoughXPLvl(player,lvl2Minus))
         {
-            player.addExperienceLevel(-lvl2Minus);
+            player.giveExperienceLevels(-lvl2Minus);
             return true;
         }else return false;
     }
@@ -120,20 +118,20 @@ public final class PlayerUtils {
     public static void sendLoading(ServerPlayerEntity player) {
         ServerUtils.startThread(new LoadingT(player,1500));
     }
-    public static List<PlayerEntity> getNearbyPlayersInRange(ServerPlayerEntity player,int range){
+    /*public static List<PlayerEntity> getNearbyPlayersInRange(ServerPlayerEntity player,int range){
         Vector3d pos=player.getPositionVec();
         Vector3d pos1=new Vector3d(pos.x-range, pos.y-range, pos.z-range);
         Vector3d pos2=new Vector3d(pos.x+range,pos.y+range,pos.z+range);
         AxisAlignedBB boundBox=new AxisAlignedBB(pos1,pos2);
-        return player.getEntityWorld().getEntitiesWithinAABB(EntityType.PLAYER,boundBox, PlayerEntity::isUser);
-    }
+        return player.getCommandSenderWorld().getEntitiesWithinAABB(EntityType.PLAYER,boundBox, PlayerEntity::isUser);
+    }*/
     public static void randomTeleport(ServerPlayerEntity player,boolean glass){
         int x=RandomUtils.generateRandomInt(-9999,9999);
         int z=RandomUtils.generateRandomInt(-9999,9999);
         Location isl=new Location(x+0.5,220,z+0.5,0,0,"minecraft:overworld");
         teleportPlayer(player,isl);
         if(glass)
-            player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),
+            player.getServer().getCommands().performCommand(player.getServer().createCommandSourceStack(),
                     "fill "+x+" 219 "+z+" "+x+" 219 "+z+" minecraft:glass");
 
     }
@@ -149,7 +147,7 @@ public final class PlayerUtils {
                 .replace("%y", String.valueOf(loca.y))
                 .replace("%z", String.valueOf(loca.z));
         //System.out.println(cmd);
-        server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
+        server.getCommands().performCommand(server.createCommandSourceStack(),cmd);*/
     }
     public static void teleportPlayer(PlayerEntity player, BlockPos loca){
         teleportPlayer(player,new ResourceLocation("minecraft:overworld"),
@@ -163,7 +161,7 @@ public final class PlayerUtils {
                 .replace("%y", String.valueOf(loca.y))
                 .replace("%z", String.valueOf(loca.z));
         //System.out.println(cmd);
-        server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
+        server.getCommands().performCommand(server.createCommandSourceStack(),cmd);*/
     }
     public static void teleportPlayer(PlayerEntity player, Location loca){
         teleportPlayer(player,loca.getDims(),loca.getX(),loca.getY(),loca.getZ(),loca.getYaw(),loca.getPitch());
@@ -180,7 +178,7 @@ public final class PlayerUtils {
                 .replace("%y", String.valueOf(y))
                 .replace("%z", String.valueOf(z));
         //System.out.println(cmd);
-        server.getCommandManager().handleCommand(server.getCommandSource(),cmd);
+        server.getCommands().performCommand(server.createCommandSourceStack(),cmd);
     }
     public static boolean givePlayerItem(ServerPlayerEntity player, String id, int amount) throws CommandSyntaxException {
         ItemInput ia=ItemArgument.item().parse(new StringReader(id));
@@ -188,12 +186,12 @@ public final class PlayerUtils {
         String cmd="give %player %id %amount".replace("%player",player.getDisplayName().getString())
                 .replace("%id",id).replace("%amount",amount+"");
         System.out.println(cmd);
-        server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
-        ItemStack stack=ia.createStack(amount,false);
-        return player.inventory.addItemStackToInventory(stack);
+        server.getCommands().performCommand(server.createCommandSourceStack(),cmd);*/
+        ItemStack stack=ia.createItemStack(amount,false);
+        return player.inventory.add(stack);
     }
     public static boolean hasInventorySpace(ServerPlayerEntity player){
-        int stack=player.inventory.getFirstEmptyStack();
+        int stack=player.inventory.getFreeSlot();
         if(stack==-1)
             return false;
         else
@@ -201,7 +199,7 @@ public final class PlayerUtils {
     }
     public static BlockPos lookingAtBlock(PlayerEntity player, boolean isFluid){
         RayTraceResult rays=player.pick(6,1.0f,isFluid);
-        Vector3d lookat=rays.getHitVec();
+        Vector3d lookat=(Vector3d) rays.hitInfo;
         return new BlockPos(lookat);
     }
     public static char facing(ServerPlayerEntity player){
@@ -221,8 +219,8 @@ public final class PlayerUtils {
     public static int getEmptySlotsInventory(ServerPlayerEntity player){
         PlayerInventory inv=player.inventory;
         int emptySlots=0;
-        for(int i=0; i<inv.mainInventory.size();++i) {
-            if (inv.mainInventory.get(i).isEmpty()) {
+        for(int i=0; i<inv.items.size();++i) {
+            if (inv.items.get(i).isEmpty()) {
                 ++emptySlots;
             }
         }

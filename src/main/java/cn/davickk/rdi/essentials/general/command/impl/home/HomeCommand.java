@@ -35,7 +35,7 @@ public class HomeCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
         //sendMessage(player, "请输入家的名称");
         TextUtils.clickableContent2Send(player, EColor.ORANGE.code+"------RDI Home系统 版本v3.0------","",
                 "感谢KenRoKoro,pop751899,SampsonnZ,YIYIXinAn对于本系统作出的建议和贡献（排名不分先后）");
@@ -45,7 +45,7 @@ public class HomeCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source, String homeName) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
         ServerUtils.startThread(new HomeThread(player, homeName));
         return Command.SINGLE_SUCCESS;
     }

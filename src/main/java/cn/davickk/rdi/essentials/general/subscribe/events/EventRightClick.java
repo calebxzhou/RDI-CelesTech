@@ -21,7 +21,7 @@ public class EventRightClick {
     /*@SubscribeEvent
     public static void onLeftClick(PlayerInteractEvent.LeftClickBlock event){
         PlayerEntity player = event.getPlayer();
-        if(player.getEntityWorld().getBlockState(event.getPos()).getBlock().getRegistryName().toString().contains("sign")){
+        if(player.getCommandSenderWorld().getBlockState(event.getPos()).getBlock().getRegistryName().toString().contains("sign")){
             TileEntity te=player.world.getTileEntity(event.getPos());
             if(te!=null && te instanceof SignTileEntity){
                 try {
@@ -40,8 +40,8 @@ public class EventRightClick {
                     return;
                 else{
                     MinecraftServer serv=player.getServer();
-                    serv.getCommandManager().handleCommand
-                            (player.getCommandSource(),
+                    serv.getCommands().performCommand
+                            (player.createCommandSourceStack(),
                                     signLine2CmdTxt.getString());
                 }
                 TextUtils.sendChatMessage(player,"这个牌子内置了指令。正在读取....");}*//*
@@ -57,8 +57,8 @@ public class EventRightClick {
         //System.out.println(heldItem.getRegistryName());
         if(heldItem == Items.BONE) {
             BlockPos lookingAt=event.getPos();
-            BlockState blockS=player.getEntityWorld().getBlockState(lookingAt);
-            //player.getEntityWorld().setBlockState(lookingAt, Blocks.AIR.getDefaultState());
+            BlockState blockS=player.getCommandSenderWorld().getBlockState(lookingAt);
+            //player.getCommandSenderWorld().setBlockState(lookingAt, Blocks.AIR.getDefaultState());
             //System.out.println(blockS.getBlock().getRegistryName().toString());
             if(!blockS.getBlock().getRegistryName().toString().contains("sapling"))
                 return;

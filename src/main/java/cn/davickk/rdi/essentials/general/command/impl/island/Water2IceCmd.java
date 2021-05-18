@@ -25,17 +25,17 @@ public class Water2IceCmd extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player=source.asPlayer();
+        ServerPlayerEntity player=source.getPlayerOrException();
         if(!PlayerUtils.minusXPLvl(player,10)){
             TextUtils.sendChatMessage(player,"执行本操作需要10经验，您的经验不足。");
             return Command.SINGLE_SUCCESS;
         }
         BlockPos blockp= PlayerUtils.lookingAtBlock(player,true);
-        BlockState blocks=player.getServerWorld().getBlockState(blockp);
+        BlockState blocks=player.getCommandSenderWorld().getBlockState(blockp);
         if(blocks.getBlock().getRegistryName().getPath().contains("water")){
             sendMessage(player,"成功把水冻住了。");
             player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP,1.0f,0.5f);
-            player.getServerWorld().setBlockState(blockp, Blocks.ICE.getDefaultState());
+            player.getCommandSenderWorld().setBlockState(blockp, Blocks.ICE.getDefaultState());
         }else{
             TranslationTextComponent blockname=new TranslationTextComponent(blocks.getBlock().getTranslationKey());
             sendMessage(player,"请从东/南向对准"+ EColor.AQUA.code+"冰块"+EColor.RESET.code +

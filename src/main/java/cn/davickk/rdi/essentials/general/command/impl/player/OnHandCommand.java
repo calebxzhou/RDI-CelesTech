@@ -24,7 +24,7 @@ public class OnHandCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
         try {
             ItemStack itm = player.getHeldItemMainhand();
             Item it = itm.getItem();
@@ -46,7 +46,7 @@ public class OnHandCommand extends BaseCommand {
             e.printStackTrace();
         }
         /*Location ploc = new Location(player);
-       // if(player.getServerWorld().getWorldInfo())
+       // if(player.getCommandSenderWorld().getWorldInfo())
 
         double x=ploc.x;
         double y=ploc.y;

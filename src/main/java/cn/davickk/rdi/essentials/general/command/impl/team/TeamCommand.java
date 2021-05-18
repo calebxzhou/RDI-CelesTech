@@ -25,7 +25,7 @@ public class TeamCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
         //sendMessage(player, "请输入家的名称");
         TextUtils.clickableContent2Send(player,"------RDI Coop 1.0------","",
                 "");
@@ -46,7 +46,7 @@ public class TeamCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source, String opr) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
 
         /*if(opr.equals("join"))
             else if(opr.equals("create"))

@@ -29,22 +29,22 @@ public class Location {
         this.dims=new ResourceLocation(dims);
     }
 
-    public Location(ServerPlayerEntity player) {
-        this.x = player.getPosX();
-        this.y = player.getPosY();
-        this.z = player.getPosZ();
-        this.yaw = player.rotationYaw;
-        this.pitch = player.rotationPitch;
-        this.dims=player.getEntityWorld().getDimensionKey().getLocation();
-    }
+   /* public Location(ServerPlayerEntity player) {
+        this.x = player.getX();
+        this.y = player.getY();
+        this.z = player.getZ();
+        this.yaw = player.xRot;
+        this.pitch = player.yRot;
+        this.dims=player.getCommandSenderWorld().dimension().location();
+    }*/
 
     public Location(PlayerEntity player) {
-        this.x = player.getPosX();
-        this.y = player.getPosY();
-        this.z = player.getPosZ();
-        this.yaw = player.rotationYaw;
-        this.pitch = player.rotationPitch;
-        this.dims=player.getEntityWorld().getDimensionKey().getLocation();
+        this.x = player.getX();
+        this.y = player.getY();
+        this.z = player.getZ();
+        this.yaw = player.xRot;
+        this.pitch = player.yRot;
+        this.dims=player.getCommandSenderWorld().dimension().location();
         //this.playerEntity = player;
     }
 

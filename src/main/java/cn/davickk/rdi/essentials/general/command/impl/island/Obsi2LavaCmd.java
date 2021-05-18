@@ -24,9 +24,9 @@ public class Obsi2LavaCmd extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player=source.asPlayer();
+        ServerPlayerEntity player=source.getPlayerOrException();
         BlockPos blockp= PlayerUtils.lookingAtBlock(player,false);
-        BlockState blocks=player.getServerWorld().getBlockState(blockp);
+        BlockState blocks=player.getCommandSenderWorld().getBlockState(blockp);
         if(PlayerUtils.hasEnoughXPLvl(player,2)){
             sendMessage(player,"您的能力太强了，无法执行。");
             return Command.SINGLE_SUCCESS;
@@ -35,7 +35,7 @@ public class Obsi2LavaCmd extends BaseCommand {
             sendMessage(player,"成功把黑曜石熔为岩浆。");
             player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP,1.0f,0.5f);
             //PlayerUtils.givePlayerItem(player,"minecraft:lava_bucket",1);
-            player.getServerWorld().setBlockState(blockp, Fluids.LAVA.getDefaultState().getBlockState());
+            player.getCommandSenderWorld().setBlockState(blockp, Fluids.LAVA.getDefaultState().getBlockState());
         }else{
             TranslationTextComponent blockname=new TranslationTextComponent(blocks.getBlock().getTranslationKey());
             sendMessage(player,"请从东/南向对准"+ EColor.PURPLE.code+"黑曜石的侧面"+EColor.RESET.code+

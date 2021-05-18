@@ -27,13 +27,13 @@ public class TpYesCommand extends BaseCommand {
 
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
         TextUtils.sendChatMessage(player,"本功能需要RDI Request ID，如果不知道这是什么，请直接点“接受”按钮，不要使用本指令");
         return Command.SINGLE_SUCCESS;
     }
 
     private int execute(CommandSource source, String reqid) throws CommandSyntaxException {
-        ServerPlayerEntity toPlayer = source.asPlayer();
+        ServerPlayerEntity toPlayer = source.getPlayerOrException();
         ServerUtils.startThread(new AcceptTpaRequestT(toPlayer,reqid));
         return Command.SINGLE_SUCCESS;
     }

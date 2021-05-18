@@ -16,20 +16,18 @@ import java.sql.SQLException;
 public class EventLivingDeath {
 
     @SubscribeEvent
-    public static void onDeath(LivingDeathEvent event) throws SQLException, ClassNotFoundException {
+    public static void onDeath(LivingDeathEvent event){
         if (!(event.getEntity() instanceof PlayerEntity))
             return;
         PlayerEntity player=(PlayerEntity) event.getEntity();
-        //ServerUtils.startThread(new BackThread(player, EBack.RECORD));
-        //ServerUtils.startThread(new DeathItemT(player, EDeathItemReq.RECORD));
         for(int i=0;i<20;i++){
             int ran= RandomUtils.generateRandomInt(1,35);
-            ItemStack stack2Drop = player.inventory.getStackInSlot(ran);
+            ItemStack stack2Drop = player.inventory.getItem(ran);
             if(stack2Drop.isEmpty())
                 continue;
-            player.inventory.deleteStack(stack2Drop);
-            World w=player.getEntityWorld();
-            w.addEntity(new ItemEntity(w,player.getPosX()+0.5f,player.getPosY()+1.1f,player.getPosZ()+0.5f,
+            player.inventory.removeItem(stack2Drop);
+            World w=player.getCommandSenderWorld();
+            w.addFreshEntity(new ItemEntity(w,player.getX()+0.5f,player.getY()+1.1f,player.getZ()+0.5f,
                     stack2Drop));
             //String itemNbt = stack2Drop.serializeNBT().toString();
         }

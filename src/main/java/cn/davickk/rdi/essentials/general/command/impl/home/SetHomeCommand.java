@@ -26,14 +26,14 @@ public class SetHomeCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
         sendMessage(player, "请输入家的名称，例如 111, a, jia");
         //doSetHome(player, "home");
         return Command.SINGLE_SUCCESS;
     }
 
     private int execute(CommandSource source, String homeName) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
 
         PlayerUtils.sendLoading(player);
 

@@ -51,7 +51,7 @@ public class EventWorldTick {
                 TextUtils.sendGlobalChatMessage(playerList, "已清理掉落物");
                 TextUtils.sendGlobalChatMessage(playerList, "提示：输入指令/SAVE可以手动存档，避免回档");
                 MinecraftServer mcs = event.world.getServer();
-                mcs.getCommandManager().handleCommand(mcs.getCommandSource(), "kill @e[type=item]");
+                mcs.getCommands().performCommand(mcs.createCommandSourceStack(), "kill @e[type=item]");
                 mcs.save(false, false, true);
                 tickCounter = 0;
             } else {

@@ -16,7 +16,7 @@ public class RinvRequest {
     public RinvRequest(ServerPlayerEntity player){
         RINV_MAPPER = SQL_SESSION.getMapper(IRinvMapper.class);
         PLAYER=player;
-        UUID=player.getUniqueID().toString();
+        UUID=player.getUUID().toString();
         PLAYER_NAME=player.getDisplayName().getString();
     }
     public void put(String uuid,String playerName,String serializedNbt){

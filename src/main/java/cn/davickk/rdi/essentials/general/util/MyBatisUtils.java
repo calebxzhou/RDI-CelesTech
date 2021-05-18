@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import java.io.IOException;
 import java.io.Reader;
 
-public class SQLUtils {
+public class MyBatisUtils {
     /*public static final String DB_URL = "jdbc:mysql://cdb-p243thok.cd.tencentcdb.com:10083/rdi?useSSL=true";
     public static final String USR= "root";
     public static final String PWD = "dmts_avia";
@@ -19,7 +19,7 @@ public class SQLUtils {
     /*private static HikariConfig config = new HikariConfig();
     private static HikariDataSource ds;*/
 
-    public SQLUtils(){
+    public MyBatisUtils(){
         try {
             CONF_RES=Resources.getResourceAsReader("SqlMapConfig.xml");
             SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(CONF_RES);

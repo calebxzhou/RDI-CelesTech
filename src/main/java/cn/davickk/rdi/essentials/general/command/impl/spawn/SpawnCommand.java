@@ -29,8 +29,8 @@ public class SpawnCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
-        IWorldInfo worldInfo = player.getServerWorld().getWorldInfo();
+        ServerPlayerEntity player = source.getPlayerOrException();
+        IWorldInfo worldInfo = player.getCommandSenderWorld().getWorldInfo();
         int x = worldInfo.getSpawnX();
         int y = worldInfo.getSpawnY();
         int z = worldInfo.getSpawnZ();

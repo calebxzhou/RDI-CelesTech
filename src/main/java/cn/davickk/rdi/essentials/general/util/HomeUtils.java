@@ -16,7 +16,7 @@ public class HomeUtils {
     }
 //对应的服务器有对应的home表
     /*public static String getHomeDBTable(ServerPlayerEntity player){
-        return SQLUtils.getHomeTable(player.getServer().getServerPort());
+        return MyBatisUtils.getHomeTable(player.getServer().getServerPort());
     }*/
 
     //这个家是否已经存在了？在玩家中

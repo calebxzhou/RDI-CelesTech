@@ -1,7 +1,7 @@
 package cn.davickk.rdi.essentials;
 
 import cn.davickk.rdi.essentials.general.register.ModCommands;
-import cn.davickk.rdi.essentials.general.util.SQLUtils;
+import cn.davickk.rdi.essentials.general.util.MyBatisUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,12 +33,12 @@ public class RDIEssentials {
         MinecraftForge.EVENT_BUS.register(this);
 
     }
-    public static SQLUtils getSQLUtils(){
-        return new SQLUtils();
+    public static MyBatisUtils getSQLUtils(){
+        return new MyBatisUtils();
     }
         @SubscribeEvent
         public void onServerStarting(FMLServerStartingEvent event) {
-            //sqlu=new SQLUtils();
+            //sqlu=new MyBatisUtils();
         }
 
     @SubscribeEvent

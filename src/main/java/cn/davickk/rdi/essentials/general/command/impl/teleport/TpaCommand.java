@@ -26,7 +26,7 @@ public class TpaCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source, ServerPlayerEntity toPlayer) throws CommandSyntaxException {
-        ServerPlayerEntity fromPlayer = source.asPlayer();
+        ServerPlayerEntity fromPlayer = source.getPlayerOrException();
         if(fromPlayer==toPlayer){
             TextUtils.sendChatMessage(fromPlayer,"身体被一股奇怪的力量吸住了，动弹不得.....");
             fromPlayer.addPotionEffect(new EffectInstance(Effects.SLOWNESS,10*20,5));

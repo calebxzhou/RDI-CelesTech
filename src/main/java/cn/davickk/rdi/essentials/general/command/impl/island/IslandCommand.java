@@ -21,7 +21,7 @@ public class IslandCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player=source.asPlayer();
+        ServerPlayerEntity player=source.getPlayerOrException();
         sendMessage(player, EColor.ORANGE.code+"--RDI System "+ RDIEssentials.VERSION+"--");
         ServerUtils.startThread(new IslandMenuT(player));
         //----RDI Aerotech新技术空岛系统 版本v1.0---

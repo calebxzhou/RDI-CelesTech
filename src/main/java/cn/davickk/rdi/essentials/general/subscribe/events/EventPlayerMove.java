@@ -48,7 +48,7 @@ public class EventPlayerMove {
     public static void onMove(TickEvent.PlayerTickEvent event) {
         PlayerEntity player=event.player;
 
-            if(player.getPosY()<PlayerUtils.LOWEST_LIMIT){
+            if(player.getY()<PlayerUtils.LOWEST_LIMIT){
             //if(PlayerUtils.minusXPLvl(player,1)){
                 //IslandLocation loca=new IslandLocation(player);
                 //loca.y+=200;
@@ -72,14 +72,14 @@ public class EventPlayerMove {
 
         if(moveCounter==20*15){
 
-            List<BlockPos> coords = getNearestBlocks(player.getEntityWorld(), new BlockPos(player.getPositionVec()));
+            List<BlockPos> coords = getNearestBlocks(player.getCommandSenderWorld(), new BlockPos(player.getPositionVec()));
             for (BlockPos pos : coords)
             {
-                Block block = player.getEntityWorld().getBlockState(pos).getBlock();
+                Block block = player.getCommandSenderWorld().getBlockState(pos).getBlock();
 
                     if (block instanceof SaplingBlock)
                     {
-                        BoneMealItem.applyBonemeal(new ItemStack(Items.BONE_MEAL), player.getEntityWorld(), pos, player);
+                        BoneMealItem.applyBonemeal(new ItemStack(Items.BONE_MEAL), player.getCommandSenderWorld(), pos, player);
                         counterFullCount++;
                         TextUtils.sendActionMessage(player,"生长概率"+ counterFullCount*RandomUtils.generateRandomInt(10,16)+"%\n树苗生长点数 300/300");
                         break;

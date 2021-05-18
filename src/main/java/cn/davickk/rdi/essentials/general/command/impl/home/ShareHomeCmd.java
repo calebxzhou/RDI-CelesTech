@@ -31,11 +31,11 @@ public class ShareHomeCmd extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        TextUtils.sendChatMessage(source.asPlayer(),"用法：/sharehome island <玩家名>");
+        TextUtils.sendChatMessage(source.getPlayerOrException(),"用法：/sharehome island <玩家名>");
         return Command.SINGLE_SUCCESS;
     }
     private int execute(CommandSource source,String homeName,String player2Share) throws CommandSyntaxException {
-        ServerPlayerEntity player=source.asPlayer();
+        ServerPlayerEntity player=source.getPlayerOrException();
         ServerUtils.startThread(new ShareHomeT(player,homeName,player2Share));
         return Command.SINGLE_SUCCESS;
     }

@@ -12,9 +12,9 @@ public class IslandLocation{
         this.z = z;
     }
     public IslandLocation(PlayerEntity playerEntity){
-        this.x= (int) playerEntity.getPosX();
-        this.y= (int) playerEntity.getPosY();
-        this.z= (int) playerEntity.getPosZ();
+        this.x= (int) playerEntity.getX();
+        this.y= (int) playerEntity.getY();
+        this.z= (int) playerEntity.getZ();
     }
 
     @Override

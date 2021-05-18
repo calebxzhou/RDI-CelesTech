@@ -22,7 +22,7 @@ public class RdiCommand extends BaseCommand {
         return builder.executes((context) -> execute(context.getSource()));
     }
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player=source.asPlayer();
+        ServerPlayerEntity player=source.getPlayerOrException();
         String ob2lav=EColor.RED.code+       "熔化黑曜石";
         String water2ice=EColor.AQUA.code+      "水变冰";
         String clearPhantom=EColor.STRIKE.code+ "幻翼";

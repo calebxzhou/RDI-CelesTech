@@ -31,6 +31,7 @@
     <mappers>
         <mapper resource = "/mybatis/Home.xml"/>
         <mapper resource = "/mybatis/Rinv.xml"/>
+        <mapper resource = "/mybatis/SingleBlockRecord.xml"/>
     </mappers>
 
 </configuration>

@@ -22,7 +22,7 @@ public class ClearPhantomCmd extends BaseCommand {
     }
 
     private int execute(CommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.asPlayer();
+        ServerPlayerEntity player = source.getPlayerOrException();
         if(player.experienceLevel<1){
             TextUtils.sendChatMessage(player,"清除幻翼需要1经验，您的经验不足。");
             return Command.SINGLE_SUCCESS;

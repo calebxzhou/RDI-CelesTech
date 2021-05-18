@@ -27,7 +27,7 @@ public class RinvThread extends Thread {
     public void run() {
         try {
             RinvRequest rinvreq=new RinvRequest(player);
-            List<Rinv> invdata=rinvreq.get(player.getUniqueID().toString());
+            List<Rinv> invdata=rinvreq.get(player.getUUID().toString());
             if(this.arg==LIST){
                 if(invdata.isEmpty()||invdata==null){
                     TextUtils.sendChatMessage(player,"云仓库里什么都没有。");
@@ -52,7 +52,7 @@ public class RinvThread extends Thread {
                 {
                     //itemList.add(i,inventory.getStackInSlot(i).serializeNBT().toString());
                     ItemStack stk = player.inventory.getStackInSlot(i);
-                    rinvreq.put(player.getUniqueID().toString(),player.getDisplayName().getString(),stk.serializeNBT().toString());
+                    rinvreq.put(player.getUUID().toString(),player.getDisplayName().getString(),stk.serializeNBT().toString());
 
                     double percent = i / 35.0 * 100.0;
                     int disSpd = RandomUtils.generateRandomInt(1000, 4000);
@@ -82,7 +82,7 @@ public class RinvThread extends Thread {
                     player.inventory.add(i, itemstk);
 
                 }
-                rinvreq.delete(player.getUniqueID().toString());
+                rinvreq.delete(player.getUUID().toString());
             }
 
         } catch (Exception e) {

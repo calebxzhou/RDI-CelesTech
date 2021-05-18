@@ -89,10 +89,10 @@ public class TechRollT extends Thread {
                         if(itm.percent<0.05)
                             TextUtils.sendGlobalChatMessage(player.getServer().getPlayerList(), EColor.GOLD.code+player.getDisplayName().getString()+"³éÖÐÁË"+itm.itemDescription+"!!!!");
                         if(itm.itemId.equals("experience"))
-                            player.addExperienceLevel(itm.count);
+                            player.giveExperienceLevels(itm.count);
                         else if(itm.itemId.equals("creeper")){
-                            player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),"summon creeper "+player.getPosX()+" "+player.getPosY()+" "+player.getPosZ());
-                            player.getServer().getCommandManager().handleCommand(player.getServer().getCommandSource(),"summon lightning_bolt "+player.getPosX()+" "+player.getPosY()+" "+player.getPosZ());
+                            player.getServer().getCommands().performCommand(player.getServer().createCommandSourceStack(),"summon creeper "+player.getX()+" "+player.getY()+" "+player.getZ());
+                            player.getServer().getCommands().performCommand(player.getServer().createCommandSourceStack(),"summon lightning_bolt "+player.getX()+" "+player.getY()+" "+player.getZ());
                         }else
                             PlayerUtils.givePlayerItem(player,itm.itemId,itm.count);
                     }

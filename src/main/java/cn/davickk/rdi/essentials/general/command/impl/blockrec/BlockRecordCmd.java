@@ -40,7 +40,7 @@ public class BlockRecordCmd extends BaseCommand {
         return Command.SINGLE_SUCCESS;
     }
     private int execute(CommandSource source, String opration) throws CommandSyntaxException {
-        ServerPlayerEntity player=source.asPlayer();
+        ServerPlayerEntity player=source.getPlayerOrException();
         if(!oprationList.contains(opration)){
             sendMessage(player,"无法识别本指令，请检查是否有输入错误。");
             return Command.SINGLE_SUCCESS;

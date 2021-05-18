@@ -55,9 +55,9 @@ public final class TextUtils {
     //source一般是服务器
     public static void sendTitle( ServerPlayerEntity playerToSend, ITextComponent content, STitlePacket.Type type) throws CommandSyntaxException {
         //MinecraftServer mcs=source.getServer();
-        CommandSource src=playerToSend.getServer().getCommandSource();
-        playerToSend.connection.sendPacket(new STitlePacket(type, TextComponentUtils.func_240645_a_(src, content, playerToSend, 0)));/*
-        mcs.getCommandManager().handleCommand(source,"title "
+        CommandSource src=playerToSend.getServer().createCommandSourceStack();
+        playerToSend.connection.send(new STitlePacket(type, TextComponentUtils.updateForEntity(src, content, playerToSend, 0)));/*
+        mcs.getCommands().performCommand(source,"title "
                 +playerToSend.getDisplayName().getString()+" "+type+
                         " {\"text\":\""+content+"\"}");*/
         /* Class cls = Class.forName("net.minecraft.command.impl.TitleCommand");
@@ -147,7 +147,7 @@ public final class TextUtils {
         String name=player.getDisplayName().getString();
         String cmd="tellraw "+name+" {\"text\":\""+content+"\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/"+commandTodo+"\"}}";
         System.out.println(cmd);
-        server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
+        server.getCommands().performCommand(server.createCommandSourceStack(),cmd);*/
     }
     public static void clickableContent2Send(PlayerEntity player, String content, String commandTodo, String hoverContent)
     {
@@ -163,7 +163,7 @@ public final class TextUtils {
         String name=player.getDisplayName().getString();
         String cmd="tellraw "+name+" {\"text\":\""+content+"\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/"+commandTodo+"\"}}";
         System.out.println(cmd);
-        server.getCommandManager().handleCommand(server.getCommandSource(),cmd);*/
+        server.getCommands().performCommand(server.createCommandSourceStack(),cmd);*/
     }
     public static IFormattableTextComponent getClickableContentComp(PlayerEntity player, String content, String commandTodo, String hoverContent)
     {
