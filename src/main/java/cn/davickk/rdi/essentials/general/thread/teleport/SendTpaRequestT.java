@@ -24,8 +24,8 @@ public class SendTpaRequestT extends Thread{
             TextUtils.sendChatMessage(fromPlayer,"已经发送传送请求给"+toPlayer.getDisplayName().getString()+", 请求ID:"+reqid);
             TextUtils.sendChatMessage(this.toPlayer,EColor.ORANGE.getCode()+this.fromPlayer.getDisplayName().getString()+" 想要传送到你的身边。");
             TextUtils.sendChatMessage(this.toPlayer,EColor.ORANGE.getCode()+"为防止恶意破坏，请谨慎接受传送请求。");
-            IFormattableTextComponent tpyes=TextUtils.getClickableContentComp(this.toPlayer, EColor.BRIGHT_GREEN.code+"[接受]"+EColor.RESET.code,"/tpyes "+reqid," ");
-            IFormattableTextComponent tpwait=TextUtils.getClickableContentComp(this.toPlayer, EColor.GOLD.code+"[等我一下]"+EColor.RESET.code,"稍等"," ");
+            IFormattableTextComponent tpyes=TextUtils.getClickableContentComp(EColor.BRIGHT_GREEN.code+"[接受]"+EColor.RESET.code,"/tpyes "+reqid," ");
+            IFormattableTextComponent tpwait=TextUtils.getClickableContentComp(EColor.GOLD.code+"[等我一下]"+EColor.RESET.code,"稍等"," ");
             TextUtils.sendChatMessage(this.toPlayer,tpyes.append(tpwait));
         } catch (Exception sqlException) {
             sqlException.printStackTrace();

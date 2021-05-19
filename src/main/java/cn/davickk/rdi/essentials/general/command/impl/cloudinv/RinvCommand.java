@@ -54,9 +54,9 @@ public class RinvCommand extends BaseCommand {
         for (int i = 0; i < msgHelp.length; i++) {
             sendMessage(player, new StringTextComponent(msgHelp[i]));
         }
-        IFormattableTextComponent up=TextUtils.getClickableContentComp(player, ERinv.UPLOAD.text,ERinv.UPLOAD.cmd,ERinv.UPLOAD_HOVER.text);
-        IFormattableTextComponent down=TextUtils.getClickableContentComp(player, ERinv.DOWNLOAD.text,ERinv.DOWNLOAD.cmd,ERinv.DOWNLOAD_HOVER.text);
-        IFormattableTextComponent list=TextUtils.getClickableContentComp(player, ERinv.LIST.text,ERinv.LIST.cmd,ERinv.LIST_HOVER.text);
+        IFormattableTextComponent up=TextUtils.getClickableContentComp( ERinv.UPLOAD.text,ERinv.UPLOAD.cmd,ERinv.UPLOAD_HOVER.text);
+        IFormattableTextComponent down=TextUtils.getClickableContentComp( ERinv.DOWNLOAD.text,ERinv.DOWNLOAD.cmd,ERinv.DOWNLOAD_HOVER.text);
+        IFormattableTextComponent list=TextUtils.getClickableContentComp( ERinv.LIST.text,ERinv.LIST.cmd,ERinv.LIST_HOVER.text);
         TextUtils.sendChatMessage(player,up.append(down).append(list));
         return Command.SINGLE_SUCCESS;
     }

@@ -51,13 +51,13 @@ public class RollCommand extends BaseCommand {
         if(PlayerUtils.hasEnoughXPLvl(player,30))
             z10=EColor.GOLD.code+"[转10次] ";
         IFormattableTextComponent t1
-                = TextUtils.getClickableContentComp(player, z1,"/rroll 1","需要经验");
+                = TextUtils.getClickableContentComp( z1,"/rroll 1","需要经验");
         IFormattableTextComponent t5
-                = TextUtils.getClickableContentComp(player,z5,"/rroll 5","需要经验");
+                = TextUtils.getClickableContentComp(z5,"/rroll 5","需要经验");
         IFormattableTextComponent t10
-                = TextUtils.getClickableContentComp(player, z10,"/rroll 10","需要经验");
+                = TextUtils.getClickableContentComp( z10,"/rroll 10","需要经验");
         IFormattableTextComponent t3
-                = TextUtils.getClickableContentComp(player, z3,"/rroll 3","需要经验");
+                = TextUtils.getClickableContentComp( z3,"/rroll 3","需要经验");
 
         TextUtils.sendChatMessage(player, t1.append(t3).append(t5).append(t10));
 

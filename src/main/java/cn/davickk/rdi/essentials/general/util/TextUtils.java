@@ -36,11 +36,11 @@ public final class TextUtils {
         }
     }
     private static void sendMessage(ServerPlayerEntity player, IFormattableTextComponent textComponent, boolean actionBar) {
-        player.sendStatusMessage(textComponent, actionBar);
+        player.displayClientMessage(textComponent, actionBar);
     }
 
     private static void sendMessage(PlayerEntity player, IFormattableTextComponent textComponent, boolean actionBar) {
-        player.sendStatusMessage(textComponent, actionBar);
+        player.displayClientMessage(textComponent, actionBar);
     }
 
     private static void sendGlobalMessage(PlayerList players, IFormattableTextComponent textComponent, boolean actionBar) {
@@ -74,7 +74,7 @@ public final class TextUtils {
     }
 
     public static void sendMsgBySrc(CommandSource source, String content) {
-        source.sendFeedback(new StringTextComponent(content), true);
+        source.sendSuccess(new StringTextComponent(content), true);
     }
 
     // Chat msg
@@ -137,8 +137,8 @@ public final class TextUtils {
     {
         TextComponent comp=new StringTextComponent(content);
         comp.setStyle(comp.getStyle()
-            .setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,commandTodo))
-            .setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new StringTextComponent("点击以执行"))));
+            .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,commandTodo))
+            .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new StringTextComponent("点击以执行"))));
 
         player.sendMessage(comp, UUID.randomUUID());
         //TextUtils.sendChatMessage(player,comp.getStyle().toString());
@@ -153,8 +153,8 @@ public final class TextUtils {
     {
         TextComponent comp=new StringTextComponent(content);
         comp.setStyle(comp.getStyle()
-                .setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,commandTodo))
-                .setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new StringTextComponent(hoverContent))));
+                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,commandTodo))
+                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new StringTextComponent(hoverContent))));
 
         player.sendMessage(comp, UUID.randomUUID());
         //TextUtils.sendChatMessage(player,comp.getStyle().toString());
@@ -165,12 +165,12 @@ public final class TextUtils {
         System.out.println(cmd);
         server.getCommands().performCommand(server.createCommandSourceStack(),cmd);*/
     }
-    public static IFormattableTextComponent getClickableContentComp(PlayerEntity player, String content, String commandTodo, String hoverContent)
+    public static IFormattableTextComponent getClickableContentComp(String content, String commandTodo, String hoverContent)
     {
         TextComponent comp=new StringTextComponent(content);
         return comp.setStyle(comp.getStyle()
-                .setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,commandTodo))
-                .setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new StringTextComponent(hoverContent))));
+                .withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,commandTodo))
+                .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,new StringTextComponent(hoverContent))));
     }
     public static IFormattableTextComponent appendTwoComp(IFormattableTextComponent c1,IFormattableTextComponent c2)
     {

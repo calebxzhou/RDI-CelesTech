@@ -32,15 +32,15 @@ public class TeamCommand extends BaseCommand {
 
         PlayerUtils.sendLoading(player);
         //if没有团队
-        TextUtils.getClickableContentComp(player,"[加入团队]","/cp join","加入一个已有的团队（无需经验）");
-        TextUtils.getClickableContentComp(player,"[创建团队]","/cp create","创建一个新的团队（需要5经验）");
+        TextUtils.getClickableContentComp("[加入团队]","/cp join","加入一个已有的团队（无需经验）");
+        TextUtils.getClickableContentComp("[创建团队]","/cp create","创建一个新的团队（需要5经验）");
         //if玩家创建了团队
-        TextUtils.getClickableContentComp(player,"[邀请]","/cp invite","邀请他人加入您的团队 %s（需要1经验）");
-        TextUtils.getClickableContentComp(player,"[移除]","/cp remove","将一个人从您的团队中移除");
-        TextUtils.getClickableContentComp(player,"[提升等级]","/cp levelup","提升团队的等级以容纳更多人");
+        TextUtils.getClickableContentComp("[邀请]","/cp invite","邀请他人加入您的团队 %s（需要1经验）");
+        TextUtils.getClickableContentComp("[移除]","/cp remove","将一个人从您的团队中移除");
+        TextUtils.getClickableContentComp("[提升等级]","/cp levelup","提升团队的等级以容纳更多人");
 
         //if玩家加入了别人的团队
-        TextUtils.getClickableContentComp(player,"[退出团队]","/cp quit","退出团队%s");
+        TextUtils.getClickableContentComp("[退出团队]","/cp quit","退出团队%s");
 
         return Command.SINGLE_SUCCESS;
     }

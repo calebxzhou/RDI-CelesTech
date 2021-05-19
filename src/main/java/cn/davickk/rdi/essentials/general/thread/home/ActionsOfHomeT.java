@@ -24,8 +24,6 @@ public class ActionsOfHomeT extends Thread{
         try {
 
             HomeRequest hreq=new HomeRequest(player,homeName);
-            List<PlayerEntity> playerEntityList=
-                    PlayerUtils.getNearbyPlayersInRange(player,3);
             //[传送]  [重命名] [删除] [激活]    [分享]
             String tpCont="[<==传送==>]";
             String tpHover="回到这个家";
@@ -64,21 +62,21 @@ public class ActionsOfHomeT extends Thread{
 
             //[传送]  [重命名] [删除] [激活]    [分享]
             IFormattableTextComponent tpHomeT=
-                    TextUtils.getClickableContentComp(player,tpCont,
+                    TextUtils.getClickableContentComp(tpCont,
                             EHomeText.HOME.cmd.replace("%s",homeName),
                             tpHover);
             IFormattableTextComponent renameT=
-                    TextUtils.getClickableContentComp(player,EColor.AQUA.code+renameCont
+                    TextUtils.getClickableContentComp(EColor.AQUA.code+renameCont
                             , "/renamehome","改变家的名称");
             IFormattableTextComponent delHomeT=
-                    TextUtils.getClickableContentComp(player,red+delCont,
+                    TextUtils.getClickableContentComp(red+delCont,
                             EHomeText.DELETE.cmd.replace("%s",homeName), "删除这个家");
             IFormattableTextComponent activHomeT=
-                    TextUtils.getClickableContentComp(player,activCont,
+                    TextUtils.getClickableContentComp(activCont,
                             EHomeText.ACTIVATE.cmd.replace("%s",homeName),
                             activHover);
             IFormattableTextComponent shareHomeT=
-                    TextUtils.getClickableContentComp(player,shareCont,
+                    TextUtils.getClickableContentComp(shareCont,
                             EHomeText.SHARE.cmd.replace("%s","")
                                     .replace("%p",""),shareHover);
             TextUtils.sendChatMessage(player,TextUtils.appendTwoComp(homeName+" -> ",

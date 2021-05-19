@@ -29,17 +29,17 @@ public class IslandMenuT extends Thread{
             }
             IFormattableTextComponent homeTxt;
             /*if(otherIsland)
-                homeTxt=TextUtils.getClickableContentComp(player,bkS,"/home island_other", "返回您的空岛");
+                homeTxt=TextUtils.getClickableContentComp(bkS,"/home island_other", "返回您的空岛");
             else*/
-                homeTxt= TextUtils.getClickableContentComp(player,bkS,"/home island", "返回您的空岛");
+                homeTxt= TextUtils.getClickableContentComp(bkS,"/home island", "返回您的空岛");
             IFormattableTextComponent space=
                     new StringTextComponent("   ");
             IFormattableTextComponent coverTxt=
-                    TextUtils.getClickableContentComp(player,changeTp,"/updatehome island --locate here","将当前您所在的位置设置为空岛的传送点\n（这将会覆盖原有的传送点，无法恢复）");
+                    TextUtils.getClickableContentComp(changeTp,"/updatehome island --locate here","将当前您所在的位置设置为空岛的传送点\n（这将会覆盖原有的传送点，无法恢复）");
             IFormattableTextComponent utTxt=
-                    TextUtils.getClickableContentComp(player,ut,"/rdi","实用工具大合集");
+                    TextUtils.getClickableContentComp(ut,"/rdi","实用工具大合集");
             IFormattableTextComponent rollTxt=
-                    TextUtils.getClickableContentComp(player,roll, "/rroll","花费经验启动大转盘。");
+                    TextUtils.getClickableContentComp(roll, "/rroll","花费经验启动大转盘。");
             TextUtils.sendChatMessage(player,homeTxt.append(space).append(coverTxt));
             TextUtils.sendChatMessage(player,space);
             TextUtils.sendChatMessage(player,utTxt.append(space).append(space).append(rollTxt));

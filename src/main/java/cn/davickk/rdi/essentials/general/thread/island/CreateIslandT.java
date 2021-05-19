@@ -36,10 +36,10 @@ public class CreateIslandT extends Thread{
         }
 
         IFormattableTextComponent t1=
-                TextUtils.getClickableContentComp(player,
+                TextUtils.getClickableContentComp(
                         EColor.BRIGHT_GREEN.code+"[（点这里）可以，就在这创建空岛吧]","/createkdhere"," ");
         IFormattableTextComponent t2=
-                TextUtils.getClickableContentComp(player,
+                TextUtils.getClickableContentComp(
                         EColor.RED.code+"[（点这里）不可以，重新寻找位置]","/createkd"," ");
         TextUtils.sendChatMessage(player,t1.append(t2));
        /* String name= player.getDisplayName().getString();

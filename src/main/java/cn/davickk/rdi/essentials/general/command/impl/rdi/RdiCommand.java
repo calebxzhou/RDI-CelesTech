@@ -38,26 +38,26 @@ public class RdiCommand extends BaseCommand {
         IFormattableTextComponent space=
                 new StringTextComponent("   ");
         IFormattableTextComponent obsTxt=
-                TextUtils.getClickableContentComp(player,ob2lav,"/obsi2lava","将黑曜石熔为岩浆");
+                TextUtils.getClickableContentComp(ob2lav,"/obsi2lava","将黑曜石熔为岩浆");
         IFormattableTextComponent water2iceTxt=
-                TextUtils.getClickableContentComp(player,water2ice,"/water2ice","让水结冰。（需要经验）");
+                TextUtils.getClickableContentComp(water2ice,"/water2ice","让水结冰。（需要经验）");
         IFormattableTextComponent clearPhanTxt=
-                TextUtils.getClickableContentComp(player,clearPhantom, "/clearphantom",
+                TextUtils.getClickableContentComp(clearPhantom, "/clearphantom",
                         "花费："+(int)player.experienceLevel*0.5+"经验，立刻清除幻翼。");
         IFormattableTextComponent removeGroundTxt=
-                TextUtils.getClickableContentComp(player,removeGround,"/tps","查看延迟。");
+                TextUtils.getClickableContentComp(removeGround,"/tps","查看延迟。");
         IFormattableTextComponent ysTxt=
-                TextUtils.getClickableContentComp(player,ys,"/ae2yunshi","在空旷的地方尝试，召唤一颗大陨石。");
+                TextUtils.getClickableContentComp(ys,"/ae2yunshi","在空旷的地方尝试，召唤一颗大陨石。");
         IFormattableTextComponent tpsTxt=
-                TextUtils.getClickableContentComp(player,tps,"/tps","查看服务器延迟");
+                TextUtils.getClickableContentComp(tps,"/tps","查看服务器延迟");
         IFormattableTextComponent kilmeTxt=
-                TextUtils.getClickableContentComp(player,killme,"/shalewo8","鲨了我8");
+                TextUtils.getClickableContentComp(killme,"/shalewo8","鲨了我8");
         IFormattableTextComponent onHandTxt=
-                TextUtils.getClickableContentComp(player,onHand,"/onhand","我的手上都有什么？");
+                TextUtils.getClickableContentComp(onHand,"/onhand","我的手上都有什么？");
         IFormattableTextComponent saveTxt=
-                TextUtils.getClickableContentComp(player,save,"/SAVE","强制存档");
+                TextUtils.getClickableContentComp(save,"/SAVE","强制存档");
         /*IFormattableTextComponent forcekickTxt=
-                TextUtils.getClickableContentComp(player,forcekick,"/kickme","强制退出服务器");*/
+                TextUtils.getClickableContentComp(forcekick,"/kickme","强制退出服务器");*/
         TextUtils.sendChatMessage(player,obsTxt.append(space).append(water2iceTxt).append(space).append(clearPhanTxt));
         TextUtils.sendChatMessage(player,space);
         TextUtils.sendChatMessage(player,tpsTxt.append(space).append(kilmeTxt).append(space).append(onHandTxt));

@@ -51,7 +51,7 @@ public class HomeListThread extends Thread {
                         EColor.GRAY.code,
                         home.getComment()
                 );
-                txt2s=TextUtils.getClickableContentComp(player,fullMsg,"/actions4home "+home.getHomeName(),"");
+                txt2s=TextUtils.getClickableContentComp(fullMsg,"/actions4home "+home.getHomeName(),"");
                 TextUtils.sendChatMessage(player,txt2s);
 
                 /*String hname=entry.getKey();
@@ -69,7 +69,7 @@ public class HomeListThread extends Thread {
                 }else hnameC=hname;
                 String hlocs="(" +dims+", "+ x + ", " + y + ", " + z + ")";
                 String hnames=" >"+hnameC+EColor.RESET.code+"< ";
-                txt2s.append(TextUtils.getClickableContentComp(player,hnames,
+                txt2s.append(TextUtils.getClickableContentComp(hnames,
                         "/actions4home "+hname,hlocs));*/
             }
 

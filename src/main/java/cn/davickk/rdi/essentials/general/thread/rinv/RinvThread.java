@@ -25,7 +25,7 @@ public class RinvThread extends Thread {
     }
 
     public void run() {
-        try {
+        /*try {
             RinvRequest rinvreq=new RinvRequest(player);
             List<Rinv> invdata=rinvreq.get(player.getUUID().toString());
             if(this.arg==LIST){
@@ -87,11 +87,11 @@ public class RinvThread extends Thread {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
-    private ItemStack getStackFromNbt(String serializedNbt) throws CommandSyntaxException {
+    /*private ItemStack getStackFromNbt(String serializedNbt) throws CommandSyntaxException {
         CompoundNBT cnbt = JsonToNBT.getTagFromJson(serializedNbt);
         return ItemStack.read(cnbt);
-    }
+    }*/
 }
