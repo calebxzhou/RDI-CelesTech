@@ -30,10 +30,10 @@ public class SpawnCommand extends BaseCommand {
 
     private int execute(CommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player = source.getPlayerOrException();
-        IWorldInfo worldInfo = player.getCommandSenderWorld().getWorldInfo();
-        int x = worldInfo.getSpawnX();
+        /*IWorldInfo worldInfo = player.getCommandSenderWorld().getLevelData();
+        int x = worldInfo.getXSpawn();
         int y = worldInfo.getSpawnY();
-        int z = worldInfo.getSpawnZ();
+        int z = worldInfo.getSpawnZ();*/
         TextUtils.sendChatMessage(player, "传送回主世界的出生点了。");
         PlayerUtils.teleportPlayer(player, ServerUtils.SPAWN_LOCA);
         /*EssentialPlayer eslPlayer = DataManager.getPlayer(player);

@@ -23,7 +23,7 @@ public class CreateIslandHereT extends Thread{
             //IslandRequest req = new IslandRequest(player);
             //IslandLocation iloc=new IslandLocation(player);
             HomeRequest hreq=new HomeRequest(player);
-            BlockPos bpos=player.getPosition();
+            BlockPos bpos=player.blockPosition();
             if (hreq.getHomeCounts()>0) {
                 TextUtils.sendChatMessage(player, "您已经有一个空岛了，因此不能创建新的空岛。");
                 return;

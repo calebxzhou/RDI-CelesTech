@@ -18,13 +18,13 @@ public class EventPlayerLoggedIn {
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         ServerPlayerEntity player = (ServerPlayerEntity) event.getPlayer();
         PlayerUtils.teleportPlayer(player, ServerUtils.SPAWN_LOCA);
-        String ip = player.getPlayerIP();
+        String ip = player.getIpAddress();
         PlayerUtils.sayHello(player);
         WeatherUtils.sendWeatherToPlayer(ip, player);
-        player.setGameType(GameType.SURVIVAL);
+        player.setGameMode(GameType.SURVIVAL);
         //TextUtils.sendChatMessage(player,new StringTextComponent(WeatherUtils.getFormattedWeatherFromIP(ip,1)));
         //重新设置出生点到主城
-        player.func_242111_a(player.world.OVERWORLD, ServerUtils.SPAWN_BLKPS, 0f, true, false);
+        player.setRespawnPosition(player.level.OVERWORLD, ServerUtils.SPAWN_BLKPS, 0f, true, false);
         /*EssentialPlayer eslPlayer = DataManager.newPlayer(player);
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         //Date date= Calendar.getInstance().getTime();
@@ -57,7 +57,7 @@ public class EventPlayerLoggedIn {
                     player.connection.disconnect(new TranslationTextComponent("tempban.rdi-essentials.success.perm.target", player.getDisplayName(), ban.getReason()));
                 } else {
                    if (ban.getTime() > currentTimestamp()) {
-                       String displayTime = TimeUtils.formatDate(ban.getTime() - currentTimestamp());
+                       String displayTime = DateTimeUtils.formatDate(ban.getTime() - currentTimestamp());
                        player.connection.disconnect(new TranslationTextComponent("tempban.rdi-essentials.success.target", player.getDisplayName(), displayTime, ban.getReason()));
                    }
                 }

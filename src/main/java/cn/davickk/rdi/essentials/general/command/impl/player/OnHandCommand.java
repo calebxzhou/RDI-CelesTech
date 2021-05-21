@@ -26,20 +26,20 @@ public class OnHandCommand extends BaseCommand {
     private int execute(CommandSource source) throws CommandSyntaxException {
         ServerPlayerEntity player = source.getPlayerOrException();
         try {
-            ItemStack itm = player.getHeldItemMainhand();
+            ItemStack itm = player.getMainHandItem();
             Item it = itm.getItem();
             int amount = itm.getCount();
             CompoundNBT nbt = itm.getTag();
             sendMessage(player, new StringTextComponent
                     ("您的手上拿着的是" + amount + "个" + itm.getDisplayName().getString()));
             sendMessage(player, it.getRegistryName().toString());
-            sendMessage(player, it.getTranslationKey());
+            sendMessage(player, it.getDescriptionId());
 
-            sendMessage(player, (TextComponent) itm.getTextComponent());
+            sendMessage(player, (TextComponent) itm.getDisplayName());
             if (nbt == null)
                 sendMessage(player, new StringTextComponent("该物品没有附加数据"));
             else
-                sendMessage(player, new StringTextComponent("附加数据：" + nbt.getString()));
+                sendMessage(player, new StringTextComponent("附加数据：" + nbt.toString()));
 
 
         } catch (Exception e) {

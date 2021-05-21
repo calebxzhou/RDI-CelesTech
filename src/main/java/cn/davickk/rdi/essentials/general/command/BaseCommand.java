@@ -15,7 +15,7 @@ public abstract class BaseCommand {
     boolean enabled;
 
     public BaseCommand(String name, int permissionLevel, boolean enabled) {
-        this.builder = Commands.literal(name).requires(source -> source.hasPermissionLevel(permissionLevel));
+        this.builder = Commands.literal(name).requires(source -> source.hasPermission(permissionLevel));
         this.enabled = enabled;
     }
 

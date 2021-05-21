@@ -7,12 +7,13 @@ buildscript {
         }
         maven{
             url = "https://maven.enginehub.org/repo/"
-        }
 
+        }
+        maven {url="https://repo.spongepowered.org/repository/maven-public/"}
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.+', changing: true
-
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 
 
@@ -22,15 +23,24 @@ repositories {
      maven{
          url = "https://maven.enginehub.org/repo/"
      }
+    maven {url="https://repo.spongepowered.org/repository/maven-public/"}
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
 version = modMinecraftVersion + '-' + modVersion
 group = modGroup
 archivesBaseName = modFileName
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
-
+mixin {
+    add sourceSets.main, "mixins.rdiengine.refmap.json"
+}
+sourceSets {
+    main {
+        ext.refMap = "mixins.rdiengine.refmap.json"
+    }
+}
 minecraft {
 
     mappings channel: 'official', version: '1.16.5'
@@ -100,6 +110,8 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok:1.18.20'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+    compile 'org.spongepowered:mixin:0.8.3-SNAPSHOT'
+    annotationProcessor 'org.spongepowered:mixin:0.8.3-SNAPSHOT:processor'
     //implementation 'org.hibernate:hibernate-agroal:5.4.27.Final'
 }
 

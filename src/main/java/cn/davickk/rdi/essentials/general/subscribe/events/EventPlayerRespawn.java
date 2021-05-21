@@ -22,7 +22,7 @@ public class EventPlayerRespawn {
         TextUtils.clickableContent2Send(player,EColor.GOLD.code+"[我卡住了]","/spawn","。");
         TextUtils.clickableContent2Send(player,EColor.BRIGHT_GREEN.code+"[<==返回空岛==>]","/home island"," ");
         //重新设置出生点到主城
-        player.func_242111_a(player.world.OVERWORLD, ServerUtils.SPAWN_BLKPS, 0f, true, false);
+        player.setRespawnPosition(player.level.OVERWORLD, ServerUtils.SPAWN_BLKPS, 0f, true, false);
         /*if (ModConfig.spawn_force_on_death) {
 
             Location location = DataManager.getWorld().getSpawn();

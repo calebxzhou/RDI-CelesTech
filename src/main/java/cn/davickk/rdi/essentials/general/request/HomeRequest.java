@@ -30,14 +30,14 @@ public class HomeRequest{
         HOME_MAPPER = SQL_SESSION.getMapper(IHomeDaoMapper.class);
         this.PLAYER = player;
         this.UUID = PlayerUtils.getUUID(player);
-        this.PORT =player.getServer().getServerPort();
+        this.PORT =player.getServer().getPort();
     }
     public HomeRequest(ServerPlayerEntity player, String homeName) throws SQLException, ClassNotFoundException {
         HOME_MAPPER = SQL_SESSION.getMapper(IHomeDaoMapper.class);
         this.PLAYER = player;
         this.HOMENAME = homeName;
         this.UUID = PlayerUtils.getUUID(player);
-        this.PORT =player.getServer().getServerPort();
+        this.PORT =player.getServer().getPort();
     }
     private void setHome(boolean isWithLocation, Location hloc, boolean useAnotherHomeName, String anotherHomeName, boolean isActiv,String comment) {
         String playerName= PLAYER.getDisplayName().getString();

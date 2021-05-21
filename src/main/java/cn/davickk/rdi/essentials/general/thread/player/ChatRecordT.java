@@ -1,11 +1,6 @@
 package cn.davickk.rdi.essentials.general.thread.player;
 
-import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.util.TimeUtils;
 import net.minecraft.entity.player.PlayerEntity;
-
-import java.sql.PreparedStatement;
-import java.sql.Timestamp;
 
 public class ChatRecordT extends Thread {
     private final PlayerEntity player;
@@ -20,7 +15,7 @@ public class ChatRecordT extends Thread {
     public void run() {
         /*try {
 
-            Timestamp param = TimeUtils.getTimestampNow();
+            Timestamp param = DateTimeUtils.getTimestampNow();
             PreparedStatement psm=RDIEssentials.getSQLUtils().getSqlSession().getConnection().prepareStatement
                     ("INSERT INTO chat (Date, playerName, chat) VALUES (?,?,?)");
             psm.setTimestamp(1, param);

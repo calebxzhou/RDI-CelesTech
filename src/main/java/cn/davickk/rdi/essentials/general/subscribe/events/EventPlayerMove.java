@@ -35,7 +35,7 @@ public class EventPlayerMove {
 
         PlayerEntity player=event.getPlayer();
         RegistryKey<World> world=event.getTo();
-        String locaw=world.getLocation().toString();
+        String locaw=world.location().toString();
         System.out.println("前往"+ locaw);
         if(locaw.contains("nether")){
             //player.setGameType(GameType.ADVENTURE);
@@ -56,7 +56,7 @@ public class EventPlayerMove {
                 loca.setY(240);
                 TextUtils.sendChatMessage(player,"虚空防掉落机制已启动.....");
                 PlayerUtils.teleportPlayer(player,loca);
-                player.addPotionEffect(new EffectInstance(Effects.SLOW_FALLING,10*20,2));
+                player.addEffect(new EffectInstance(Effects.SLOW_FALLING,10*20,2));
                 TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[我卡住了]","/spawn","修复卡住的问题。");
             //}
 
@@ -123,7 +123,7 @@ public class EventPlayerMove {
         info.addPlayer(player);*/
 
 
-    }
+    }/*
     private static void resetCounter(){
         tickCounter=0;moveCounter=0;
     }
@@ -133,5 +133,5 @@ public class EventPlayerMove {
                 .filter(p -> world.getBlockState(p).getBlock() instanceof SaplingBlock)
                 .map(BlockPos::toImmutable)
                 .collect(Collectors.toList());
-    }
+    }*/
 }

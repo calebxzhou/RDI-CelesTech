@@ -1,22 +1,8 @@
 package cn.davickk.rdi.essentials.general.request;
 
-import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.enums.EColor;
-import cn.davickk.rdi.essentials.general.model.Location;
 import cn.davickk.rdi.essentials.general.model.PlayerTpaRequest;
-import cn.davickk.rdi.essentials.general.util.PlayerUtils;
-import cn.davickk.rdi.essentials.general.util.TextUtils;
-import cn.davickk.rdi.essentials.general.util.TimeUtils;
-import cn.davickk.rdi.essentials.general.util.WorldUtils;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.text.IFormattableTextComponent;
-import org.apache.ibatis.session.SqlSession;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TpaRequest {
@@ -60,7 +46,7 @@ public class TpaRequest {
     /*public void sendRequest() throws SQLException {
         PreparedStatement ps=sql.prepareStatement("INSERT INTO tpa (reqid, reqtime, fromPlayer, toPlayer) VALUES (?,?,?,?)");
         ps.setString(1,reqid);
-        ps.setTimestamp(2, TimeUtils.getTimestampNow());
+        ps.setTimestamp(2, DateTimeUtils.getTimestampNow());
         ps.setString(3,this.fromPlayerName);
         ps.setString(4,this.toPlayerName);
         ps.executeUpdate();
@@ -79,7 +65,7 @@ public class TpaRequest {
         if(!rs.next())
             return false;
         Timestamp timesReq=rs.getTimestamp("reqtime");
-        Timestamp timesNow=TimeUtils.getTimestampNow();
+        Timestamp timesNow=DateTimeUtils.getTimestampNow();
         if((timesNow.getTime()-timesReq.getTime()) > 60*1000)
             return false;
         double dis= WorldUtils.getDistanceXZ(new Location(fromPlayer),new Location(toPlayer));

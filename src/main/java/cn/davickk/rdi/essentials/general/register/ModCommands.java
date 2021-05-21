@@ -1,6 +1,7 @@
 package cn.davickk.rdi.essentials.general.register;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
+import cn.davickk.rdi.essentials.general.command.impl.blockrec.BlockRecordCmd;
 import cn.davickk.rdi.essentials.general.command.impl.cloudinv.RinvCommand;
 import cn.davickk.rdi.essentials.general.command.impl.home.*;
 import cn.davickk.rdi.essentials.general.command.impl.island.*;
@@ -49,6 +50,7 @@ public final class ModCommands {
         commands.add(new ClearPhantomCmd("clearphantom",0,true));
         commands.add(new RollCommand("rroll",0,true));
 //        commands.add(new AfkCommand("afk", 0, true));
+        commands.add(new BlockRecordCmd("rbrx",0,true));
         commands.add(new OnHandCommand("onhand", 0, true));
         commands.add(new Obsi2LavaCmd("obsi2lava",0,true));
         commands.add(new Water2IceCmd("water2ice",0,true));

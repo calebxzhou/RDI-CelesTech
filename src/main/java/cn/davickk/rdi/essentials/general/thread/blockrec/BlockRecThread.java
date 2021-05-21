@@ -4,7 +4,7 @@ package cn.davickk.rdi.essentials.general.thread.blockrec;
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.dao.IBlockRecDaoMapper;
 import cn.davickk.rdi.essentials.general.model.SingleBlockRecord;
-import cn.davickk.rdi.essentials.general.util.TimeUtils;
+import cn.davickk.rdi.essentials.general.util.DateTimeUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
@@ -63,7 +63,7 @@ public class BlockRecThread extends Thread{
             record.setPosX(blockPos.getX());
             record.setPosY(blockPos.getY());
             record.setPosZ(blockPos.getZ());
-            record.setOpr_time(TimeUtils.getTimestampNow());
+            record.setOpr_time(DateTimeUtils.getTimestampNow());
 
             mapper.insertRecord(record);
             SQL_SESSION.commit();

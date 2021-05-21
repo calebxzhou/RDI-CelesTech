@@ -23,7 +23,7 @@ public class SaveCommand extends BaseCommand {
     }
 
     private int execute(CommandSource source) {
-        source.getServer().save(false, false, true);
+        source.getServer().saveAllChunks(false, false, true);
         TextUtils.sendMsgBySrc(source, "保存成功了。");
         return Command.SINGLE_SUCCESS;
     }

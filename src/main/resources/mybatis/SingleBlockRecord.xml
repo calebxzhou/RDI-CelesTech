@@ -22,6 +22,9 @@
         (#{player_name}, #{block_type}, #{oprType},
         #{dimension},#{posX},#{posY},#{posZ},#{opr_time});
     </insert>
+    <select id = "readRecordOnXyz" parameterType="map" resultMap = "result">
+        SELECT * FROM block_rec WHERE posX=#{posX} AND posY=#{posY} AND posZ=#{posZ};
+    </select>
 
 
 </mapper>

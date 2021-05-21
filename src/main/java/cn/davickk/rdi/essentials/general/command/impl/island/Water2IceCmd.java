@@ -34,10 +34,10 @@ public class Water2IceCmd extends BaseCommand {
         BlockState blocks=player.getCommandSenderWorld().getBlockState(blockp);
         if(blocks.getBlock().getRegistryName().getPath().contains("water")){
             sendMessage(player,"成功把水冻住了。");
-            player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP,1.0f,0.5f);
-            player.getCommandSenderWorld().setBlockState(blockp, Blocks.ICE.getDefaultState());
+            //player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP,1.0f,0.5f);
+            player.getCommandSenderWorld().setBlockAndUpdate(blockp, Blocks.ICE.defaultBlockState());
         }else{
-            TranslationTextComponent blockname=new TranslationTextComponent(blocks.getBlock().getTranslationKey());
+            TranslationTextComponent blockname=new TranslationTextComponent(blocks.getBlock().getRegistryName().toString());
             sendMessage(player,"请从东/南向对准"+ EColor.AQUA.code+"冰块"+EColor.RESET.code +
                     "，再执行本操作。(当前对准的是"+blockname.getString()+"，朝向:"
                     +PlayerUtils.facing(player)+")");

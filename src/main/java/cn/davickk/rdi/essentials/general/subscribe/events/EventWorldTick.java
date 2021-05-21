@@ -1,8 +1,11 @@
 package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
+import cn.davickk.rdi.essentials.general.command.impl.blockrec.BlockRecordCmd;
 import cn.davickk.rdi.essentials.general.request.TpaRequest;
+import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
+import com.mysql.fabric.Server;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerList;
 import net.minecraftforge.event.TickEvent;
@@ -33,6 +36,8 @@ public class EventWorldTick {
                 PlayerList playerList = event.world.getServer().getPlayerList();
                 TextUtils.sendGlobalChatMessage(playerList, "提示：机械动力(Create)可以实现前期大多数自动化，这是1.16的独有特性。");
                 TpaRequest.getReqMap().clear();
+                ServerUtils.getPlayerInspectingMap().clear();
+                BlockRecordCmd.getTimer().cancel();
             }else tickCounter++;
             if (tickCounter == min10) {
                 PlayerList playerList = event.world.getServer().getPlayerList();
@@ -52,7 +57,7 @@ public class EventWorldTick {
                 TextUtils.sendGlobalChatMessage(playerList, "提示：输入指令/SAVE可以手动存档，避免回档");
                 MinecraftServer mcs = event.world.getServer();
                 mcs.getCommands().performCommand(mcs.createCommandSourceStack(), "kill @e[type=item]");
-                mcs.save(false, false, true);
+                mcs.saveAllChunks(false, false, true);
                 tickCounter = 0;
             } else {
                 tickCounter++;

@@ -33,11 +33,11 @@ public class Obsi2LavaCmd extends BaseCommand {
         }
         if(blocks.getBlock().getRegistryName().getPath().contains("obsidian")){
             sendMessage(player,"成功把黑曜石熔为岩浆。");
-            player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP,1.0f,0.5f);
+            //player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP,1.0f,0.5f);
             //PlayerUtils.givePlayerItem(player,"minecraft:lava_bucket",1);
-            player.getCommandSenderWorld().setBlockState(blockp, Fluids.LAVA.getDefaultState().getBlockState());
+            player.getCommandSenderWorld().setBlockAndUpdate(blockp, Fluids.LAVA.defaultFluidState().createLegacyBlock());
         }else{
-            TranslationTextComponent blockname=new TranslationTextComponent(blocks.getBlock().getTranslationKey());
+            TranslationTextComponent blockname=new TranslationTextComponent(blocks.getBlock().getRegistryName().toString());
             sendMessage(player,"请从东/南向对准"+ EColor.PURPLE.code+"黑曜石的侧面"+EColor.RESET.code+
                     "，再执行本操作(当前对准的是:"+blockname.getString()+"，朝向:" +PlayerUtils.facing(player)+")");
         }

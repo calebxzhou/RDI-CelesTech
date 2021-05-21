@@ -27,7 +27,7 @@ public class RtpsCommand extends BaseCommand {
         // sendTime(ctx, dim);//一般玩家可以忍受的延迟 120ms
 
         //String squarePattern25="§a■■■■■■■■■■■■■■■ §e■■■■■■■ §c■■■";
-        double meanTickTime = mean(ctx.getServer().tickTimeArray) * 1.0E-6D;
+        double meanTickTime = mean(ctx.getServer().tickTimes) * 1.0E-6D;
         double stdTickTime = 120.0;
         double meanTPS = Math.min(1000.0 / meanTickTime, 20);
         double meanTPM=meanTPS*60*24;
@@ -43,12 +43,12 @@ public class RtpsCommand extends BaseCommand {
             if (i == 22)
                 squaresToSend += "§c";
         }
-        ctx.sendFeedback(new StringTextComponent(
+        ctx.sendSuccess(new StringTextComponent(
                         "负载[" + Math.round(ratio * 100) + "%]" + squaresToSend),
                 false);
-        ctx.sendFeedback(new StringTextComponent("延迟 " + Math.round(meanTickTime) + "ms"), false);
+        ctx.sendSuccess(new StringTextComponent("延迟 " + Math.round(meanTickTime) + "ms"), false);
         //TIME_FORMATTER.format(meanTickTime)+","+TIME_FORMATTER.format(meanTPS)),false);
-        ctx.sendFeedback(new StringTextComponent("服务器每分钟处理量 "+meanTPM),false);
+        ctx.sendSuccess(new StringTextComponent("服务器每分钟处理量 "+meanTPM),false);
         return Command.SINGLE_SUCCESS;
     }
 

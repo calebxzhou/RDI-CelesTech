@@ -3,11 +3,14 @@ package cn.davickk.rdi.essentials.general.model;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.io.Serializable;
 import java.sql.Timestamp;
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class SingleBlockRecord implements Serializable {
     private int record_id;
 

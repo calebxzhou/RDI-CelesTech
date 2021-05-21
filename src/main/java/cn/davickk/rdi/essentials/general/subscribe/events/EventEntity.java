@@ -4,6 +4,7 @@ import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.RandomUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
@@ -16,10 +17,16 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = RDIEssentials.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class EventMobs {
+public class EventEntity {
     @SubscribeEvent(priority = EventPriority.HIGHEST)//LivingSpawnEvent.AllowDespawn
     public static void mobSpawn(EntityJoinWorldEvent event){
-        if(event.getEntity().getType().equals(EntityType.TNT)){
+        Entity entity=event.getEntity();
+        if(entity.getType().equals(EntityType.ITEM)){
+            /*entity.level.getEntity()
+            entity.getStringUUID();
+            entity.level.getChunk(entity.xChunk,entity.zChunk);*/
+        }
+        else if(entity.getType().equals(EntityType.TNT)){
             if(RandomUtils.randomPercentage(0.4))
                 event.getEntity().remove();
         }

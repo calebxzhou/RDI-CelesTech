@@ -74,7 +74,7 @@ public class WorldUtils {
     public static void clearMob(PlayerEntity player,String mobName){
         player.getServer().getCommands().performCommand(player.getServer().createCommandSourceStack(),
                 "kill @e[type="+mobName+"]");
-    }
+    }/*
     public static void removeGround(ServerPlayerEntity player){
         String fillcmd="fill %x1 4 %z1 %x2 0 %z2 minecraft:air";
 
@@ -86,7 +86,7 @@ public class WorldUtils {
         System.out.println(fillcmd);
         player.getServer().getCommands().performCommand(player.getServer().createCommandSourceStack(),fillcmd);
 
-    }
+    }*/
     public static void pasteSchematic(PlayerEntity player,IslandLocation loc,String schem) throws IOException, WorldEditException {
         Clipboard clipboard;
         File file=new File("./islands/"+schem+".schem");
