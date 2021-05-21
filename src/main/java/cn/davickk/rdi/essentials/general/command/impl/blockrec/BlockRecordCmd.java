@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Timer;
 
 public class BlockRecordCmd extends BaseCommand {
+    /*TODO 1.按照放置、破坏筛选 2.按照时间筛选 3。根据玩家名筛选
+    *  --filter place/break,time,player __,today/yesterday/dd-dd 可重复*/
     private static Timer timer=new Timer();
     private List<String> oprationList=new ArrayList();
     private final SuggestionProvider<CommandSource> SUGGESTIONS_PROVIDER
@@ -43,7 +45,8 @@ public class BlockRecordCmd extends BaseCommand {
     public static Timer getTimer(){
         return timer;
     }
-    private int execute(CommandSource source) {
+    private int execute(CommandSource source) throws CommandSyntaxException {
+        sendMessage(source.getPlayerOrException(),"指令用法：/rbrx inspect");
         return Command.SINGLE_SUCCESS;
     }
     private int execute(CommandSource source, String opration) throws CommandSyntaxException {

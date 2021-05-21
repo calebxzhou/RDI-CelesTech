@@ -51,6 +51,8 @@ public class DateTimeUtils {
      * 1.day相同 - 今天
      * 2.day差1  - 昨天
      * 3.day差2~7 - 周123/上周456日
+     *
+     *
      * @param dtRec 旧日期
      * @param dtNow 新日期--现在的日期
      * @return 类似于 今天9：20，昨天2：40，周二2：49，上周六22：45，4月4日12：45，20xx年x月x日 xx:xx

@@ -5,7 +5,7 @@
 <mapper namespace = "cn.davickk.rdi.essentials.general.dao.IBlockRecDaoMapper">
 
     <resultMap id = "result" type = "cn.davickk.rdi.essentials.general.model.SingleBlockRecord">
-        <result property = "record_id" column = "record_id"/>
+        <result property = "record_id" column = "id"/>
         <result property = "player_name" column = "player_name"/>
         <result property = "block_type" column = "block_type"/>
         <result property = "oprType" column = "oprType"/>

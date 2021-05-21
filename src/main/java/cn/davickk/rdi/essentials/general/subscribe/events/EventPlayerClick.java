@@ -15,6 +15,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.SignTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -28,11 +29,17 @@ import java.io.IOException;
 public class EventPlayerClick {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onLeftClick(PlayerInteractEvent.LeftClickBlock event){
-        PlayerEntity player = event.getPlayer();
-        if(ServerUtils.getPlayerInspectingMap().containsKey(player.getStringUUID())){
-            event.setCanceled(true);
-            TextUtils.sendChatMessage(player,"正在读取此位置的方块记录....");
-            ServerUtils.startThread(new ReadRecThread(player,event.getPos()));
+        if(event.getHand()==Hand.OFF_HAND)
+            return;
+        if(event.getHand()==Hand.MAIN_HAND){
+            PlayerEntity player = event.getPlayer();
+            if(player.level.isClientSide())
+                return;
+            if(ServerUtils.getPlayerInspectingMap().containsKey(player.getStringUUID())){
+                event.setCanceled(true);
+                TextUtils.sendChatMessage(player,"正在读取此位置的方块记录....");
+                ServerUtils.startThread(new ReadRecThread(player,event.getPos()));
+            }
         }
     }
     @SubscribeEvent
@@ -61,16 +68,6 @@ public class EventPlayerClick {
             }
             player.getMainHandItem().setCount(player.getMainHandItem().getCount()-1);
         }
-
-
-            /*if (heldItem == Items.COMPASS) {
-                // TODO
-            }*/
-
-//            System.out.println(event.getItemStack());
-//            System.out.println(vec3b.getX());
-//            System.out.println(vec3b.getY());
-//            System.out.println(vec3b.getZ());
 
     }
 }

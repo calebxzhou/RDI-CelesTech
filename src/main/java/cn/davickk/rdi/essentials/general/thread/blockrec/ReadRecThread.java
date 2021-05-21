@@ -2,9 +2,12 @@ package cn.davickk.rdi.essentials.general.thread.blockrec;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
 import cn.davickk.rdi.essentials.general.dao.IBlockRecDaoMapper;
+import cn.davickk.rdi.essentials.general.enums.EColor;
 import cn.davickk.rdi.essentials.general.model.SingleBlockRecord;
+import cn.davickk.rdi.essentials.general.util.DateTimeUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
 import java.sql.Timestamp;
@@ -27,9 +30,13 @@ public class ReadRecThread extends Thread{
             int z=blockPos.getZ();
 
             IBlockRecDaoMapper mapper= RDIEssentials.getSQLUtils().getSqlSession().getMapper(IBlockRecDaoMapper.class);
-            List<SingleBlockRecord> records=mapper.readRecordOnXyz(x,y,z);
+
             TextUtils.sendChatMessage(player,
                     String.format("----查询结果 (%d,%d,%d)----",x,y,z));
+            List<SingleBlockRecord> records=mapper.readRecordOnXyz(x,y,z);
+            if(records.isEmpty()) {
+                TextUtils.sendChatMessage(player,"没有在这里找到结果。");
+            }
             String formattedTime = "";
             String formattedTimePrefix = "";
 
@@ -38,20 +45,23 @@ public class ReadRecThread extends Thread{
             for(SingleBlockRecord record:records){
                 Timestamp time=record.getOpr_time();
                 LocalDateTime recordTime=time.toLocalDateTime();
-
-
-                
-
+                String timec= DateTimeUtils.getComparedDateTime(recordTime,nowTime);
+                String oprtype="?";
+                if(record.getOprType()==SingleBlockRecord.BRAKE)
+                    oprtype= EColor.RED.code+ "毁"+EColor.RESET.code;
+                if(record.getOprType()==SingleBlockRecord.PLACE)
+                    oprtype=EColor.BRIGHT_GREEN.code+"置"+EColor.RESET.code;
 
                 TextUtils.sendChatMessage(player,
-                        String.format("[%d]%s %s%s%s",
+                        String.format("#%d %s %s %s %s",
                                 record.getRecord_id(),
-                                record.getOpr_time(),
+                                timec,
                                 record.getPlayer_name(),
-                                record.getOprType(),
+                                oprtype,
                                 record.getBlock_type()));
                 //不是今年，显示完整时间
             }
+            TextUtils.sendChatMessage(player,"----------");
         } catch (Exception e) {
             e.printStackTrace();
         }
