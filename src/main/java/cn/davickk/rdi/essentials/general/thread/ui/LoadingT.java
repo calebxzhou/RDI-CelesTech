@@ -1,10 +1,11 @@
 package cn.davickk.rdi.essentials.general.thread.ui;
 
 import cn.davickk.rdi.essentials.general.util.TextUtils;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 
 public class LoadingT extends Thread{
-    private final ServerPlayerEntity player;
+    private final PlayerEntity player;
     private final String a1="[";
     private final String a2="]";
     private final String b1="=";
@@ -14,7 +15,7 @@ public class LoadingT extends Thread{
     private String toSend;
     private final int totalTime;
     //时间单位是毫秒
-    public LoadingT(ServerPlayerEntity player,int totalTime) {
+    public LoadingT(PlayerEntity player, int totalTime) {
         this.player = player;
         this.totalTime=totalTime;
     }

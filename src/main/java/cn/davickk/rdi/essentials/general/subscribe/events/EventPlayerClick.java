@@ -1,7 +1,7 @@
 package cn.davickk.rdi.essentials.general.subscribe.events;
 
 import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.thread.blockrec.ReadRecThread;
+import cn.davickk.rdi.essentials.general.thread.blockrec.QueryRecThread;
 import cn.davickk.rdi.essentials.general.util.PlayerUtils;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import cn.davickk.rdi.essentials.general.util.TextUtils;
@@ -11,13 +11,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.SignTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,7 +33,7 @@ public class EventPlayerClick {
             if(ServerUtils.getPlayerInspectingMap().containsKey(player.getStringUUID())){
                 event.setCanceled(true);
                 TextUtils.sendChatMessage(player,"正在读取此位置的方块记录....");
-                ServerUtils.startThread(new ReadRecThread(player,event.getPos()));
+                ServerUtils.startThread(new QueryRecThread(player,event.getPos()));
             }
         }
     }

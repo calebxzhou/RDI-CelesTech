@@ -137,7 +137,7 @@ public class WeatherRequestThread extends Thread {
 
 
 
-            TextUtils.clickableContent2Send(player, EColor.GOLD.code+"点击[这 ↑ 里 ↓]打开空岛菜单]","/rkd","/rkd");
+            TextUtils.clickableContent2Send(player, EColor.GOLD.code+"按下键盘上的T键，将鼠标移动到[这里]再按下鼠标左键，即可打开空岛菜单。","/rkd","/rkd");
 
 
         } catch (Exception e) {

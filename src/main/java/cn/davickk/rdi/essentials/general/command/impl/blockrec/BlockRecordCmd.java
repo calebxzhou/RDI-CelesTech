@@ -1,10 +1,13 @@
 package cn.davickk.rdi.essentials.general.command.impl.blockrec;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
+import cn.davickk.rdi.essentials.general.model.DetailedBlockRecord;
+import cn.davickk.rdi.essentials.general.thread.blockrec.QueryRecThread;
 import cn.davickk.rdi.essentials.general.thread.rinv.RinvThread;
 import cn.davickk.rdi.essentials.general.thread.tick.TickTask;
 import cn.davickk.rdi.essentials.general.util.ServerUtils;
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -31,15 +34,20 @@ public class BlockRecordCmd extends BaseCommand {
     public BlockRecordCmd(String name, int permissionLevel, boolean enabled) {
         super(name, permissionLevel, enabled);
         oprationList.add("inspect");
+        oprationList.add("lookup");
     }
     @Override
     public LiteralArgumentBuilder<CommandSource> setExecution() {
-        return builder.executes((context) -> execute(context.getSource()))
-                .then(Commands.argument("opration", StringArgumentType.string())
-                        .suggests(SUGGESTIONS_PROVIDER)
-                        .executes((context) ->
-                                execute(context.getSource(), StringArgumentType.getString(context, "opration"))
-                        )
+        return builder.executes((context)
+                -> execute(context.getSource()))
+                .then(
+                        Commands.argument("opration", StringArgumentType.string())
+                            .suggests(SUGGESTIONS_PROVIDER)
+                                .executes((context) -> execute(context.getSource(), StringArgumentType.getString(context, "opration")))
+                        .then(Commands.argument("detailed", StringArgumentType.string())
+                                .executes(context -> execute(context.getSource(), StringArgumentType.getString(context,"opration"),StringArgumentType.getString(context,"detailed"))))
+
+
                 );
     }
     public static Timer getTimer(){
@@ -74,5 +82,10 @@ public class BlockRecordCmd extends BaseCommand {
             e.printStackTrace();
         }
         return Command.SINGLE_SUCCESS;
+    }
+    private int execute(CommandSource source, String opration, String confJson) throws CommandSyntaxException{
+        DetailedBlockRecord record=DetailedBlockRecord.fromString(confJson);
+        ServerUtils.startThread(new QueryRecThread(source.getPlayerOrException(),record));
+        return 1;
     }
 }

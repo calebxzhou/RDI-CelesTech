@@ -65,15 +65,15 @@ public class DateTimeUtils {
         }
         //如果是今年，但 不是这个月，返回X月X日 xx:xx记录
         if(!(dtRec.getMonth().getValue()==dtNow.getMonth().getValue())){
-            return getFormattedDateTime(dtRec,"MM月dd日 HH:mm");
+            return getFormattedDateTime(dtRec,"MM月dd日HH:mm");
         }
 
         //如果是今年，是 这个月，但是日期是 前天 或更早（），显示周几/上周几
         if(dtNow.getDayOfYear() - dtRec.getDayOfYear()>=2){
             int dt2Week=dtNow.getDayOfWeek().getValue();
             int dt1Week=dtRec.getDayOfWeek().getValue();
-            //早周X>晚周X说明是上周
-            if(dt1Week>dt2Week)
+            //早周X>=晚周X说明是上周
+            if(dt1Week>=dt2Week)
                 formattedTimePrefix="上周"+getWeekByInt(dt1Week);
             else
                 formattedTimePrefix="周"+getWeekByInt(dt2Week);

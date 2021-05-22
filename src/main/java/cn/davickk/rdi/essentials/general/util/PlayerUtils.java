@@ -16,6 +16,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
@@ -115,7 +116,7 @@ public final class PlayerUtils {
     public static boolean hasEnoughXPLvl(PlayerEntity player,int lvl){
         return player.experienceLevel >= lvl;
     }
-    public static void sendLoading(ServerPlayerEntity player) {
+    public static void sendLoading(PlayerEntity player) {
         ServerUtils.startThread(new LoadingT(player,1500));
     }
     /*public static List<PlayerEntity> getNearbyPlayersInRange(ServerPlayerEntity player,int range){
@@ -198,9 +199,8 @@ public final class PlayerUtils {
             return true;
     }
     public static BlockPos lookingAtBlock(PlayerEntity player, boolean isFluid){
-        RayTraceResult rays=player.pick(6,1.0f,isFluid);
-        Vector3d lookat=(Vector3d) rays.hitInfo;
-        return new BlockPos(lookat);
+        BlockRayTraceResult rays=(BlockRayTraceResult) player.pick(20.0D,0.0f,isFluid);
+        return rays.getBlockPos();
     }
     public static char facing(ServerPlayerEntity player){
         Location loca=new Location(player);
