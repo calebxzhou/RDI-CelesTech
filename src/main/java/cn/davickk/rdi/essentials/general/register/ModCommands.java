@@ -1,6 +1,7 @@
 package cn.davickk.rdi.essentials.general.register;
 
 import cn.davickk.rdi.essentials.general.command.BaseCommand;
+import cn.davickk.rdi.essentials.general.command.impl.admin.HideSelfCommand;
 import cn.davickk.rdi.essentials.general.command.impl.blockrec.BlockRecordCmd;
 import cn.davickk.rdi.essentials.general.command.impl.cloudinv.RinvCommand;
 import cn.davickk.rdi.essentials.general.command.impl.home.*;
@@ -13,6 +14,7 @@ import cn.davickk.rdi.essentials.general.command.impl.teleport.TpaCommand;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.command.CommandSource;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.fml.config.ModConfig;
 
 import java.util.ArrayList;
 
@@ -38,7 +40,7 @@ public final class ModCommands {
         // Spawn
 
         commands.add(new SpawnCommand("spawn", 0, true));
-        //commands.add(new SetSpawnCommand("setspawn", 2, ModConfig.spawn_enable));
+        commands.add(new HideSelfCommand("hideself", 2, true));
         //Island
         commands.add(new IslandCommand("rkd",0,true));
         commands.add(new CreateIslandCmd("createkd",0,true));

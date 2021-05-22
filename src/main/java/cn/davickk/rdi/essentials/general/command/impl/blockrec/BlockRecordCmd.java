@@ -66,7 +66,7 @@ public class BlockRecordCmd extends BaseCommand {
                 }else{
                     map.put(player.getStringUUID(),player);
                     sendMessage(player,"您已开启记录查询模式：");
-                    timer.schedule(new TickTask(player), 0, 1000);
+                    timer.schedule(new TickTask(player), 0, 2000);
                 }
 
             }

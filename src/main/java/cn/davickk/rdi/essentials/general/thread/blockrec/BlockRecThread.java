@@ -8,6 +8,7 @@ import cn.davickk.rdi.essentials.general.util.DateTimeUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.world.BlockEvent;
 import org.apache.ibatis.session.SqlSession;
 
@@ -54,7 +55,7 @@ public class BlockRecThread extends Thread{
 
 
             String dim=entity.getCommandSenderWorld().dimension().location().toString();
-            String blockType=blockState.getBlock().getRegistryName().toString();
+            String blockType=new TranslationTextComponent(blockState.getBlock().getDescriptionId()).getString()+"("+blockState.getBlock().getRegistryName().toString()+")";
             String playerName=entity.getDisplayName().getString();
 
             record.setPlayer_name(playerName);
