@@ -31,27 +31,21 @@ public class QueryRecThread extends Thread{
     public void run(){
         try {
             if(record!=null){
-
                 return;
             }
             int x=blockPos.getX();
             int y=blockPos.getY();
             int z=blockPos.getZ();
-            TextUtils.sendChatMessage(player,
-                    String.format("----查询结果 (%d,%d,%d)----",x,y,z));
+            TextUtils.sendChatMessage(player, String.format("----查询结果 (%d,%d,%d)----",x,y,z));
             PlayerUtils.sendLoading(player);
             IBlockRecDaoMapper mapper= RDIEssentials.getSQLUtils().getSqlSession().getMapper(IBlockRecDaoMapper.class);
-
-
             List<SingleBlockRecord> records=mapper.queryByCoord(x,y,z);
             if(records.isEmpty()) {
                 TextUtils.sendChatMessage(player,"没有在这里找到结果。");
             }
             String formattedTime = "";
             String formattedTimePrefix = "";
-
             LocalDateTime nowTime=LocalDateTime.now();
-
             for(SingleBlockRecord record:records){
                 Timestamp time=record.getOpr_time();
                 LocalDateTime recordTime=time.toLocalDateTime();
@@ -64,16 +58,16 @@ public class QueryRecThread extends Thread{
                     oprtype= EColor.RED.code+ "毁"+EColor.RESET.code;
                 if(record.getOprType()==SingleBlockRecord.PLACE)
                     oprtype=EColor.BRIGHT_GREEN.code+"置"+EColor.RESET.code;
-
-                TextUtils.sendChatMessage(player,
+                String hoverMsg= "时间："+time+"\n玩家名："+record.getPlayer_name()+"";
+                TextUtils.clickableContent2Send(player,
                         String.format("- %s %s %s %s",
                                 timec,
                                 record.getPlayer_name(),
                                 oprtype,
-                                record.getBlock_type()));
+                                record.getBlock_type()),"",hoverMsg);
                 //不是今年，显示完整时间
             }
-            TextUtils.sendChatMessage(player,"[<<上一页]----<第%d/%d页>----[下一页>>]");
+           // TextUtils.sendChatMessage(player,"[<<上一页]----<第%d/%d页>----[下一页>>]");
         } catch (Exception e) {
             e.printStackTrace();
         }

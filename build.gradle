@@ -32,7 +32,7 @@ version = modMinecraftVersion + '-' + modVersion
 group = modGroup
 archivesBaseName = modFileName
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '15'
 mixin {
     add sourceSets.main, "mixins.rdiengine.refmap.json"
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IBlockRecDaoMapper {
     void insertRecord(SingleBlockRecord record);
+
     List<SingleBlockRecord> queryByCoord(@Param("posX") int x,
                                          @Param("posY") int y,
                                          @Param("posZ") int z);
@@ -15,11 +16,13 @@ public interface IBlockRecDaoMapper {
     List<SingleBlockRecord> queryByCoordRanged(@Param("posX") int x,
                                                   @Param("posY") int y,
                                                   @Param("posZ") int z,
-                                                  @Param("rangeMin") int rangeMin,
-                                                  @Param("rangeMax") int rangeMax)));
+                                                  @Param("rangeStartFrom") int rangeStartFrom,
+                                                  @Param("showRowsAmount") int showRowsAmount,
+                                               @Param("isDesc") boolean isDesc);
 
-    List<SingleBlockRecord> query
-SingleBlockRecord queryById(long id);
+    List<SingleBlockRecord> queryByPlayer(@Param("playerName") String playerName);
+
+    SingleBlockRecord queryById(long id);
 
 
 }

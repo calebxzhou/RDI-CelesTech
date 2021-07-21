@@ -13,13 +13,16 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -160,7 +163,7 @@ public final class PlayerUtils {
                 .replace("%player",player.getDisplayName().getString())
                 .replace("%x", String.valueOf(loca.x))
                 .replace("%y", String.valueOf(loca.y))
-                .replace("%z", String.valueOf(loca.z));
+                .replace("%z", String.valueOf(locaz));
         //System.out.println(cmd);
         server.getCommands().performCommand(server.createCommandSourceStack(),cmd);*/
     }
@@ -168,8 +171,28 @@ public final class PlayerUtils {
         teleportPlayer(player,loca.getDims(),loca.getX(),loca.getY(),loca.getZ(),loca.getYaw(),loca.getPitch());
     }
     public static void teleportPlayer(PlayerEntity player, ResourceLocation world, double x, double y, double z, float w, float p){
-        MinecraftServer server=player.getServer();
-        if(server==null) return;
+
+        try {//如果不同世界传送
+            String playerDim=player.level.dimension().location().toString();
+            String targetDim=world.toString();
+           // System.out.println(playerDim+targetDim);
+            if(!playerDim.equals(targetDim)){
+                MinecraftServer server=player.getServer();
+                String cmd="execute as %player in %world rotated %yaw %pitch run tp %x %y %z"
+                        .replace("%player",player.getDisplayName().getString())
+                        .replace("%world", world.toString())
+                        .replace("%yaw", String.valueOf(w))
+                        .replace("%pitch", String.valueOf(p))
+                        .replace("%x", String.valueOf(x))
+                        .replace("%y", String.valueOf(y))
+                        .replace("%z", String.valueOf(z));
+                server.getCommands().performCommand(server.createCommandSourceStack(),cmd);
+            }else
+                player.moveTo(x,y,z,p,w);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*if(server==null) return;
         String cmd="execute as %player in %world rotated %yaw %pitch run tp %x %y %z"
                 .replace("%player",player.getDisplayName().getString())
                 .replace("%world", world.toString())
@@ -179,7 +202,7 @@ public final class PlayerUtils {
                 .replace("%y", String.valueOf(y))
                 .replace("%z", String.valueOf(z));
         //System.out.println(cmd);
-        server.getCommands().performCommand(server.createCommandSourceStack(),cmd);
+        server.getCommands().performCommand(server.createCommandSourceStack(),cmd);*/
     }
     public static boolean givePlayerItem(ServerPlayerEntity player, String id, int amount) throws CommandSyntaxException {
         ItemInput ia=ItemArgument.item().parse(new StringReader(id));

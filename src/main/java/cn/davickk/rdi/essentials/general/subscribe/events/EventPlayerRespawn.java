@@ -19,7 +19,7 @@ public class EventPlayerRespawn {
         PlayerUtils.teleportPlayer(player, ServerUtils.SPAWN_LOCA);
         //TextUtils.sendChatMessage(player,"您刚才可能掉落了一些物品。");
         //TextUtils.clickableContent2Send(player, EColor.GOLD.code+"[从云端下载物品]","/getfromvoid"," 。");
-        TextUtils.clickableContent2Send(player,EColor.GOLD.code+"[我卡住了]","/spawn","。");
+        TextUtils.clickableContent2Send(player,EColor.GOLD.code+"如果您卡住了，请点击[这里]执行自动修复","/spawn","。");
         TextUtils.clickableContent2Send(player,EColor.BRIGHT_GREEN.code+"[<==返回空岛==>]","/home island"," ");
         //重新设置出生点到主城
         player.setRespawnPosition(player.level.OVERWORLD, ServerUtils.SPAWN_BLKPS, 0f, true, false);

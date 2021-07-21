@@ -3,7 +3,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "cn.davickk.rdi.essentials.general.dao.IBlockRecDaoMapper">
-
+    <sql id="whereXyz">
+        WHERE posX=#{posX} AND posY=#{posY} AND posZ=#{posZ}
+    </sql>
     <resultMap id = "result" type = "cn.davickk.rdi.essentials.general.model.SingleBlockRecord">
         <result property = "record_id" column = "id"/>
         <result property = "player_name" column = "player_name"/>
@@ -22,9 +24,22 @@
         (#{player_name}, #{block_type}, #{oprType},
         #{dimension},#{posX},#{posY},#{posZ},#{opr_time});
     </insert>
-    <select id = "readRecordOnXyz" parameterType="map" resultMap = "result">
+
+    <select id = "queryByCoord" parameterType="map" resultMap = "result">
         SELECT * FROM block_rec WHERE posX=#{posX} AND posY=#{posY} AND posZ=#{posZ};
     </select>
 
+    <select id = "queryByCoordRanged" parameterType="map" resultMap = "result">
+        SELECT * FROM block_rec
+        WHERE posX=#{posX} AND posY=#{posY} AND posZ=#{posZ}
+        ORDER BY opr_time
+        <if test="isDesc == true">
+            DESC
+        </if>
+        LIMIT #{rangeStartFrom},#{showRowsAmount}
+    </select>
 
+    <select id = "queryByPlayer" parameterType="map" resultMap = "result">
+        SELECT * FROM block_rec WHERE posX=#{posX} AND posY=#{posY} AND posZ=#{posZ};
+    </select>
 </mapper>

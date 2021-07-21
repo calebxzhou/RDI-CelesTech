@@ -25,7 +25,7 @@ public class RinvThread extends Thread {
     }
 
     public void run() {
-        /*try {
+        try {
             RinvRequest rinvreq=new RinvRequest(player);
             List<Rinv> invdata=rinvreq.get(player.getUUID().toString());
             if(this.arg==LIST){
@@ -37,7 +37,7 @@ public class RinvThread extends Thread {
                 for (Rinv singleInvdata:invdata) {
                     ItemStack itemstk = this.getStackFromNbt(singleInvdata.getSerializedNbt());
                     if (!singleInvdata.getSerializedNbt().startsWith("{id:\"minecraft:air\"")) {
-                        TextComponent text = (TextComponent) itemstk.getTextComponent();
+                        TextComponent text = (TextComponent) itemstk.getDisplayName();
                         TextUtils.sendChatMessage(player, text);
                     }
                 }
@@ -51,13 +51,13 @@ public class RinvThread extends Thread {
                 for (int i = 0; i <= 35; i++)//MC的物品栏排列：9~17 / 18~26 / 27~35 / 0~8
                 {
                     //itemList.add(i,inventory.getStackInSlot(i).serializeNBT().toString());
-                    ItemStack stk = player.inventory.getStackInSlot(i);
+                    ItemStack stk = player.inventory.getItem(i);
                     rinvreq.put(player.getUUID().toString(),player.getDisplayName().getString(),stk.serializeNBT().toString());
 
                     double percent = i / 35.0 * 100.0;
                     int disSpd = RandomUtils.generateRandomInt(1000, 4000);
                     TextUtils.sendActionMessage(player, "正在上传：(" + Math.round(percent) + "%) " + disSpd + " KB/s");
-                    player.inventory.deleteStack(stk);
+                    player.inventory.removeItem(stk);
 
 
                 }
@@ -77,21 +77,22 @@ public class RinvThread extends Thread {
                     double percent = i / 35.0 * 100.0;
                     int disSpd = RandomUtils.generateRandomInt(1000, 4000);
                     TextUtils.sendActionMessage(player, "正在下载：(" + Math.round(percent) + "%) " + disSpd + " KB/s");
-                    CompoundNBT cnbt = JsonToNBT.getTagFromJson(itemNbt.getSerializedNbt());
-                    ItemStack itemstk = ItemStack.read(cnbt);
+                    CompoundNBT cnbt = JsonToNBT.parseTag(itemNbt.getSerializedNbt());
+                    ItemStack itemstk = ItemStack.of(cnbt);
                     player.inventory.add(i, itemstk);
 
                 }
+                TextUtils.sendChatMessage(player,"下载完成");
                 rinvreq.delete(player.getUUID().toString());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
 
     }
-    /*private ItemStack getStackFromNbt(String serializedNbt) throws CommandSyntaxException {
-        CompoundNBT cnbt = JsonToNBT.getTagFromJson(serializedNbt);
-        return ItemStack.read(cnbt);
-    }*/
+    private ItemStack getStackFromNbt(String serializedNbt) throws CommandSyntaxException {
+        CompoundNBT cnbt = JsonToNBT.parseTag(serializedNbt);
+        return ItemStack.of(cnbt);
+    }
 }

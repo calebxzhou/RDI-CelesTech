@@ -8,6 +8,7 @@ import cn.davickk.rdi.essentials.general.command.impl.home.*;
 import cn.davickk.rdi.essentials.general.command.impl.island.*;
 import cn.davickk.rdi.essentials.general.command.impl.player.*;
 import cn.davickk.rdi.essentials.general.command.impl.rdi.RdiCommand;
+import cn.davickk.rdi.essentials.general.command.impl.server.VoteRestartCmd;
 import cn.davickk.rdi.essentials.general.command.impl.spawn.SpawnCommand;
 import cn.davickk.rdi.essentials.general.command.impl.teleport.TpYesCommand;
 import cn.davickk.rdi.essentials.general.command.impl.teleport.TpaCommand;
@@ -43,6 +44,7 @@ public final class ModCommands {
         commands.add(new HideSelfCommand("hideself", 2, true));
         //Island
         commands.add(new IslandCommand("rkd",0,true));
+        commands.add(new IslandCommand("island",0,true));
         commands.add(new CreateIslandCmd("createkd",0,true));
         commands.add(new CreateIslandHereCmd("createkdhere",0,true));
         commands.add(new DeleteIslandCmd("shanchukongdao",0,true));
@@ -53,16 +55,19 @@ public final class ModCommands {
         commands.add(new RollCommand("rroll",0,true));
 //        commands.add(new AfkCommand("afk", 0, true));
         commands.add(new BlockRecordCmd("rbrx",0,true));
+        commands.add(new BlockRecordCmd("co",0,true));
         commands.add(new OnHandCommand("onhand", 0, true));
         commands.add(new Obsi2LavaCmd("obsi2lava",0,true));
         commands.add(new Water2IceCmd("water2ice",0,true));
         commands.add(new SummonMetrCmd("ae2yunshi",0,true));
+        commands.add(new SummonDragonCmd("enderdragon",0,true));
         //commands.add(new RtpsCommand("rfz", 0, true));
         commands.add(new RtpsCommand("tps", 0, true));
         commands.add(new SaveCommand("SAVE", 0, true));
         commands.add(new TpaCommand("tpa",0,true));
         commands.add(new TpYesCommand("tpyes",0,true));
         commands.add(new RdiCommand("rdi",0,true));
+        commands.add(new VoteRestartCmd("vote-restart",0,true));
         //commands.add(new BackCommand("back",0,true));
         //TODO
         // commands.add(new BackCommand("back", 0, ModConfig.back_enable));

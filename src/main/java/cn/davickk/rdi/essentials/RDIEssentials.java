@@ -17,7 +17,7 @@ import java.sql.SQLException;
 @Mod(RDIEssentials.MODID)
 public class RDIEssentials {
     public static final String MODID = "rdi-essentials";
-    public static final String VERSION="2.0pre1";
+    public static final String VERSION="2.5";
 
 
     public RDIEssentials() throws SQLException, ClassNotFoundException {

@@ -27,7 +27,7 @@ public class HomeListThread extends Thread {
                 //TextUtils.clickableContent2Send(player, EHomeText.IMPORT.text, EHomeText.IMPORT.cmd);
                 return;
             }
-            TextUtils.sendChatMessage(player, "家 (点击->操作)");
+            TextUtils.sendChatMessage(player, "家 (点击操作)");
             List<Home> homeList= hreq.getHomeList();
             if(homeList==null){
                 TextUtils.sendChatMessage(player,"无法获取家列表，请咨询腐竹");
@@ -47,30 +47,14 @@ public class HomeListThread extends Thread {
                         home.getHomeName(),
                         EColor.RESET.code,
                         (int)home.getX(),(int)home.getY(),(int)home.getZ(),
-                        home.getDims(),
+                        home.getDims().replace("minecraft:overworld","主世界")
+                        .replace("minecraft:the_nether","地狱")
+                        .replace("minecraft:the_end","末地"),
                         EColor.GRAY.code,
                         home.getComment()
                 );
                 txt2s=TextUtils.getClickableContentComp(fullMsg,"/actions4home "+home.getHomeName(),"");
                 TextUtils.sendChatMessage(player,txt2s);
-
-                /*String hname=entry.getKey();
-                String hnameC="";
-                HomeLocation hloc=entry.getValue();
-                int x=(int)hloc.getX(),  y=(int)hloc.getY(),  z=(int)hloc.getZ();
-                String dims=hloc.dims;
-                if(hloc.isActive)
-                {
-                    hnameC=EColor.BRIGHT_GREEN.code+EColor.BOLD.code+hname;
-                    if(dims.equalsIgnoreCase(EWorld.THE_NETHER.dim))
-                        hnameC=EColor.DARK_RED.code+EColor.BOLD.code+hname;
-                    if(dims.equalsIgnoreCase(EWorld.THE_END.dim))
-                        hnameC=EColor.DARK_GREEN.code+EColor.BOLD.code+hname;
-                }else hnameC=hname;
-                String hlocs="(" +dims+", "+ x + ", " + y + ", " + z + ")";
-                String hnames=" >"+hnameC+EColor.RESET.code+"< ";
-                txt2s.append(TextUtils.getClickableContentComp(hnames,
-                        "/actions4home "+hname,hlocs));*/
             }
 
 

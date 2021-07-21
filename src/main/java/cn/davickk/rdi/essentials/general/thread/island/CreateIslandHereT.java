@@ -20,8 +20,6 @@ public class CreateIslandHereT extends Thread{
         }
         TextUtils.sendChatMessage(player,"正在创建空岛...请不要移动...");
         try{
-            //IslandRequest req = new IslandRequest(player);
-            //IslandLocation iloc=new IslandLocation(player);
             HomeRequest hreq=new HomeRequest(player);
             BlockPos bpos=player.blockPosition();
             if (hreq.getHomeCounts()>0) {

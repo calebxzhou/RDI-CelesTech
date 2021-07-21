@@ -1,29 +1,24 @@
 package cn.davickk.rdi.essentials.general.thread.blockrec;
 
 
-import cn.davickk.rdi.essentials.RDIEssentials;
-import cn.davickk.rdi.essentials.general.dao.IBlockRecDaoMapper;
 import cn.davickk.rdi.essentials.general.model.SingleBlockRecord;
+import cn.davickk.rdi.essentials.general.request.BlockRecRequest;
 import cn.davickk.rdi.essentials.general.util.DateTimeUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.world.BlockEvent;
-import org.apache.ibatis.session.SqlSession;
 
 public class BlockRecThread extends Thread{
     private BlockEvent.EntityPlaceEvent placeEvent=null;
     private BlockEvent.BreakEvent breakEvent=null;
-    private final SqlSession SQL_SESSION = RDIEssentials.getSQLUtils().getSqlSession();
-    private IBlockRecDaoMapper mapper;
+
     public BlockRecThread(BlockEvent.EntityPlaceEvent event){
         this.placeEvent =event;
-        mapper=SQL_SESSION.getMapper(IBlockRecDaoMapper.class);
     }
     public BlockRecThread(BlockEvent.BreakEvent event){
         this.breakEvent =event;
-        mapper=SQL_SESSION.getMapper(IBlockRecDaoMapper.class);
     }
     @Override
     public void run(){
@@ -66,8 +61,9 @@ public class BlockRecThread extends Thread{
             record.setPosZ(blockPos.getZ());
             record.setOpr_time(DateTimeUtils.getTimestampNow());
 
-            mapper.insertRecord(record);
-            SQL_SESSION.commit();
+            new BlockRecRequest(record).insertRecord();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
